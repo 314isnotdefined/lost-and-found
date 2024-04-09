@@ -12,6 +12,8 @@
  */
 body {
   --bs-light-rgb: var(--matr-navbar-bg-rgb);
+  background: fixed center url("/images/landingPageBackground.png");
+  background-size: cover;
 }
 
 /* Set the alert background on the signin and signup pages. */
