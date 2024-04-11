@@ -21,7 +21,7 @@ const SignUp = ({ location }) => {
     lastName: String,
     email: String,
     password: String,
-    image: { type: String, defaultValue: ""},
+    image: { type: String, defaultValue: "" },
     position: {
       type: String,
       allowedValues: ['Freshman', 'Sophomore', 'Junior', 'Senior', 'Graduate Student', 'Professor/Faculty', 'Staff', 'Other', 'Rather not say'],
@@ -39,19 +39,27 @@ const SignUp = ({ location }) => {
       } else {
         setError('');
         setRedirectToRef(true);
+
+        Profiles.collection.insert({
+          firstName: firstName,
+          lastName: lastName,
+          email: email,
+          image: image,
+          position: position,
+          points: 0,
+          totalItemsFound: 0,
+          totalItemsLost: 0,
+          recentItemsFound: [],
+        }, (e) => {
+          if (e) {
+            // if anything goes wrong submitting the form.
+            swal(e);
+          } else {
+            swal('You created an account!', `Happy searching, ${firstName} ${lastName}!`, 'success');
+          }
+        });
       }
     });
-    Profiles.insert({
-      firstName: firstName,
-      lastName: lastName,
-      email: email,
-      image: image,
-      position: position,
-      points: 0,
-      totalItemsFound: 0,
-      totalItemsLost: 0,
-      recentItemsFound: [],
-    }, (err) => swal(err));
   };
 
   /* Display the signup form. Redirect to add page after successful registration and login. */
