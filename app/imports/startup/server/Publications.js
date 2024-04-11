@@ -13,11 +13,25 @@ Meteor.publish(Stuffs.userPublicationName, function () {
   return this.ready();
 });
 
+Meteor.publish(Profiles.userPublicationName, function () {
+  if (this.userId) {
+    return Profiles.collection.find({});
+  }
+  return this.ready();
+});
+
 // Admin-level publication.
 // If logged in and with admin role, then publish all documents from all users. Otherwise, publish nothing.
 Meteor.publish(Stuffs.adminPublicationName, function () {
   if (this.userId && Roles.userIsInRole(this.userId, 'admin')) {
     return Stuffs.collection.find();
+  }
+  return this.ready();
+});
+
+Meteor.publish(Profiles.adminPublicationName, function () {
+  if (this.userId) {
+    return Profiles.collection.find({});
   }
   return this.ready();
 });
