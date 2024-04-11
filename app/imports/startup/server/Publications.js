@@ -1,6 +1,7 @@
 import { Meteor } from 'meteor/meteor';
 import { Roles } from 'meteor/alanning:roles';
 import { Stuffs } from '../../api/stuff/Stuff';
+import { Profiles } from '../../api/profile/Profile';
 import { LostItems } from '../../api/item/LostItems';
 
 // User-level publication.
@@ -11,6 +12,12 @@ Meteor.publish(Stuffs.userPublicationName, function () {
     return Stuffs.collection.find({ owner: username });
   }
   return this.ready();
+});
+
+Meteor.publish(Profiles.userPublicationName, function () {
+  if (this.userId) {
+    return Profiles.collection.find({});
+  }
 });
 
 Meteor.publish(LostItems.userPublicationName, function () {
@@ -30,12 +37,20 @@ Meteor.publish(Stuffs.adminPublicationName, function () {
   return this.ready();
 });
 
+Meteor.publish(Profiles.adminPublicationName, function () {
+  if (this.userId) {
+    return Profiles.collection.find({});
+  }
+  return this.ready();
+});
+
 Meteor.publish(LostItems.adminPublicationName, function () {
   if (this.userId && Roles.userIsInRole(this.userId, 'admin')) {
     return LostItems.collection.find();
   }
   return this.ready();
 });
+
 // alanning:roles publication
 // Recommended code to publish roles for each user.
 Meteor.publish(null, function () {
