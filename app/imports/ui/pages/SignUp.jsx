@@ -21,7 +21,7 @@ const SignUp = ({ location }) => {
     lastName: String,
     email: String,
     password: String,
-    image: { type: String, defaultValue: "" },
+    image: { type: String, defaultValue: '' },
     position: {
       type: String,
       allowedValues: ['Freshman', 'Sophomore', 'Junior', 'Senior', 'Graduate Student', 'Professor/Faculty', 'Staff', 'Other', 'Rather not say'],

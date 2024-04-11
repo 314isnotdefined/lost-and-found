@@ -13,7 +13,7 @@ const addData = (data) => {
 const addProfileData = (data) => {
   console.log(`Adding data for ${data.firstName} ${data.lastName}`);
   Profiles.collection.insert(data);
-}
+};
 
 // Initialize the StuffsCollection if empty.
 if (Stuffs.collection.find().count() === 0) {

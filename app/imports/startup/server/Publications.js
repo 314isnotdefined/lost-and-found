@@ -18,6 +18,7 @@ Meteor.publish(Profiles.userPublicationName, function () {
   if (this.userId) {
     return Profiles.collection.find({});
   }
+  return this.ready();
 });
 
 Meteor.publish(LostItems.userPublicationName, function () {
