@@ -6,6 +6,8 @@ import { Alert, Card, Col, Container, Row } from 'react-bootstrap';
 import SimpleSchema from 'simpl-schema';
 import SimpleSchema2Bridge from 'uniforms-bridge-simple-schema-2';
 import { AutoForm, ErrorsField, SubmitField, TextField, SelectField } from 'uniforms-bootstrap5';
+import swal from 'sweetalert';
+import { Profiles } from '../../api/profile/Profile';
 
 /**
  * SignUp component is similar to signin component, but we create a new user instead.
@@ -19,8 +21,8 @@ const SignUp = ({ location }) => {
     lastName: String,
     email: String,
     password: String,
-    image: String,
-    class: {
+    image: { type: String, defaultValue: ""},
+    position: {
       type: String,
       allowedValues: ['Freshman', 'Sophomore', 'Junior', 'Senior', 'Graduate Student', 'Professor/Faculty', 'Staff', 'Other', 'Rather not say'],
       defaultValue: 'Other',
@@ -30,7 +32,7 @@ const SignUp = ({ location }) => {
 
   /* Handle SignUp submission. Create user account and a profile entry, then redirect to the home page. */
   const submit = (doc) => {
-    const { email, password } = doc;
+    const { firstName, lastName, email, password, image, position } = doc;
     Accounts.createUser({ email, username: email, password }, (err) => {
       if (err) {
         setError(err.reason);
@@ -39,6 +41,17 @@ const SignUp = ({ location }) => {
         setRedirectToRef(true);
       }
     });
+    Profiles.insert({
+      firstName: firstName,
+      lastName: lastName,
+      email: email,
+      image: image,
+      position: position,
+      points: 0,
+      totalItemsFound: 0,
+      totalItemsLost: 0,
+      recentItemsFound: [],
+    }, (err) => swal(err));
   };
 
   /* Display the signup form. Redirect to add page after successful registration and login. */
@@ -62,7 +75,7 @@ const SignUp = ({ location }) => {
                 <TextField name="email" placeholder="E-mail address" />
                 <TextField name="password" placeholder="Password" type="password" />
                 <TextField name="image" placeholder="URL to image" />
-                <SelectField name="class" placeholder="What describes you?" />
+                <SelectField name="position" placeholder="What describes you?" />
                 <ErrorsField />
                 <SubmitField />
               </Card.Body>

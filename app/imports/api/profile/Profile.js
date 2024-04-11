@@ -15,10 +15,10 @@ class ProfileCollection {
       totalItemsLost: Number, // total number of items that the person lost.
       recentItemsFound: { type: Array },
       'recentItemsFound.$': { type: String }, // an array of unique String identifiers.
-      class: {
+      position: {
         type: String,
-        allowedValues: ['freshman', 'sophomore', 'junior', 'senior', 'professor/faculty', 'staff', 'other'],
-        defaultValue: 'other',
+        allowedValues: ['Freshman', 'Sophomore', 'Junior', 'Senior', 'Graduate Student', 'Professor/Faculty', 'Staff', 'Other', 'Rather not say'],
+        defaultValue: 'Other',
       },
     });
 
