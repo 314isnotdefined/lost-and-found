@@ -23,13 +23,12 @@ const ListFoundItem = () => {
       ready: rdy,
     };
   }, []);
-
   return (ready ? (
     <Container className="py-3">
       <Row className="justify-content-center">
         <Col>
           <Col className="text-center">
-            <h2>List Found Item</h2>
+            <h2>List Found Items</h2>
           </Col>
           <Row xs={1} md={2} lg={3} className="g-4">
             {founditems.map((item) => (<Col key={item._id}><Item item={item} /></Col>))}

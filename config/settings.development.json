@@ -17,5 +17,11 @@
 
   "profileData": [
     { "firstName":  "John", "lastName":  "Smith", "email": "john@foo.com", "image":  "img", "points":  0, "totalItemsLost":  0, "totalItemsFound":  0, "recentItemsFound":  [], "position": "Freshman"}
-  ]
+  ],
+
+  "defaultItems": [{
+    "itemName": "IPhone", "category": "Electronics", "locationFound": "POST 307, University of Hawaii",
+    "image": "https://a57.foxnews.com/static.foxbusiness.com/foxbusiness.com/content/uploads/2023/04/1440/810/Recovered-iPhone.jpg?ve=1&tl=1",
+    "description": "Lost Iphone at Waikiki Beach", "contactEmail": "abc@hawaii.edu", "owner": "john@foo.com"
+  }]
 }

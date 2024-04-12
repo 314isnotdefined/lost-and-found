@@ -12,7 +12,7 @@ const Item = ({ item }) => (
     </Card.Header>
     <Card.Body>
       <Card.Text>{item.description}</Card.Text>
-      <Card.Text>{item.locationFound}</Card.Text>
+      <Card.Text>{item.location}</Card.Text>
       <Card.Text>{item.contactEmail}</Card.Text>
       <Link to={`/edit/${item._id}`}>Edit</Link>
     </Card.Body>
@@ -24,7 +24,7 @@ Item.propTypes = {
   item: PropTypes.shape({
     itemName: PropTypes.string,
     category: PropTypes.string,
-    locationFound: PropTypes.string,
+    location: PropTypes.string,
     contactEmail: PropTypes.string,
     image: PropTypes.string,
     description: PropTypes.string,

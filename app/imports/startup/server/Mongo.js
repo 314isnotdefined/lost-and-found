@@ -1,7 +1,7 @@
 import { Meteor } from 'meteor/meteor';
 import { Stuffs } from '../../api/stuff/Stuff.js';
 import { Profiles } from '../../api/profile/Profile';
-
+import { FoundItems } from '../../api/item/FoundItems';
 /* eslint-disable no-console */
 
 // Initialize the database with a default data document.
@@ -27,5 +27,17 @@ if (Profiles.collection.find().count() === 0) {
   if (Meteor.settings.profileData) {
     console.log('Creating default data.');
     Meteor.settings.profileData.forEach(data => addProfileData(data));
+  }
+}
+
+const addFoundItem = (itemfound) => {
+  console.log(` Adding: ${itemfound.itemName} (${itemfound.owner}`);
+  FoundItems.collection.insert(itemfound);
+};
+
+if (FoundItems.collection.find().count() === 0) {
+  if (Meteor.settings.defaultItems) {
+    console.log('Creating default Items.');
+    Meteor.settings.defaultItems.forEach(itemfound => addFoundItem(itemfound));
   }
 }
