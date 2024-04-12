@@ -18,6 +18,7 @@ import NotAuthorized from '../pages/NotAuthorized';
 import LoadingSpinner from '../components/LoadingSpinner';
 import AddLostItem from '../pages/AddLostItem';
 import AddFoundItem from '../pages/AddFoundItem';
+import ListFoundItem from '../pages/ListFoundItem';
 
 /** Top-level layout component for this application. Called in imports/startup/client/startup.jsx. */
 const App = () => {
@@ -37,7 +38,7 @@ const App = () => {
           <Route path="/signup" element={<SignUp />} />
           <Route path="/signout" element={<SignOut />} />
           <Route path="/home" element={<ProtectedRoute><Landing /></ProtectedRoute>} />
-          <Route path="/list" element={<ProtectedRoute><ListStuff /></ProtectedRoute>} />
+          <Route path="/list" element={<ProtectedRoute><ListFoundItem /></ProtectedRoute>} />
           <Route path="/add" element={<ProtectedRoute><AddLostItem /></ProtectedRoute>} />
           <Route path="/addfound" element={<ProtectedRoute><AddFoundItem /></ProtectedRoute>} />
           <Route path="/edit/:_id" element={<ProtectedRoute><EditStuff /></ProtectedRoute>} />
