@@ -53,3 +53,7 @@ footer, footer a {
   color: var(--matr-navbar-text-color);
   font-size: 20px;
 }
+
+#center-text {
+  margin-top: 150px;
+}
