@@ -17,6 +17,7 @@ body {
   --bs-dark: var(--matr-navbar-bg);
   --bs-dark-rgb: var(--matr-navbar-bg-rgb);
   background-size: cover;
+  --bs-heading-color: var(--matr-navbar-text-color);
 }
 
 body .navbar {
