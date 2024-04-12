@@ -15,6 +15,11 @@ const addProfileData = (data) => {
   Profiles.collection.insert(data);
 };
 
+const addFoundItem = (item) => {
+  console.log(` Adding: ${item.itemName} (${item.owner})`);
+  FoundItems.collection.insert(item);
+};
+
 // Initialize the StuffsCollection if empty.
 if (Stuffs.collection.find().count() === 0) {
   if (Meteor.settings.defaultData) {
@@ -29,11 +34,6 @@ if (Profiles.collection.find().count() === 0) {
     Meteor.settings.profileData.forEach(data => addProfileData(data));
   }
 }
-
-const addFoundItem = (itemfound) => {
-  console.log(` Adding: ${itemfound.itemName} (${itemfound.owner}`);
-  FoundItems.collection.insert(itemfound);
-};
 
 if (FoundItems.collection.find().count() === 0) {
   if (Meteor.settings.defaultItems) {

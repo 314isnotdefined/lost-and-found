@@ -17,9 +17,9 @@ const ListFoundItem = () => {
     // Determine if the subscription is ready
     const rdy = subscription.ready();
     // Get the Stuff documents
-    const foundItems = FoundItems.collection.find({}).fetch();
+    const foundItems1 = FoundItems.collection.find({}).fetch();
     return {
-      founditems: foundItems,
+      founditems: foundItems1,
       ready: rdy,
     };
   }, []);
@@ -31,7 +31,7 @@ const ListFoundItem = () => {
             <h2>List Found Items</h2>
           </Col>
           <Row xs={1} md={2} lg={3} className="g-4">
-            {founditems.map((item) => (<Col key={item._id}><Item item={item} /></Col>))}
+            {founditems.map((item, index) => (<Col key={index}><Item item={item} /></Col>))}
           </Row>
         </Col>
       </Row>
