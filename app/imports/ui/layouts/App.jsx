@@ -37,7 +37,7 @@ const App = () => {
           <Route path="/signup" element={<SignUp />} />
           <Route path="/signout" element={<SignOut />} />
           <Route path="/home" element={<ProtectedRoute><Landing /></ProtectedRoute>} />
-          <Route path="/list" element={<ProtectedRoute><ListFoundItem /></ProtectedRoute>} />
+          <Route path="/listfound" element={<ProtectedRoute><ListFoundItem /></ProtectedRoute>} />
           <Route path="/add" element={<ProtectedRoute><AddLostItem /></ProtectedRoute>} />
           <Route path="/addfound" element={<ProtectedRoute><AddFoundItem /></ProtectedRoute>} />
           <Route path="/edit/:_id" element={<ProtectedRoute><EditStuff /></ProtectedRoute>} />
