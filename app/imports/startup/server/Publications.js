@@ -3,7 +3,9 @@ import { Roles } from 'meteor/alanning:roles';
 import { Stuffs } from '../../api/stuff/Stuff';
 import { Profiles } from '../../api/profile/Profile';
 import { LostItems } from '../../api/item/LostItems';
+import { FoundItems } from '../../api/item/FoundItems';
 import { ResolvedItemsArchive } from '../../api/item/ResolvedItemsArchive';
+
 
 // User-level publication.
 // If logged in, then publish documents owned by this user. Otherwise, publish nothing.
@@ -26,6 +28,14 @@ Meteor.publish(LostItems.userPublicationName, function () {
   if (this.userId) {
     const username = Meteor.users.findOne(this.userId).username;
     return LostItems.collection.find({ owner: username });
+  }
+  return this.ready();
+});
+
+Meteor.publish(FoundItems.userPublicationName, function () {
+  if (this.userId) {
+    const username = Meteor.users.findOne(this.userId).username;
+    return FoundItems.collection.find({ owner: username });
   }
   return this.ready();
 });
@@ -56,6 +66,14 @@ Meteor.publish(Profiles.adminPublicationName, function () {
 Meteor.publish(LostItems.adminPublicationName, function () {
   if (this.userId && Roles.userIsInRole(this.userId, 'admin')) {
     return LostItems.collection.find();
+  }
+  return this.ready();
+});
+
+
+Meteor.publish(FoundItems.adminPublicationName, function () {
+  if (this.userId && Roles.userIsInRole(this.userId, 'admin')) {
+    return FoundItems.collection.find();
   }
   return this.ready();
 });

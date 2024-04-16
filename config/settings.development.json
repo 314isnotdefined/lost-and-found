@@ -19,6 +19,12 @@
     { "firstName":  "John", "lastName":  "Smith", "email": "john@foo.com", "image":  "img", "points":  0, "totalItemsLost":  0, "totalItemsFound":  0, "recentItemsFound":  [], "position": "Freshman"}
   ],
 
+  "defaultItems": [{
+    "itemName": "IPhone", "category": "Electronics", "locationFound": "POST 307, University of Hawaii",
+    "image": "https://a57.foxnews.com/static.foxbusiness.com/foxbusiness.com/content/uploads/2023/04/1440/810/Recovered-iPhone.jpg?ve=1&tl=1",
+    "description": "Black IPhone 13 Pro with dark blue case", "contactEmail": "abc@hawaii.edu", "owner": "john@foo.com"
+  }],
+
   "resolvedItems": [
     { "uniqueID": "uniqueid1", "foundBy": "john@foo.com", "dateResolved": "8-15-2023" },
     { "uniqueID": "uniqueid2", "foundBy": "admin@foo.com", "dateResolved": "8-11-2023" },
