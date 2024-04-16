@@ -42,7 +42,6 @@ if (Profiles.collection.find().count() === 0) {
   }
 }
 
-
 if (FoundItems.collection.find().count() === 0) {
   if (Meteor.settings.defaultItems) {
     console.log('Creating default Items.');
