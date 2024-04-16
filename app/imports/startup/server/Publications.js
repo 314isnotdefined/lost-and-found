@@ -4,6 +4,8 @@ import { Stuffs } from '../../api/stuff/Stuff';
 import { Profiles } from '../../api/profile/Profile';
 import { LostItems } from '../../api/item/LostItems';
 import { FoundItems } from '../../api/item/FoundItems';
+import { ResolvedItemsArchive } from '../../api/item/ResolvedItemsArchive';
+
 
 // User-level publication.
 // If logged in, then publish documents owned by this user. Otherwise, publish nothing.
@@ -38,6 +40,13 @@ Meteor.publish(FoundItems.userPublicationName, function () {
   return this.ready();
 });
 
+Meteor.publish(ResolvedItemsArchive.userPublicationName, function () {
+  if (this.userId) {
+    return ResolvedItemsArchive.collection.find({});
+  }
+  return this.ready();
+});
+
 // Admin-level publication.
 // If logged in and with admin role, then publish all documents from all users. Otherwise, publish nothing.
 Meteor.publish(Stuffs.adminPublicationName, function () {
@@ -61,9 +70,17 @@ Meteor.publish(LostItems.adminPublicationName, function () {
   return this.ready();
 });
 
+
 Meteor.publish(FoundItems.adminPublicationName, function () {
   if (this.userId && Roles.userIsInRole(this.userId, 'admin')) {
     return FoundItems.collection.find();
+  }
+  return this.ready();
+});
+
+Meteor.publish(ResolvedItemsArchive.adminPublicationName, function () {
+  if (this.userId) {
+    return ResolvedItemsArchive.collection.find({});
   }
   return this.ready();
 });
