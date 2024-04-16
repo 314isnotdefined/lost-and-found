@@ -17,5 +17,11 @@
 
   "profileData": [
     { "firstName":  "John", "lastName":  "Smith", "email": "john@foo.com", "image":  "img", "points":  0, "totalItemsLost":  0, "totalItemsFound":  0, "recentItemsFound":  [], "position": "Freshman"}
+  ],
+
+  "resolvedItems": [
+    { "uniqueID": "uniqueid1", "foundBy": "john@foo.com", "dateResolved": "8-15-2023" },
+    { "uniqueID": "uniqueid2", "foundBy": "admin@foo.com", "dateResolved": "8-11-2023" },
+    { "uniqueID": "uniqueid3", "foundBy": "anon", "dateResolved": "9-22-2023" }
   ]
 }
