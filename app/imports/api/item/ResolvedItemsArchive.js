@@ -12,7 +12,8 @@ class ResolvedItemsArchiveCollection {
     this.collection = new Mongo.Collection(this.name);
     // Define the structure of each document in the collection.
     this.schema = new SimpleSchema({
-      uniqueID: String,
+      image: String,
+      itemName: String,
       foundBy: String, // a unique email identified by the user.
       dateResolved: Date,
     });
