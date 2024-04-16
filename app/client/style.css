@@ -57,3 +57,8 @@ footer, footer a {
 #center-text {
   margin-top: 150px;
 }
+
+/* changes color of "click here to register" to white */
+#signin-page .alert-light a {
+  color: white; /* Sets the text color to white */
+}
