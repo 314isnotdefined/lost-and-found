@@ -5,7 +5,8 @@
   },
   "defaultAccounts": [
     { "email": "admin@foo.com", "password": "changeme", "role": "admin" },
-    { "email": "john@foo.com", "password": "changeme" }
+    { "email": "john@foo.com", "password": "changeme" },
+    { "email": "jane@foo.com", "password": "changeme" }
   ],
 
   "defaultData": [
@@ -16,7 +17,8 @@
   ],
 
   "profileData": [
-    { "firstName":  "John", "lastName":  "Smith", "email": "john@foo.com", "image":  "img", "points":  0, "totalItemsLost":  0, "totalItemsFound":  0, "recentItemsFound":  [], "position": "Freshman"}
+    { "firstName":  "John", "lastName":  "Smith", "email": "john@foo.com", "image":  "img", "points":  0, "totalItemsLost":  0, "totalItemsFound":  0, "recentItemsFound":  [], "position": "Freshman"},
+    { "firstName":  "Jane", "lastName":  "Doe", "email": "jane@foo.com", "image":  "img", "points":  0, "totalItemsLost":  0, "totalItemsFound":  0, "recentItemsFound":  [], "position": "Junior"}
   ],
 
   "defaultItems": [{
@@ -26,8 +28,10 @@
   }],
 
   "resolvedItems": [
-    { "uniqueID": "uniqueid1", "foundBy": "john@foo.com", "dateResolved": "8-15-2023" },
-    { "uniqueID": "uniqueid2", "foundBy": "admin@foo.com", "dateResolved": "8-11-2023" },
-    { "uniqueID": "uniqueid3", "foundBy": "anon", "dateResolved": "9-22-2023" }
+    { "itemName": "iPhone 27", "image": "https://i.fbcd.co/products/resized/resized-750-500/88cf1f6276057b29a27a5b93ebce4c82781839a7d3a6c577e30730ffed9cd2eb.jpg" ,"resolvedBy": "john@foo.com", "dateResolved": "8-15-2023" },
+
+    { "itemName": "UH ID 28670127", "image": "https://i.fbcd.co/products/resized/resized-750-500/88cf1f6276057b29a27a5b93ebce4c82781839a7d3a6c577e30730ffed9cd2eb.jpg" ,"resolvedBy": "jane@foo.com", "dateResolved": "3-11-2024" },
+
+    { "itemName": "Samsung Galaxy S9 charger", "image": "https://i.fbcd.co/products/resized/resized-750-500/88cf1f6276057b29a27a5b93ebce4c82781839a7d3a6c577e30730ffed9cd2eb.jpg" ,"resolvedBy": "john@foo.com", "dateResolved": "4-07-2024" }
   ]
 }

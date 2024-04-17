@@ -14,7 +14,7 @@ class ResolvedItemsArchiveCollection {
     this.schema = new SimpleSchema({
       image: String,
       itemName: String,
-      foundBy: String, // a unique email identified by the user.
+      resolvedBy: String, // a unique email identified by the user.
       dateResolved: Date,
     });
     // Attach the schema to the collection, so all attempts to insert a document are checked against schema.

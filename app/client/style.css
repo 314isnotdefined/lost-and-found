@@ -1,5 +1,5 @@
 /* Use Open Sans as the default sans serif font. */
-@import url("https://fonts.googleapis.com/css?family=Open+Sans:300,400,500,700|Source+Code+Pro:300,400,500,700");
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Nunito&display=swap");
 
 /* Set up some CSS variables to theme the application. */
 :root {
@@ -18,6 +18,8 @@ body {
   --bs-dark-rgb: var(--matr-navbar-bg-rgb);
   background-size: cover;
   --bs-heading-color: var(--matr-navbar-text-color);
+  --bs-body-font-family: "Inter", sans-serif;
+  --bs-body-font-weight: 300;
 }
 
 body .navbar {
