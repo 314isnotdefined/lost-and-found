@@ -19,7 +19,7 @@ const ArchiveCard = ({ data }) => {
     };
   });
 
-  function convertDate (dateString) {
+  function convertDate(dateString) {
     // converts a string to <Month> <Day>, <Year> format.
     const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
     const curr = new Date(dateString);
@@ -52,6 +52,7 @@ const ArchiveCard = ({ data }) => {
 export default ArchiveCard;
 
 ArchiveCard.propTypes = {
+  // eslint-disable-next-line react/require-default-props
   data: PropTypes.shape({
     image: PropTypes.string,
     itemName: PropTypes.string.isRequired,
