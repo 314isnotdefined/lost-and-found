@@ -19,6 +19,7 @@ import AddLostItem from '../pages/AddLostItem';
 import AddFoundItem from '../pages/AddFoundItem';
 import ListFoundItem from '../pages/ListFoundItem';
 import EditFoundItem from '../pages/EditFoundItem';
+import ResolvedArchive from '../pages/ResolvedArchive';
 
 /** Top-level layout component for this application. Called in imports/startup/client/startup.jsx. */
 const App = () => {
@@ -39,6 +40,7 @@ const App = () => {
           <Route path="/signout" element={<SignOut />} />
           <Route path="/home" element={<ProtectedRoute><Landing /></ProtectedRoute>} />
           <Route path="/listfound" element={<ProtectedRoute><ListFoundItem /></ProtectedRoute>} />
+          <Route path="/archive" element={<ProtectedRoute><ResolvedArchive /></ProtectedRoute>} />
           <Route path="/add" element={<ProtectedRoute><AddLostItem /></ProtectedRoute>} />
           <Route path="/addfound" element={<ProtectedRoute><AddFoundItem /></ProtectedRoute>} />
           <Route path="/edit/:_id" element={<ProtectedRoute><EditStuff /></ProtectedRoute>} />
