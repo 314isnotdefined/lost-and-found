@@ -3,7 +3,7 @@ import { Meteor } from 'meteor/meteor';
 import { Col, Container, Row, Form } from 'react-bootstrap';
 import { useTracker } from 'meteor/react-meteor-data';
 import LoadingSpinner from '../components/LoadingSpinner';
-import Item from '../components/Item';
+import FoundItem from '../components/FoundItem';
 import { FoundItems } from '../../api/item/FoundItems';
 
 const ListFoundItem = () => {
@@ -65,7 +65,7 @@ const ListFoundItem = () => {
               </Form.Group>
             </Form>
             <Row xs={1} md={2} lg={3} className="g-4">
-              {founditems.map((item, index) => (<Col key={index}><Item item={item} /></Col>))}
+              {founditems.map((item, index) => (<Col key={index}><FoundItem item={item} /></Col>))}
             </Row>
           </Col>
         </Row>

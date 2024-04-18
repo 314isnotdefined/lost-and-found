@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { Card, Image } from 'react-bootstrap';
 /** Renders a single row in the List Stuff table. See pages/ListStuff.jsx. */
-const Item = ({ item }) => (
+const FoundItem = ({ item }) => (
   <Card className="h-100">
     <Card.Header>
       <Image src={item.image} width={300} />
@@ -20,7 +20,7 @@ const Item = ({ item }) => (
 );
 
 // Require a document to be passed to this component.
-Item.propTypes = {
+FoundItem.propTypes = {
   item: PropTypes.shape({
     itemName: PropTypes.string,
     category: PropTypes.string,
@@ -28,9 +28,8 @@ Item.propTypes = {
     contactEmail: PropTypes.string,
     image: PropTypes.string,
     description: PropTypes.string,
-    owner: PropTypes.string,
     _id: PropTypes.string,
   }).isRequired,
 };
 
-export default Item;
+export default FoundItem;
