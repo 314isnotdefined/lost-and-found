@@ -1,42 +1,77 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Meteor } from 'meteor/meteor';
-import { Col, Container, Row } from 'react-bootstrap';
+import { Col, Container, Row, Form } from 'react-bootstrap';
 import { useTracker } from 'meteor/react-meteor-data';
 import LoadingSpinner from '../components/LoadingSpinner';
 import Item from '../components/Item';
 import { FoundItems } from '../../api/item/FoundItems';
 
-/* Renders a table containing all the Stuff documents. Use <StuffItem> to render each row. */
 const ListFoundItem = () => {
-  // useTracker connects Meteor data to React components. https://guide.meteor.com/react.html#using-withTracker
+  const [filters, setFilters] = useState({
+    category: '',
+  });
+
+  const constructQuery = () => {
+    const query = {};
+    if (filters.name) {
+      query.name = { $regex: `^${filters.name}`, $options: 'i' };
+    }
+    if (filters.category) {
+      query.category = filters.category;
+    }
+    return query;
+  };
   const { ready, founditems } = useTracker(() => {
-    // Note that this subscription will get cleaned up
-    // when your component is unmounted or deps change.
-    // Get access to Stuff documents.
     const subscription = Meteor.subscribe(FoundItems.userPublicationName);
-    // Determine if the subscription is ready
     const rdy = subscription.ready();
-    // Get the Stuff documents
-    const foundItems1 = FoundItems.collection.find({}).fetch();
+    const query = constructQuery(filters);
+    const foundItems1 = FoundItems.collection.find(query).fetch();
     return {
       founditems: foundItems1,
       ready: rdy,
     };
-  }, []);
-  return (ready ? (
-    <Container className="py-3">
-      <Row className="justify-content-center">
-        <Col>
-          <Col className="text-center">
-            <h2>List Found Items</h2>
+  }, [filters]);
+
+  const handleFilterChange = (e) => {
+    const { name, value } = e.target;
+    setFilters({ ...filters, [name]: value });
+  };
+
+  return (
+    ready ? (
+      <Container className="py-3">
+        <Row className="justify-content-center">
+          <Col>
+            <Col className="text-center">
+              <h2>List Found Items</h2>
+            </Col>
+            <Form>
+              <Form.Group controlId="category">
+                <Form.Label>Category</Form.Label>
+                <Form.Control
+                  as="select"
+                  name="category"
+                  value={filters.category || ''}
+                  onChange={handleFilterChange}
+                >
+                  <option value="">All Items</option>
+                  <option value="Electronics">Electronics</option>
+                  <option value="Identification and Access Cards">Identification and Access Cards</option>
+                  <option value="Clothing and Accessories">Clothing and Accessories</option>
+                  <option value="Food and Drink Containers">Food and Drink Containers</option>
+                  <option value="Textbooks and School Supplies">Textbooks and School Supplies</option>
+                  <option value="Miscellaneous">Miscellaneous</option>
+                </Form.Control>
+              </Form.Group>
+            </Form>
+            <Row xs={1} md={2} lg={3} className="g-4">
+              {founditems.map((item, index) => (<Col key={index}><Item item={item} /></Col>))}
+            </Row>
           </Col>
-          <Row xs={1} md={2} lg={3} className="g-4">
-            {founditems.map((item, index) => (<Col key={index}><Item item={item} /></Col>))}
-          </Row>
-        </Col>
-      </Row>
-    </Container>
-  ) : <LoadingSpinner />);
+        </Row>
+      </Container>
+    ) : <LoadingSpinner />
+  );
 };
 
 export default ListFoundItem;
