@@ -18,7 +18,7 @@ import LoadingSpinner from '../components/LoadingSpinner';
 import AddLostItem from '../pages/AddLostItem';
 import AddFoundItem from '../pages/AddFoundItem';
 import ListFoundItem from '../pages/ListFoundItem';
-
+import EditFoundItem from '../pages/EditFoundItem';
 /** Top-level layout component for this application. Called in imports/startup/client/startup.jsx. */
 const App = () => {
   const { ready } = useTracker(() => {
@@ -41,6 +41,7 @@ const App = () => {
           <Route path="/add" element={<ProtectedRoute><AddLostItem /></ProtectedRoute>} />
           <Route path="/addfound" element={<ProtectedRoute><AddFoundItem /></ProtectedRoute>} />
           <Route path="/edit/:_id" element={<ProtectedRoute><EditStuff /></ProtectedRoute>} />
+          <Route path="/editfound/:_id" element={<ProtectedRoute><EditFoundItem /></ProtectedRoute>} />
           <Route path="/admin" element={<AdminProtectedRoute ready={ready}><ListStuffAdmin /></AdminProtectedRoute>} />
           <Route path="/notauthorized" element={<NotAuthorized />} />
           <Route path="*" element={<NotFound />} />

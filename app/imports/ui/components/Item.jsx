@@ -14,7 +14,7 @@ const Item = ({ item }) => (
       <Card.Text>Description: {item.description}</Card.Text>
       <Card.Text>Found At: {item.locationFound}</Card.Text>
       <Card.Text>Email: {item.contactEmail}</Card.Text>
-      <Link to={`/edit/${item._id}`}>Edit</Link>
+      <Link to={`/editfound/${item._id}`}>Edit</Link>
     </Card.Body>
   </Card>
 );
