@@ -7,7 +7,7 @@ import FoundItem from '../components/FoundItem';
 import { FoundItems } from '../../api/item/FoundItems';
 
 /* Renders a table containing all the Stuff documents. Use <StuffItem> to render each row. */
-const ListFoundItem = () => {
+const ListFoundItemAdmin = () => {
   // useTracker connects Meteor data to React components. https://guide.meteor.com/react.html#using-withTracker
   const { ready, founditems } = useTracker(() => {
     // Note that this subscription will get cleaned up
@@ -28,7 +28,7 @@ const ListFoundItem = () => {
       <Row className="justify-content-center">
         <Col>
           <Col className="text-center">
-            <h2>List Found Items</h2>
+            <h2>List Found Items (Admin)</h2>
           </Col>
           <Row xs={1} md={2} lg={3} className="g-4">
             {founditems.map((item, index) => (<Col key={index}><FoundItem item={item} /></Col>))}
@@ -39,4 +39,4 @@ const ListFoundItem = () => {
   ) : <LoadingSpinner />);
 };
 
-export default ListFoundItem;
+export default ListFoundItemAdmin;
