@@ -19,6 +19,7 @@ import AddLostItem from '../pages/AddLostItem';
 import AddFoundItem from '../pages/AddFoundItem';
 import ListFoundItem from '../pages/ListFoundItem';
 import EditFoundItem from '../pages/EditFoundItem';
+
 /** Top-level layout component for this application. Called in imports/startup/client/startup.jsx. */
 const App = () => {
   const { ready } = useTracker(() => {
