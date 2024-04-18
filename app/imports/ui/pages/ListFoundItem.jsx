@@ -45,7 +45,7 @@ const ListFoundItem = () => {
             <Col className="text-center">
               <h2>List Found Items</h2>
             </Col>
-            <Form>
+            <Form className="g-4">
               <Form.Group controlId="category">
                 <Form.Label>Category</Form.Label>
                 <Form.Control
@@ -53,6 +53,7 @@ const ListFoundItem = () => {
                   name="category"
                   value={filters.category || ''}
                   onChange={handleFilterChange}
+                  className="mb-4"
                 >
                   <option value="">All Items</option>
                   <option value="Electronics">Electronics</option>
