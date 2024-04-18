@@ -5,6 +5,7 @@ import { Accounts } from 'meteor/accounts-base';
 import { Alert, Card, Col, Container, Row } from 'react-bootstrap';
 import SimpleSchema from 'simpl-schema';
 import SimpleSchema2Bridge from 'uniforms-bridge-simple-schema-2';
+import multer from 'multer';
 import { AutoForm, ErrorsField, SubmitField, TextField, SelectField } from 'uniforms-bootstrap5';
 import swal from 'sweetalert';
 import { Profiles } from '../../api/profile/Profile';
@@ -15,13 +16,16 @@ import { Profiles } from '../../api/profile/Profile';
 const SignUp = ({ location }) => {
   const [error, setError] = useState('');
   const [redirectToReferer, setRedirectToRef] = useState(false);
+  const [uploadedImage, setUploadedImage] = useState('');
 
   const schema = new SimpleSchema({
     firstName: String,
     lastName: String,
     email: String,
     password: String,
-    image: { type: String, defaultValue: '' },
+    image: { type: 'string',
+      defaultValue: '',
+    },
     position: {
       type: String,
       allowedValues: ['Freshman', 'Sophomore', 'Junior', 'Senior', 'Graduate Student', 'Professor/Faculty', 'Staff', 'Other', 'Rather not say'],
@@ -29,6 +33,15 @@ const SignUp = ({ location }) => {
     },
   });
   const bridge = new SimpleSchema2Bridge(schema);
+
+  const storageDest = multer.diskStorage({
+    destination: function (req, file, cb) {
+      cb(null, 'images');
+    },
+    filename: function (req, file, cb) {
+      cb(null, file.originalname);
+    },
+  });
 
   /* Handle SignUp submission. Create user account and a profile entry, then redirect to the home page. */
   const submit = (doc) => {
@@ -62,6 +75,16 @@ const SignUp = ({ location }) => {
     });
   };
 
+  function previewImage(e) {
+    const src = URL.createObjectURL(e.target.files[0]);
+    const fr = new FileReader();
+    fr.addEventListener('load', (event) => console.log(event.target.result));
+    fr.readAsDataURL(e.target.files[0]);
+    // console.log(src);
+    // const imageBuffer = Buffer.from(e.target.files[0].data, 'base64');
+    setUploadedImage(src);
+  }
+
   /* Display the signup form. Redirect to add page after successful registration and login. */
   const { from } = location?.state || { from: { pathname: '/add' } };
   // if correct authentication, redirect to from: page instead of signup screen
@@ -82,8 +105,25 @@ const SignUp = ({ location }) => {
                 <TextField name="lastName" placeholder="Last Name" />
                 <TextField name="email" placeholder="E-mail address" />
                 <TextField name="password" placeholder="Password" type="password" />
-                <TextField name="image" placeholder="URL to image" />
+                {/* <TextField name="image" placeholder="URL to image" /> */}
                 <SelectField name="position" placeholder="What describes you?" />
+                <div className="ImageField">
+                  <label htmlFor="file-input">
+                    <div>Choose your photo</div>
+                    <img
+                      alt=""
+                      style={{ cursor: 'pointer', width: '150px', height: '150px' }}
+                      src={uploadedImage || 'https://picsum.photos/150?grayscale'}
+                    />
+                  </label>
+                  <input
+                    accept="image/*"
+                    id="file-input"
+                    type="file"
+                    onChange={(e) => previewImage(e)}
+                  />
+                </div>
+                <br /><br />
                 <ErrorsField />
                 <SubmitField />
               </Card.Body>
