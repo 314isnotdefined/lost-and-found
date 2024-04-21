@@ -1,8 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import { Card, Image } from 'react-bootstrap';
 /** Renders a single row in the List Stuff table. See pages/ListStuff.jsx. */
-const FoundItem = ({ item }) => (
+const FoundItemAdmin = ({ item }) => (
   <Card className="h-100">
     <Card.Header>
       <Image src={item.image} width={300} />
@@ -13,12 +14,13 @@ const FoundItem = ({ item }) => (
       <Card.Text>Description: {item.description}</Card.Text>
       <Card.Text>Found At: {item.locationFound}</Card.Text>
       <Card.Text>Email: {item.contactEmail}</Card.Text>
+      <Link to={`/editfound/${item._id}`}>Edit</Link>
     </Card.Body>
   </Card>
 );
 
 // Require a document to be passed to this component.
-FoundItem.propTypes = {
+FoundItemAdmin.propTypes = {
   item: PropTypes.shape({
     itemName: PropTypes.string,
     category: PropTypes.string,
@@ -30,4 +32,4 @@ FoundItem.propTypes = {
   }).isRequired,
 };
 
-export default FoundItem;
+export default FoundItemAdmin;

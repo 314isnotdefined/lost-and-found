@@ -3,10 +3,10 @@ import { Meteor } from 'meteor/meteor';
 import { Col, Container, Row, Form } from 'react-bootstrap';
 import { useTracker } from 'meteor/react-meteor-data';
 import LoadingSpinner from '../components/LoadingSpinner';
-import FoundItem from '../components/FoundItem';
 import { FoundItems } from '../../api/item/FoundItems';
+import FoundItemAdmin from '../components/FoundItemAdmin';
 
-const ListFoundItem = () => {
+const ListFoundItemAdmin = () => {
   const [filters, setFilters] = useState({
     category: '',
   });
@@ -43,7 +43,7 @@ const ListFoundItem = () => {
         <Row className="justify-content-center">
           <Col>
             <Col className="text-center">
-              <h2>Found Items</h2>
+              <h2>List Item (Admin)</h2>
             </Col>
             <Form className="g-4">
               <Form.Group controlId="category">
@@ -66,7 +66,7 @@ const ListFoundItem = () => {
               </Form.Group>
             </Form>
             <Row xs={1} md={2} lg={3} className="g-4">
-              {founditems.map((item, index) => (<Col key={index}><FoundItem item={item} /></Col>))}
+              {founditems.map((item, index) => (<Col key={index}><FoundItemAdmin item={item} /></Col>))}
             </Row>
           </Col>
         </Row>
@@ -75,4 +75,4 @@ const ListFoundItem = () => {
   );
 };
 
-export default ListFoundItem;
+export default ListFoundItemAdmin;
