@@ -22,11 +22,6 @@ const NavBar = () => {
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto justify-content-start">
             {currentUser ? ([
-<<<<<<< Updated upstream
-              <Nav.Link id="add-stuff-nav" as={NavLink} to="/add" key="add">Submit Lost Item</Nav.Link>,
-              <Nav.Link id="add-stuff-nav" as={NavLink} to="/addfound" key="add">Submit Found Item</Nav.Link>,
-              <Nav.Link id="leaderboard-nav" as={NavLink} to="/leaderboard" key="leaderboard">Leaderboard</Nav.Link>,
-=======
               <NavDropdown title="Dropdown 1" id="basic-nav-dropdown1">
                 <NavDropdown.Item as={NavLink} to="/add" key="add">Submit Lost Item</NavDropdown.Item>
                 <NavDropdown.Item as={NavLink} to="/addfound" key="addfound">Submit Found Item</NavDropdown.Item>
@@ -35,7 +30,6 @@ const NavBar = () => {
                 <NavDropdown.Item as={NavLink} to="/listfound" key="listfound">List Found Item</NavDropdown.Item>
                 <NavDropdown.Item as={NavLink} to="/archive" key="listfound">Item Archive</NavDropdown.Item>
               </NavDropdown>,
->>>>>>> Stashed changes
             ]) : ''}
             {Roles.userIsInRole(Meteor.userId(), 'admin') ? (
               <Nav.Link id="list-stuff-admin-nav" as={NavLink} to="/admin" key="admin">Admin</Nav.Link>
@@ -62,11 +56,6 @@ const NavBar = () => {
                   {' '}
                   Sign
                   out
-                </NavDropdown.Item>
-                <NavDropdown.Item id="navbar-profile" as={NavLink} to="/profile">
-                  <BoxArrowRight />
-                  {' '}
-                  Profile
                 </NavDropdown.Item>
               </NavDropdown>
             )}
