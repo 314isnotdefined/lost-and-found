@@ -6,7 +6,6 @@ import { Roles } from 'meteor/alanning:roles';
 import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
 import Footer from '../components/Footer';
 import Landing from '../pages/Landing';
-import ListStuffAdmin from '../pages/ListStuffAdmin';
 import EditStuff from '../pages/EditStuff';
 import NotFound from '../pages/NotFound';
 import SignUp from '../pages/SignUp';
@@ -21,6 +20,7 @@ import ListFoundItem from '../pages/ListFoundItem';
 import EditFoundItem from '../pages/EditFoundItem';
 import ResolvedArchive from '../pages/ResolvedArchive';
 import EditLostItem from '../pages/EditLostItem';
+import ListFoundItemAdmin from '../pages/ListItemAdmin';
 
 /** Top-level layout component for this application. Called in imports/startup/client/startup.jsx. */
 const App = () => {
@@ -47,7 +47,7 @@ const App = () => {
           <Route path="/edit/:_id" element={<ProtectedRoute><EditStuff /></ProtectedRoute>} />
           <Route path="/editfound/:_id" element={<ProtectedRoute><EditFoundItem /></ProtectedRoute>} />
           <Route path="/editlost/:_id" element={<ProtectedRoute><EditLostItem /></ProtectedRoute>} />
-          <Route path="/admin" element={<AdminProtectedRoute ready={ready}><ListStuffAdmin /></AdminProtectedRoute>} />
+          <Route path="/foundadmin" element={<AdminProtectedRoute ready={ready}><ListFoundItemAdmin /></AdminProtectedRoute>} />
           <Route path="/notauthorized" element={<NotAuthorized />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
