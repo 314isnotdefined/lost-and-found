@@ -33,8 +33,7 @@ Meteor.publish(LostItems.userPublicationName, function () {
 
 Meteor.publish(FoundItems.userPublicationName, function () {
   if (this.userId) {
-    const username = Meteor.users.findOne(this.userId).username;
-    return FoundItems.collection.find({ owner: username });
+    return FoundItems.collection.find({});
   }
   return this.ready();
 });
