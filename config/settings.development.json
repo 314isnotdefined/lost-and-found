@@ -5,7 +5,8 @@
   },
   "defaultAccounts": [
     { "email": "admin@foo.com", "password": "changeme", "role": "admin" },
-    { "email": "john@foo.com", "password": "changeme" }
+    { "email": "john@foo.com", "password": "changeme" },
+    { "email": "jane@foo.com", "password": "changeme" }
   ],
 
   "defaultData": [
@@ -16,6 +17,48 @@
   ],
 
   "profileData": [
-    { "firstName":  "John", "lastName":  "Smith", "email": "john@foo.com", "image":  "img", "points":  0, "totalItemsLost":  0, "totalItemsFound":  0, "recentItemsFound":  [], "position": "Freshman"}
+    { "firstName":  "John", "lastName":  "Smith", "email": "john@foo.com", "image":  "img", "points":  0, "totalItemsLost":  0, "totalItemsFound":  0, "recentItemsFound":  [], "position": "Freshman"},
+    { "firstName":  "Jane", "lastName":  "Doe", "email": "jane@foo.com", "image":  "img", "points":  0, "totalItemsLost":  0, "totalItemsFound":  0, "recentItemsFound":  [], "position": "Junior"}
+  ],
+
+  "defaultItems": [
+    {
+      "itemName": "IPhone", "category": "Electronics", "locationFound": "POST 307, University of Hawaii",
+    "image": "https://a57.foxnews.com/static.foxbusiness.com/foxbusiness.com/content/uploads/2023/04/1440/810/Recovered-iPhone.jpg?ve=1&tl=1",
+    "description": "Black IPhone 13 Pro with dark blue case", "contactEmail": "abc@hawaii.edu", "owner": "john@foo.com"
+    },
+    {
+      "itemName": "Student ID Card", "category": "Identification and Access Cards", "locationFound": "UHM Bookstore",
+      "image": "https://bloximages.newyork1.vip.townnews.com/manoanow.org/content/tncms/assets/v3/editorial/7/9d/79d02ea6-be32-11e9-a1ae-03c492fd97f2/5d5363de273ca.image.jpg?crop=1662%2C873%2C0%2C187&resize=1200%2C630&order=crop%2Cresize",
+      "description": "Student's first name is Ramos", "contactEmail": "abc@hawaii.edu", "owner": "john@foo.com"
+    },
+    {
+      "itemName": "White Hoodie", "category": "Clothing and Accessories", "locationFound": "Hamilton Library",
+      "image": "https://img.freepik.com/premium-photo/blank-white-hoodie-lying-table-photographed-from_786887-172.jpg",
+      "description": "Found on the first floor by the computers", "contactEmail": "abc@hawaii.edu", "owner": "john@foo.com"
+    },
+    {
+      "itemName": "Black Hydro flask", "category": "Food and Drink Containers", "locationFound": "Paradise Palms",
+      "image": "https://www.lostwinds.com/cdn/shop/products/hydro-flask-wide-mouth-32oz-bottle-black.jpg?v=1708013244&width=1200",
+      "description": "Brand New Hydro flask found at the tables inside Paradise Palms", "contactEmail": "abc@hawaii.edu", "owner": "john@foo.com"
+    },
+    {
+      "itemName": "Algorithm Book", "category": "Textbooks and School Supplies", "locationFound": "Edmonson Third Floor",
+      "image": "https://m.media-amazon.com/images/I/81JCp+3S5tL._AC_UF1000,1000_QL80_.jpg",
+      "description": "found on the tables", "contactEmail": "abc@hawaii.edu", "owner": "john@foo.com"
+    },
+    {
+      "itemName": "Bracelet", "category": "Miscellaneous", "locationFound": "Gateway Cafe",
+      "image": "https://cdn01.pinkoi.com/product/sJ3vB3s8/0/1/640x530.jpg",
+      "description": "White Bracelet found at 11:30 AM 4/18/24", "contactEmail": "abc@hawaii.edu", "owner": "john@foo.com"
+    }
+  ],
+
+  "resolvedItems": [
+    { "itemName": "iPhone 27", "image": "https://i.fbcd.co/products/resized/resized-750-500/88cf1f6276057b29a27a5b93ebce4c82781839a7d3a6c577e30730ffed9cd2eb.jpg" ,"resolvedBy": "john@foo.com", "dateResolved": "8-15-2023" },
+
+    { "itemName": "UH ID 28670127", "image": "https://i.fbcd.co/products/resized/resized-750-500/88cf1f6276057b29a27a5b93ebce4c82781839a7d3a6c577e30730ffed9cd2eb.jpg" ,"resolvedBy": "jane@foo.com", "dateResolved": "3-11-2024" },
+
+    { "itemName": "Samsung Galaxy S9 charger", "image": "https://i.fbcd.co/products/resized/resized-750-500/88cf1f6276057b29a27a5b93ebce4c82781839a7d3a6c577e30730ffed9cd2eb.jpg" ,"resolvedBy": "john@foo.com", "dateResolved": "4-07-2024" }
   ]
 }
