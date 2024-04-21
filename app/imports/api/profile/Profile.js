@@ -1,9 +1,9 @@
 import { Mongo } from 'meteor/mongo';
 import SimpleSchema from 'simpl-schema';
 
-class ProfileCollection {
+class ProfilesCollection {
   constructor() {
-    this.name = 'ProfileCollection';
+    this.name = 'ProfilesCollection';
     this.collection = new Mongo.Collection(this.name);
     this.schema = new SimpleSchema({
       firstName: String,
@@ -31,6 +31,6 @@ class ProfileCollection {
 
 /**
  * The singleton instance of the StuffsCollection.
- * @type {StuffsCollection}
+ * @type {ProfilesCollection}
  */
-export const Profiles = new ProfileCollection();
+export const Profiles = new ProfilesCollection();
