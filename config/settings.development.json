@@ -17,8 +17,8 @@
   ],
 
   "profileData": [
-    { "firstName":  "John", "lastName":  "Smith", "email": "john@foo.com", "image":  "img", "points":  0, "totalItemsLost":  0, "totalItemsFound":  0, "recentItemsFound":  [], "position": "Freshman"},
-    { "firstName":  "Jane", "lastName":  "Doe", "email": "jane@foo.com", "image":  "img", "points":  0, "totalItemsLost":  0, "totalItemsFound":  0, "recentItemsFound":  [], "position": "Junior"}
+    { "firstName":  "John", "lastName":  "Smith", "email": "john@foo.com", "image":  null, "points":  0, "totalItemsLost":  0, "totalItemsFound":  0, "recentItemsFound":  [], "position": "Freshman"},
+    { "firstName":  "Jane", "lastName":  "Doe", "email": "jane@foo.com", "image":  null, "points":  0, "totalItemsLost":  0, "totalItemsFound":  0, "recentItemsFound":  [], "position": "Junior"}
   ],
 
   "defaultItems": [

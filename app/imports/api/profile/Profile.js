@@ -9,7 +9,7 @@ class ProfileCollection {
       firstName: String,
       lastName: String,
       email: String, // unique identifier to match with the default profile.
-      image: String,
+      image: { type: String, required: false },
       points: Number, // leaderboard points
       totalItemsFound: Number, // total number of items that the person found.
       totalItemsLost: Number, // total number of items that the person lost.

@@ -17,15 +17,15 @@ const SignUp = ({ location }) => {
   const [error, setError] = useState('');
   const [redirectToReferer, setRedirectToRef] = useState(false);
   const [uploadedImage, setUploadedImage] = useState('');
+  // eslint-disable-next-line no-buffer-constructor
+  const [encodedBinaryImage, setEncodedBinaryImage] = useState('');
 
   const schema = new SimpleSchema({
     firstName: String,
     lastName: String,
     email: String,
     password: String,
-    image: { type: 'string',
-      defaultValue: '',
-    },
+    // images is not included due to it getting extremely messy. It has its own form, which changes the state upon uploading files.
     position: {
       type: String,
       allowedValues: ['Freshman', 'Sophomore', 'Junior', 'Senior', 'Graduate Student', 'Professor/Faculty', 'Staff', 'Other', 'Rather not say'],
@@ -34,30 +34,20 @@ const SignUp = ({ location }) => {
   });
   const bridge = new SimpleSchema2Bridge(schema);
 
-  const storageDest = multer.diskStorage({
-    destination: function (req, file, cb) {
-      cb(null, 'images');
-    },
-    filename: function (req, file, cb) {
-      cb(null, file.originalname);
-    },
-  });
-
   /* Handle SignUp submission. Create user account and a profile entry, then redirect to the home page. */
   const submit = (doc) => {
-    const { firstName, lastName, email, password, image, position } = doc;
+    const { firstName, lastName, email, password, position } = doc;
     Accounts.createUser({ email, username: email, password }, (err) => {
       if (err) {
         setError(err.reason);
       } else {
         setError('');
-        setRedirectToRef(true);
-
+        console.log(`image getting uploaded is: ${Buffer.from(encodedBinaryImage, 'base64')}`);
         Profiles.collection.insert({
           firstName: firstName,
           lastName: lastName,
           email: email,
-          image: image,
+          image: encodedBinaryImage,
           position: position,
           points: 0,
           totalItemsFound: 0,
@@ -66,9 +56,12 @@ const SignUp = ({ location }) => {
         }, (e) => {
           if (e) {
             // if anything goes wrong submitting the form.
+            alert(e);
             swal(e);
           } else {
-            swal('You created an account!', `Happy searching, ${firstName} ${lastName}!`, 'success');
+            swal('You created an account!', `Happy searching, ${firstName} ${lastName}!`, 'success').then(() => {
+              setRedirectToRef(true);
+            });
           }
         });
       }
@@ -78,7 +71,13 @@ const SignUp = ({ location }) => {
   function previewImage(e) {
     const src = URL.createObjectURL(e.target.files[0]);
     const fr = new FileReader();
-    fr.addEventListener('load', (event) => console.log(event.target.result));
+    fr.addEventListener('load', (event) => {
+      const text = event.target.result;
+      console.log(`raw form is: ${text}`);
+      /* const bufferResult = Buffer.from(text.split(',')[1], 'base64');
+      setEncodedBinaryImage(bufferResult); */
+      setEncodedBinaryImage(text.split(',')[1]);
+    });
     fr.readAsDataURL(e.target.files[0]);
     // console.log(src);
     // const imageBuffer = Buffer.from(e.target.files[0].data, 'base64');
