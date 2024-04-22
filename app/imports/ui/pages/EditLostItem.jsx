@@ -46,12 +46,18 @@ const EditLostItem = () => {
           <AutoForm schema={bridge} onSubmit={data => submit(data)} model={doc}>
             <Card>
               <Card.Body>
-                <TextField name="itemName" />
-                <TextField name="image" />
-                <SelectField name="category" />
-                <TextField name="lastSeen" />
-                <TextField name="contactEmail" />
-                <LongTextField name="description" />
+                <Row>
+                  <Col><TextField name="itemName" /></Col>
+                  <Col><TextField name="image" /></Col>
+                </Row>
+                <Row>
+                  <Col><SelectField name="category" /></Col>
+                  <Col><TextField name="lastSeen" /></Col>
+                </Row>
+                <Row>
+                  <Col><TextField name="contactEmail" /></Col>
+                  <Col><LongTextField name="description" /></Col>
+                </Row>
                 <SubmitField value="Submit" />
                 <ErrorsField />
                 <HiddenField name="owner" />

@@ -53,12 +53,18 @@ const AddFoundItem = () => {
           <AutoForm ref={ref => { fRef = ref; }} schema={bridge} onSubmit={data => submit(data, fRef)}>
             <Card>
               <Card.Body>
-                <TextField name="itemName" />
-                <TextField name="image" />
-                <SelectField name="category" />
-                <TextField name="locationFound" />
-                <TextField name="contactEmail" />
-                <LongTextField name="description" />
+                <Row>
+                  <Col><TextField name="itemName" /></Col>
+                  <Col><TextField name="image" /></Col>
+                </Row>
+                <Row>
+                  <Col><SelectField name="category" /></Col>
+                  <Col><TextField name="locationFound" /></Col>
+                </Row>
+                <Row>
+                  <Col><TextField name="contactEmail" /></Col>
+                  <Col><LongTextField name="description" /></Col>
+                </Row>
                 <SubmitField value="Submit" />
                 <ErrorsField />
               </Card.Body>

@@ -55,14 +55,16 @@ const AddLostItem = () => {
               <Card.Body>
                 <Row>
                   <Col><TextField name="itemName" /></Col>
+                  <Col><TextField name="image" /></Col>
                 </Row>
                 <Row>
-                  <TextField name="image" />
+                  <Col><SelectField name="category" /></Col>
+                  <Col><TextField name="lastSeen" /></Col>
                 </Row>
-                <SelectField name="category" />
-                <TextField name="lastSeen" />
-                <TextField name="contactEmail" />
-                <LongTextField name="description" />
+                <Row>
+                  <Col><TextField name="contactEmail" /></Col>
+                  <Col><LongTextField name="description" /></Col>
+                </Row>
                 <SubmitField value="Submit" />
                 <ErrorsField />
               </Card.Body>
