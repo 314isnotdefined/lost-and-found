@@ -60,5 +60,38 @@
     { "itemName": "UH ID 28670127", "image": "https://i.fbcd.co/products/resized/resized-750-500/88cf1f6276057b29a27a5b93ebce4c82781839a7d3a6c577e30730ffed9cd2eb.jpg" ,"resolvedBy": "jane@foo.com", "dateResolved": "3-11-2024" },
 
     { "itemName": "Samsung Galaxy S9 charger", "image": "https://i.fbcd.co/products/resized/resized-750-500/88cf1f6276057b29a27a5b93ebce4c82781839a7d3a6c577e30730ffed9cd2eb.jpg" ,"resolvedBy": "john@foo.com", "dateResolved": "4-07-2024" }
+  ],
+
+  "lostItems": [
+    {
+      "itemName": "Mac", "category": "Electronics", "lastSeen": "POST 307, University of Hawaii",
+      "image": "https://cdn.arstechnica.net/wp-content/uploads/2023/01/2022-MacBook-Pro-closed-scaled.jpeg",
+      "description": "MacBook Pro", "contactEmail": "abc@hawaii.edu", "owner": "john@foo.com"
+    },
+    {
+      "itemName": "Driver's License", "category": "Identification and Access Cards", "lastSeen": "UHM Bookstore",
+      "image": "https://m.media-amazon.com/images/I/71N33CXWnCL._AC_SL1001_.jpg",
+      "description": "First name is Santa, last name Claus, the address is the North Pole.", "contactEmail": "abc@hawaii.edu", "owner": "john@foo.com"
+    },
+    {
+      "itemName": "Backpack", "category": "Clothing and Accessories", "lastSeen": "Hamilton Library",
+      "image": "https://pic.stylelab.com/emdx/star/2101/2101-BAG344-5.jpg",
+      "description": "A backpack with the theme of the show, Lost.", "contactEmail": "abc@hawaii.edu", "owner": "john@foo.com"
+    },
+    {
+      "itemName": "Gray Hydro Flask", "category": "Food and Drink Containers", "lastSeen": "Paradise Palms",
+      "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRoAh-RzwJK7eu8ZZwaIFfszkaHpgbN2xGSqE1izgj2EQ&s",
+      "description": "Gray hydro flask with a sticker that says, Am I Lost?", "contactEmail": "abc@hawaii.edu", "owner": "john@foo.com"
+    },
+    {
+      "itemName": "Pencil Pouch", "category": "Textbooks and School Supplies", "lastSeen": "Edmonson Third Floor",
+      "image": "https://cdn.shopify.com/s/files/1/0575/7177/products/the-student-leather-pencil-case-purple_2000x.jpg?v=1536591794",
+      "description": "found on the tables", "contactEmail": "abc@hawaii.edu", "owner": "john@foo.com"
+    },
+    {
+      "itemName": "Bracelet", "category": "Miscellaneous", "lastSeen": "Gateway Cafe",
+      "image": "https://www.biohazardcandy.com/wp-content/uploads/2021/01/2.jpg",
+      "description": "Metal Bracelet found at 12:30 PM 4/15/24", "contactEmail": "abc@hawaii.edu", "owner": "john@foo.com"
+    }
   ]
 }
