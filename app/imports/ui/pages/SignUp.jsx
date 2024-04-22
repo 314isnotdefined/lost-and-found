@@ -5,7 +5,6 @@ import { Accounts } from 'meteor/accounts-base';
 import { Alert, Card, Col, Container, Row } from 'react-bootstrap';
 import SimpleSchema from 'simpl-schema';
 import SimpleSchema2Bridge from 'uniforms-bridge-simple-schema-2';
-import multer from 'multer';
 import { AutoForm, ErrorsField, SubmitField, TextField, SelectField } from 'uniforms-bootstrap5';
 import swal from 'sweetalert';
 import { Profiles } from '../../api/profile/Profile';
@@ -42,7 +41,9 @@ const SignUp = ({ location }) => {
         setError(err.reason);
       } else {
         setError('');
-        console.log(`image getting uploaded is: ${Buffer.from(encodedBinaryImage, 'base64')}`);
+        /* console.log(`image getting uploaded is: ${Buffer.from(encodedBinaryImage, 'base64')}`); */
+
+        // note that if encodedBinaryImage is blank, the inserted MongoDB document will not have an "image" attribute.
         Profiles.collection.insert({
           firstName: firstName,
           lastName: lastName,
@@ -56,12 +57,10 @@ const SignUp = ({ location }) => {
         }, (e) => {
           if (e) {
             // if anything goes wrong submitting the form.
-            alert(e);
             swal(e);
           } else {
-            swal('You created an account!', `Happy searching, ${firstName} ${lastName}!`, 'success').then(() => {
-              setRedirectToRef(true);
-            });
+            setRedirectToRef(true);
+            swal('You created an account!', `Happy searching, ${firstName} ${lastName}!`, 'success');
           }
         });
       }
@@ -70,15 +69,27 @@ const SignUp = ({ location }) => {
 
   function previewImage(e) {
     const src = URL.createObjectURL(e.target.files[0]);
+    const size = e.target.files[0].size;
     const fr = new FileReader();
     fr.addEventListener('load', (event) => {
       const text = event.target.result;
-      console.log(`raw form is: ${text}`);
       /* const bufferResult = Buffer.from(text.split(',')[1], 'base64');
       setEncodedBinaryImage(bufferResult); */
-      setEncodedBinaryImage(text.split(',')[1]);
+
+      // check the image size.
+      /* const size = new Blob([text]).size; */
+      if (size >= 4194304) {
+        // If more than 4mb, reject and display err message.
+        swal('Please upload a smaller image!', `Max image size is 4mb; you've uploaded ${(size / 1048576).toFixed(2)}mb`, 'error');
+        setUploadedImage('');
+        /* setEncodedBinaryImage(''); */
+      } else {
+        // If under 4mb, allow.
+        setEncodedBinaryImage(text.split(',')[1]);
+      }
     });
     fr.readAsDataURL(e.target.files[0]);
+
     // console.log(src);
     // const imageBuffer = Buffer.from(e.target.files[0].data, 'base64');
     setUploadedImage(src);
@@ -107,12 +118,13 @@ const SignUp = ({ location }) => {
                 {/* <TextField name="image" placeholder="URL to image" /> */}
                 <SelectField name="position" placeholder="What describes you?" />
                 <div className="ImageField">
+                  {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
                   <label htmlFor="file-input">
                     <div>Choose your photo</div>
                     <img
                       alt=""
-                      style={{ cursor: 'pointer', width: '150px', height: '150px' }}
-                      src={uploadedImage || 'https://picsum.photos/150?grayscale'}
+                      style={{ cursor: 'pointer', width: '200px', height: '200px' }}
+                      src={uploadedImage || 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png'}
                     />
                   </label>
                   <input
