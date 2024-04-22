@@ -28,17 +28,12 @@ const NavBar = () => {
               </NavDropdown>,
               <NavDropdown title="Item Listings" id="basic-nav-dropdown2">
                 <NavDropdown.Item as={NavLink} to="/listfound" key="listfound">Found Items</NavDropdown.Item>
-                <NavDropdown.Item as={NavLink} to="/listlost" key="listlost">Lost Items</NavDropdown.Item>
                 <NavDropdown.Item as={NavLink} to="/archive" key="listfound">Item Archive</NavDropdown.Item>
               </NavDropdown>,
             ]) : ''}
             {Roles.userIsInRole(Meteor.userId(), 'admin') ? (
               <Nav.Link id="list-found-admin-nav" as={NavLink} to="/foundadmin" key="foundadmin">Found Items (Admin)</Nav.Link>
             ) : ''}
-            {Roles.userIsInRole(Meteor.userId(), 'admin') ? (
-              <Nav.Link id="list-lost-admin-nav" as={NavLink} to="/lostadmin" key="lostadmin">Lost Items (Admin)</Nav.Link>
-            ) : ''}
-
           </Nav>
           <Nav className="justify-content-end">
             {currentUser === '' ? (

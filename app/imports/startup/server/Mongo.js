@@ -2,7 +2,6 @@ import { Meteor } from 'meteor/meteor';
 import { Stuffs } from '../../api/stuff/Stuff.js';
 import { Profiles } from '../../api/profile/Profile';
 import { FoundItems } from '../../api/item/FoundItems';
-import { LostItems } from '../../api/item/LostItems';
 import { ResolvedItemsArchive } from '../../api/item/ResolvedItemsArchive';
 
 /* eslint-disable no-console */
@@ -22,11 +21,6 @@ const addProfileData = (data) => {
 const addFoundItem = (item) => {
   console.log(` Adding: ${item.itemName} (${item.owner})`);
   FoundItems.collection.insert(item);
-};
-
-const addLostItem = (item) => {
-  console.log(` Adding: ${item.itemName} (${item.owner})`);
-  LostItems.collection.insert(item);
 };
 
 const addResolvedItemData = (data) => {
@@ -53,13 +47,6 @@ if (FoundItems.collection.find().count() === 0) {
   if (Meteor.settings.defaultItems) {
     console.log('Creating default Items.');
     Meteor.settings.defaultItems.forEach(itemfound => addFoundItem(itemfound));
-  }
-}
-
-if (LostItems.collection.find().count() === 0) {
-  if (Meteor.settings.lostItems) {
-    console.log('Creating default Items.');
-    Meteor.settings.lostItems.forEach(itemlost => addLostItem(itemlost));
   }
 }
 

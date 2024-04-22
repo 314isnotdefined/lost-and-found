@@ -19,10 +19,8 @@ import AddFoundItem from '../pages/AddFoundItem';
 import ListFoundItem from '../pages/ListFoundItem';
 import EditFoundItem from '../pages/EditFoundItem';
 import ResolvedArchive from '../pages/ResolvedArchive';
-import ListLostItem from '../pages/ListLostItem';
 import EditLostItem from '../pages/EditLostItem';
 import ListFoundItemAdmin from '../pages/ListItemAdmin';
-import ListLostItemAdmin from '../pages/ListLostItemAdmin';
 
 /** Top-level layout component for this application. Called in imports/startup/client/startup.jsx. */
 const App = () => {
@@ -43,7 +41,6 @@ const App = () => {
           <Route path="/signout" element={<SignOut />} />
           <Route path="/home" element={<ProtectedRoute><Landing /></ProtectedRoute>} />
           <Route path="/listfound" element={<ProtectedRoute><ListFoundItem /></ProtectedRoute>} />
-          <Route path="/listlost" element={<ProtectedRoute><ListLostItem /></ProtectedRoute>} />
           <Route path="/archive" element={<ProtectedRoute><ResolvedArchive /></ProtectedRoute>} />
           <Route path="/add" element={<ProtectedRoute><AddLostItem /></ProtectedRoute>} />
           <Route path="/addfound" element={<ProtectedRoute><AddFoundItem /></ProtectedRoute>} />
@@ -51,7 +48,6 @@ const App = () => {
           <Route path="/editfound/:_id" element={<ProtectedRoute><EditFoundItem /></ProtectedRoute>} />
           <Route path="/editlost/:_id" element={<ProtectedRoute><EditLostItem /></ProtectedRoute>} />
           <Route path="/foundadmin" element={<AdminProtectedRoute ready={ready}><ListFoundItemAdmin /></AdminProtectedRoute>} />
-          <Route path="/lostadmin" element={<AdminProtectedRoute ready={ready}><ListLostItemAdmin /></AdminProtectedRoute>} />
           <Route path="/notauthorized" element={<NotAuthorized />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
