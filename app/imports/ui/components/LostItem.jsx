@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { Card, Image, Carousel } from 'react-bootstrap';
 import { Meteor } from 'meteor/meteor';
 import { useTracker } from 'meteor/react-meteor-data';
-import swal from 'sweetalert';
 import { Images } from '../../api/item/Images';
 /** Renders a single row in the List Stuff table. See pages/ListStuff.jsx. */
 
