@@ -37,15 +37,19 @@ const LostItem = ({ item }) => {
   return (
     <Card className="h-100">
       <Card.Header>
+        {/* eslint-disable-next-line no-nested-ternary */}
         {(ready) ? (
-          <Carousel>
-            {itemImages.map(img => (
-              <Carousel.Item interval={2000}>
-                <Image src={img} style={{ width: '100%' }} />
-              </Carousel.Item>
-            ))}
-          </Carousel>
-
+          (itemImages.length === 1) ? (
+            <img src={itemImages[0]} alt="" style={{ width: '100%' }} />
+          ) : (
+            <Carousel fade>
+              {itemImages.map(img => (
+                <Carousel.Item interval={2000}>
+                  <Image src={img} style={{ width: '100%' }} />
+                </Carousel.Item>
+              ))}
+            </Carousel>
+          )
         ) : <h5 style={{ color: 'black', textAlign: 'center' }}>Fetching images...</h5>}
       </Card.Header>
       <Card.Body>
