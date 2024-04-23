@@ -105,7 +105,6 @@ const AddLostItem = () => {
               <Card.Body>
                 <Row>
                   <Col><TextField name="itemName" /></Col>
-                  <Col><TextField name="image" /></Col>
                 </Row>
                 <LongTextField name="description" />
                 <div className="ImageField">
