@@ -37,14 +37,12 @@ const AddFoundItem = () => {
         owner: owner,
         data: encodedPhotoRefs[i].data,
       }, (err, doc) => {
-        console.log(doc);
         if (err) {
           swal(err);
         } else {
           imageRefArray.push(doc);
           if (imageRefArray.length === encodedPhotoRefs.length) {
             // all the IDs of the images are obtained, now add these IDs to the FoundItem.
-            console.log(imageRefArray);
             FoundItems.collection.insert(
               { itemName, category, description, locationFound, contactEmail, owner, image: imageRefArray },
               (error) => {
@@ -66,7 +64,6 @@ const AddFoundItem = () => {
   function changeImage(e) {
     const file = e.target.files[0];
     const src = URL.createObjectURL(file);
-    console.log('uploading');
     const size = file.size;
     const fr = new FileReader();
     fr.addEventListener('load', (event) => {
@@ -96,10 +93,9 @@ const AddFoundItem = () => {
   let fRef = null;
   return (
     <Container className="py-3">
-      <p style={{ color: 'white' }}>{encodedPhotoRefs.length}</p>
       <Row className="justify-content-center">
         <Col xs={10}>
-          <Col className="text-center"><h2>Add Lost Item</h2></Col>
+          <Col className="text-center"><h2>Add a found item</h2></Col>
           <AutoForm ref={ref => { fRef = ref; }} schema={bridge} onSubmit={data => submit(data, fRef)}>
             <Card>
               <Card.Body>
