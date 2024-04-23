@@ -43,7 +43,7 @@ const ListLostItemAdmin = () => {
         <Row className="justify-content-center">
           <Col>
             <Col className="text-center">
-              <h2>List Lost Items (Admin)</h2>
+              <h2>Lost Items (Admin)</h2>
             </Col>
             <Form className="g-4">
               <Form.Group controlId="category">
