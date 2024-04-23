@@ -52,6 +52,11 @@ class NavBar {
     await testController.click('#login-dropdown');
     await testController.click('#login-dropdown-sign-up');
   }
+
+  async gotoAddLostItemPage(testController) {
+    await testController.click('#basic-nav-dropdown1');
+    await testController.click('#addlost');
+  }
 }
 
 export const navBar = new NavBar();

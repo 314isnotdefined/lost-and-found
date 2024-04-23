@@ -34,7 +34,7 @@ const NavBar = () => {
           <Nav className="me-auto justify-content-start">
             {currentUser ? ([
               <NavDropdown title="Submit An Item" id="basic-nav-dropdown1">
-                <NavDropdown.Item as={NavLink} to="/add" key="add">Submit Lost Item</NavDropdown.Item>
+                <NavDropdown.Item id="addlost" as={NavLink} to="/add" key="add">Submit Lost Item</NavDropdown.Item>
                 <NavDropdown.Item as={NavLink} to="/addfound" key="addfound">Submit Found Item</NavDropdown.Item>
               </NavDropdown>,
               <NavDropdown title="Item Listings" id="basic-nav-dropdown2">
