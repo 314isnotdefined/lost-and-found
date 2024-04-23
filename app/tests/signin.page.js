@@ -13,11 +13,13 @@ class SigninPage {
   }
 
   /** Fills out and submits the form to signin, then checks to see that login was successful. */
-  async signin(testController, username, password) {
+  async signin(testController, email, password, username) {
     await this.isDisplayed(testController);
-    await testController.typeText('#signin-form-email', username);
+    await testController.typeText('#signin-form-email', email);
     await testController.typeText('#signin-form-password', password);
     await testController.click('#signin-form-submit input.btn.btn-primary');
+    // Click on the confirm button in SweetAlert
+    await testController.click('.swal-button--confirm');
     await navBar.isLoggedIn(testController, username);
   }
 }
