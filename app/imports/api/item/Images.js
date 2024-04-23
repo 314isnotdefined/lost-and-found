@@ -9,8 +9,9 @@ class ImagesCollection {
     this.collection = new Mongo.Collection(this.name);
     // Define the structure of each document in the collection.
     this.schema = new SimpleSchema({
+      owner: String,
       data: String,
-      linkedToItemID: String, // a unique ID of a Lost or Found item that this image is part of.
+      /* linkedToItemID: String, */ // a unique ID of a Lost or Found item that this image is part of.
     });
     // Attach the schema to the collection, so all attempts to insert a document are checked against schema.
     this.collection.attachSchema(this.schema);

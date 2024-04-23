@@ -1,17 +1,16 @@
 import React, { useState } from 'react';
-import { Card, Col, Container, Row } from 'react-bootstrap';
+import { Card, Col, Container, Row, Button } from 'react-bootstrap';
 import { AutoForm, ErrorsField, LongTextField, SelectField, SubmitField, TextField } from 'uniforms-bootstrap5';
 import swal from 'sweetalert';
 import { Meteor } from 'meteor/meteor';
 import SimpleSchema2Bridge from 'uniforms-bridge-simple-schema-2';
 import SimpleSchema from 'simpl-schema';
 import { LostItems } from '../../api/item/LostItems';
-import { Button } from 'react-bootstrap';
+import { Images } from '../../api/item/Images';
 
 // Create a schema to specify the structure of the data to appear in the form.
 const formSchema = new SimpleSchema({
   itemName: String,
-  image: String,
   category: {
     type: String,
     allowedValues: ['Electronics', 'Identification and Access Cards', 'Clothing and Accessories', 'Food and Drink Containers', 'Textbooks and School Supplies', 'Miscellaneous'],
@@ -29,20 +28,39 @@ const AddLostItem = () => {
   const [encodedPhotoRefs, setEncodedPhotoRefs] = useState([]);
   // On submit, insert the data.
   const submit = (data, formRef) => {
-    const { itemName, image, category, description, lastSeen, contactEmail } = data;
+    const { itemName, category, description, lastSeen, contactEmail } = data;
     const owner = Meteor.user().username;
-    LostItems.collection.insert(
-      { itemName, image, category, description, lastSeen, contactEmail, owner },
-      (error) => {
-        if (error) {
-          swal('Error', error.message, 'error');
+    // upload images.
+    const imageRefArray = [];
+    for (let i = 0; i < encodedPhotoRefs.length; i++) {
+      Images.collection.insert({
+        owner: owner,
+        data: encodedPhotoRefs[i].data,
+      }, (err, doc) => {
+        console.log(doc);
+        if (err) {
+          swal(err);
         } else {
-          swal('Success', 'Item added successfully', 'success');
-          formRef.reset();
+          imageRefArray.push(JSON.stringify(doc));
+          if (imageRefArray.length === encodedPhotoRefs.length) {
+            // all the IDs of the images are obtained, now add these IDs to the LostItem.
+            LostItems.collection.insert(
+              { itemName, category, description, lastSeen, contactEmail, owner, image: imageRefArray },
+              (error) => {
+                if (error) {
+                  swal('Error', error.message, 'error');
+                } else {
+                  swal('Success', 'Item added successfully', 'success');
+                  formRef.reset();
+                }
+                // CALLBACK HELL!!! WOOHOO!!!! #plzdon'tdeductgrade
+              },
+            );
+          }
         }
-      },
-    );
-  };
+      });
+    }
+  }
 
   function changeImage(e) {
     const file = e.target.files[0];
