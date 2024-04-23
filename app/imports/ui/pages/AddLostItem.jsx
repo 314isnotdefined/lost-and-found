@@ -41,9 +41,10 @@ const AddLostItem = () => {
         if (err) {
           swal(err);
         } else {
-          imageRefArray.push(JSON.stringify(doc));
+          imageRefArray.push(doc);
           if (imageRefArray.length === encodedPhotoRefs.length) {
             // all the IDs of the images are obtained, now add these IDs to the LostItem.
+            console.log(imageRefArray)
             LostItems.collection.insert(
               { itemName, category, description, lastSeen, contactEmail, owner, image: imageRefArray },
               (error) => {
@@ -60,7 +61,7 @@ const AddLostItem = () => {
         }
       });
     }
-  }
+  };
 
   function changeImage(e) {
     const file = e.target.files[0];
