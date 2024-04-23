@@ -64,3 +64,7 @@ footer, footer a {
 #signin-page .alert-light a {
   color: white; /* Sets the text color to white */
 }
+
+.nav-notification-link {
+  margin-right: 10px;  /* Adjust the margin as needed */
+}
