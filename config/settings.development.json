@@ -93,5 +93,7 @@
       "image": "https://www.biohazardcandy.com/wp-content/uploads/2021/01/2.jpg",
       "description": "Metal Bracelet found at 12:30 PM 4/15/24", "contactEmail": "abc@hawaii.edu", "owner": "john@foo.com"
     }
-  ]
+  ],
+
+  "defaultImages": [{"data":  "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png", "linkedToItemID":  "5"}]
 }

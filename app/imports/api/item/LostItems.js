@@ -13,7 +13,8 @@ class LostItemsCollection {
     // Define the structure of each document in the collection.
     this.schema = new SimpleSchema({
       itemName: String,
-      image: String,
+      image: Array,
+      'image.$': String, // an array of unique image identifiers. Storing a list of raw metadata of an image in a single MongoDB document is excessive.
       owner: String,
       category: {
         type: String,
