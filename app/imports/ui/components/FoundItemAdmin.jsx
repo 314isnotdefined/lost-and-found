@@ -1,13 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
-import { Button, Card, Col, Image, Row } from 'react-bootstrap';
-import { Trash } from 'react-bootstrap-icons';
+import { Button, Card, Image, Row } from 'react-bootstrap';
+import { Pen, Trash } from 'react-bootstrap-icons';
+import { FoundItems } from '../../api/item/FoundItems';
 /** Renders a single row in the List Stuff table. See pages/ListStuff.jsx. */
-const FoundItemAdmin = ({ item, collection }) => {
+const FoundItemAdmin = ({ item }) => {
   const removeItem = (docID) => {
-    console.log(`Item to remove ${docID}`);
-    collection.remove(docID);
+    const confirmDelete = window.confirm('Are you sure you want to delete this item?');
+    if (confirmDelete) {
+      console.log(`Item to remove ${docID}`);
+      FoundItems.collection.remove(docID);
+    }
   };
   return (
     <Card className="h-100">
@@ -21,15 +24,19 @@ const FoundItemAdmin = ({ item, collection }) => {
         <Card.Text>Found At: {item.locationFound}</Card.Text>
         <Card.Text>Email: {item.contactEmail}</Card.Text>
         <Row>
-          <Col><Link to={`/editfound/${item._id}`}>Edit</Link></Col>
-          <Col>
-            <Button
-              className="align-content-end justify-content-end"
-              variant="danger"
-              onClick={() => removeItem(item._id)}
-            ><Trash />
-            </Button>{' '}
-          </Col>
+          <Button
+            href={`/editfound/${item._id}`}
+            variant="primary"
+            type="submit"
+          >
+            <Pen /> Edit
+          </Button>{' '}
+          <Button
+            variant="danger"
+            onClick={() => removeItem(item._id)}
+          >
+            <Trash /> Delete
+          </Button>{' '}
         </Row>
       </Card.Body>
     </Card>
@@ -47,8 +54,6 @@ FoundItemAdmin.propTypes = {
     description: PropTypes.string,
     _id: PropTypes.string,
   }).isRequired,
-  // eslint-disable-next-line react/forbid-prop-types
-  collection: PropTypes.object.isRequired,
 };
 
 export default FoundItemAdmin;
