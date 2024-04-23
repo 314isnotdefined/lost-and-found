@@ -44,11 +44,19 @@ const SignUp = ({ location }) => {
         /* console.log(`image getting uploaded is: ${Buffer.from(encodedBinaryImage, 'base64')}`); */
 
         // note that if encodedBinaryImage is blank, the inserted MongoDB document will not have an "image" attribute.
+
+        let profileImage;
+        if (encodedBinaryImage === '') {
+          profileImage = 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png';
+        } else {
+          profileImage = encodedBinaryImage;
+        }
+
         Profiles.collection.insert({
           firstName: firstName,
           lastName: lastName,
           email: email,
-          image: encodedBinaryImage,
+          image: profileImage,
           position: position,
           points: 0,
           totalItemsFound: 0,
@@ -85,7 +93,7 @@ const SignUp = ({ location }) => {
         /* setEncodedBinaryImage(''); */
       } else {
         // If under 4mb, allow.
-        setEncodedBinaryImage(text.split(',')[1]);
+        setEncodedBinaryImage(text.toString());
       }
     });
     fr.readAsDataURL(e.target.files[0]);

@@ -17,8 +17,8 @@
   ],
 
   "profileData": [
-    { "firstName":  "John", "lastName":  "Smith", "email": "john@foo.com", "image":  null, "points":  0, "totalItemsLost":  0, "totalItemsFound":  0, "recentItemsFound":  [], "position": "Freshman"},
-    { "firstName":  "Jane", "lastName":  "Doe", "email": "jane@foo.com", "image":  null, "points":  0, "totalItemsLost":  0, "totalItemsFound":  0, "recentItemsFound":  [], "position": "Junior"}
+    { "firstName":  "John", "lastName":  "Smith", "email": "john@foo.com", "image":  "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png", "points":  0, "totalItemsLost":  0, "totalItemsFound":  0, "recentItemsFound":  [], "position": "Freshman"},
+    { "firstName":  "Jane", "lastName":  "Doe", "email": "jane@foo.com", "image":  "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png", "points":  0, "totalItemsLost":  0, "totalItemsFound":  0, "recentItemsFound":  [], "position": "Junior"}
   ],
 
   "defaultItems": [

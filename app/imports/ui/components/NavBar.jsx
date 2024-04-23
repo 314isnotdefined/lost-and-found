@@ -5,12 +5,24 @@ import { NavLink } from 'react-router-dom';
 import { Roles } from 'meteor/alanning:roles';
 import { Container, Nav, Navbar, NavDropdown } from 'react-bootstrap';
 import { BoxArrowRight, PersonFill, PersonPlusFill } from 'react-bootstrap-icons';
+import { Profiles } from '../../api/profile/Profile';
 
 const NavBar = () => {
   // useTracker connects Meteor data to React components. https://guide.meteor.com/react.html#using-withTracker
   const { currentUser } = useTracker(() => ({
     currentUser: Meteor.user() ? Meteor.user().username : '',
   }), []);
+
+  const { userFullProfile, rdy } = useTracker(() => {
+    const sub = Meteor.subscribe(Profiles.userPublicationName);
+    const ready = sub.ready();
+    const currentUsr = Meteor.user() ? Meteor.user().username : '';
+    const user = Profiles.collection.find({ email: currentUsr }).fetch();
+    return {
+      rdy: ready,
+      userFullProfile: user[0],
+    };
+  });
 
   return (
     <Navbar bg="dark" expand="lg">
@@ -50,7 +62,19 @@ const NavBar = () => {
                 </NavDropdown.Item>
               </NavDropdown>
             ) : (
-              <NavDropdown id="navbar-current-user" title={currentUser}>
+              <NavDropdown
+                id="navbar-current-user"
+                title={(
+                  rdy ? (
+                    <>
+                      <img src={userFullProfile.image} alt="user profile" style={{ width: '3vw', height: '3vw', borderRadius: '50%' }} />
+                      <span style={{ marginLeft: '10%', display: 'inline-block', fontSize: '115%' }}>{`${userFullProfile.firstName} ${userFullProfile.lastName}`}</span>
+                    </>
+                  ) : (
+                    <h6>Fetching</h6>
+                  )
+                )}
+              >
                 <NavDropdown.Item id="navbar-sign-out" as={NavLink} to="/signout">
                   <BoxArrowRight />
                   {' '}
