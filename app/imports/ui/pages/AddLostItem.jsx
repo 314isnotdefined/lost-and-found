@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Card, Col, Container, Row } from 'react-bootstrap';
 import { AutoForm, ErrorsField, LongTextField, SelectField, SubmitField, TextField } from 'uniforms-bootstrap5';
 import swal from 'sweetalert';
@@ -25,7 +25,7 @@ const bridge = new SimpleSchema2Bridge(formSchema);
 
 /* Renders the AddLostItem page for adding a document. */
 const AddLostItem = () => {
-
+  const [photoRefs, usePhotoRefs] = useState([]);
   // On submit, insert the data.
   const submit = (data, formRef) => {
     const { itemName, image, category, description, lastSeen, contactEmail } = data;
@@ -43,6 +43,10 @@ const AddLostItem = () => {
     );
   };
 
+  function changeImage(e) {
+    console.log(e);
+  }
+
   // Render the form. Use Uniforms: https://github.com/vazco/uniforms
   let fRef = null;
   return (
@@ -56,13 +60,26 @@ const AddLostItem = () => {
                 <Row>
                   <Col><TextField name="itemName" /></Col>
                 </Row>
-                <Row>
-                  <TextField name="image" />
-                </Row>
+                <LongTextField name="description" />
+                <div className="ImageField">
+                  {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
+                  <label htmlFor="file-input">
+                    <div>Upload your photos</div>
+                    {photoRefs.map(e => (
+                      <img src={e} alt="" style={{ height: '10vw', width: '10vw' }} />
+                    ))}
+                  </label>
+                  <br />
+                  <input
+                    accept="image/*"
+                    id="file-input"
+                    type="file"
+                    onChange={(e) => changeImage(e)}
+                  />
+                </div>
                 <SelectField name="category" />
                 <TextField name="lastSeen" />
                 <TextField name="contactEmail" />
-                <LongTextField name="description" />
                 <SubmitField value="Submit" />
                 <ErrorsField />
               </Card.Body>
