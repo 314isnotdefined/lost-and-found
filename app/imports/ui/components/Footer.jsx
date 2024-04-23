@@ -6,17 +6,16 @@ const Footer = () => (
   <footer className="mt-auto py-3 bg-dark">
     <Container>
       <Col className="text-center">
-        Department of Information and Computer Sciences
+        ItemDepot is a site that connects students to their lost items through other university students
         {' '}
         <br />
-        University of Hawaii
-        <br />
-        Honolulu, HI 96822
+        <a href="https://item-depot.github.io/">
+          Organization Page
+        </a>
         {' '}
         <br />
-        <a href="http://ics-software-engineering.github.io/meteor-application-template-react">
-          Template Home
-          Page
+        <a href="https://github.com/item-depot/item-depot">
+          Github Repository
         </a>
       </Col>
     </Container>

@@ -56,14 +56,14 @@ if (Profiles.collection.find().count() === 0) {
 
 if (FoundItems.collection.find().count() === 0) {
   if (Meteor.settings.defaultItems) {
-    console.log('Creating default Items.');
+    console.log('Creating found items.');
     Meteor.settings.defaultItems.forEach(itemfound => addFoundItem(itemfound));
   }
 }
 
 if (LostItems.collection.find().count() === 0) {
   if (Meteor.settings.lostItems) {
-    console.log('Creating default Items.');
+    console.log('Creating lost Items.');
     Meteor.settings.lostItems.forEach(itemlost => addLostItem(itemlost));
   }
 }

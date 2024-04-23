@@ -21,7 +21,7 @@ import EditFoundItem from '../pages/EditFoundItem';
 import ResolvedArchive from '../pages/ResolvedArchive';
 import ListLostItem from '../pages/ListLostItem';
 import EditLostItem from '../pages/EditLostItem';
-import ListFoundItemAdmin from '../pages/ListItemAdmin';
+import ListFoundItemAdmin from '../pages/ListFoundItemAdmin';
 import ListLostItemAdmin from '../pages/ListLostItemAdmin';
 
 /** Top-level layout component for this application. Called in imports/startup/client/startup.jsx. */
