@@ -4,6 +4,7 @@ import { Profiles } from '../../api/profile/Profile';
 import { FoundItems } from '../../api/item/FoundItems';
 import { LostItems } from '../../api/item/LostItems';
 import { ResolvedItemsArchive } from '../../api/item/ResolvedItemsArchive';
+import { Images } from '../../api/item/Images';
 
 /* eslint-disable no-console */
 
@@ -32,6 +33,10 @@ const addLostItem = (item) => {
 const addResolvedItemData = (data) => {
   console.log(`Adding data for ${data.uniqueID}`);
   ResolvedItemsArchive.collection.insert(data);
+};
+
+const addImageData = (data) => {
+  Images.collection.insert(data);
 };
 
 // Initialize the StuffsCollection if empty.
@@ -67,5 +72,12 @@ if (ResolvedItemsArchive.collection.find().count() === 0) {
   if (Meteor.settings.resolvedItems) {
     console.log('Creating default resolved items');
     Meteor.settings.resolvedItems.forEach(data => addResolvedItemData(data));
+  }
+}
+
+if (Images.collection.find().count() === 0) {
+  if (Meteor.settings.defaultImages) {
+    console.log('Creating default images');
+    Meteor.settings.defaultImages.forEach(data => addImageData(data));
   }
 }
