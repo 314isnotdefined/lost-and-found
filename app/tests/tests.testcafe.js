@@ -24,9 +24,10 @@ test('Test that signin and signout work', async (testController) => {
   await signoutPage.isDisplayed(testController);
 });
 
-test('Test that lost items are added via lost item page', async (testController) => {
+test.only('Test that add lost item page works', async (testController) => {
   await navBar.gotoSignInPage(testController);
   await signinPage.signin(testController, credentials.email, credentials.password, credentials.username);
   await navBar.gotoAddLostItemPage(testController);
   await addLostItemPage.isDisplayed(testController);
+  await addLostItemPage.addLostItem(testController);
 });

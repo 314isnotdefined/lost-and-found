@@ -39,7 +39,7 @@ const NavBar = () => {
               </NavDropdown>,
               <NavDropdown title="Item Listings" id="basic-nav-dropdown2">
                 <NavDropdown.Item as={NavLink} to="/listfound" key="listfound">Found Items</NavDropdown.Item>
-                <NavDropdown.Item as={NavLink} to="/listlost" key="listlost">Lost Items</NavDropdown.Item>
+                <NavDropdown.Item id="list-lost-nav" as={NavLink} to="/listlost" key="listlost">Lost Items</NavDropdown.Item>
                 <NavDropdown.Item as={NavLink} to="/archive" key="listfound">Item Archive</NavDropdown.Item>
               </NavDropdown>,
             ]) : ''}
