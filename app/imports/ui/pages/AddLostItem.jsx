@@ -44,7 +44,7 @@ const AddLostItem = () => {
           imageRefArray.push(doc);
           if (imageRefArray.length === encodedPhotoRefs.length) {
             // all the IDs of the images are obtained, now add these IDs to the LostItem.
-            console.log(imageRefArray)
+            console.log(imageRefArray);
             LostItems.collection.insert(
               { itemName, category, description, lastSeen, contactEmail, owner, image: imageRefArray },
               (error) => {
@@ -105,7 +105,6 @@ const AddLostItem = () => {
               <Card.Body>
                 <Row>
                   <Col><TextField name="itemName" /></Col>
-                  <Col><TextField name="image" /></Col>
                 </Row>
                 <LongTextField name="description" />
                 <div className="ImageField">
