@@ -8,7 +8,7 @@ const LostItem = ({ item }) => (
       <Image src={item.image} width={300} />
     </Card.Header>
     <Card.Body>
-      <Card.Title>Item name: {item.itemName}</Card.Title>
+      <Card.Title>{item.itemName}</Card.Title>
       <Card.Text>Category: {item.category}</Card.Text>
       <Card.Text>Description: {item.description}</Card.Text>
       <Card.Text>Last Seen At: {item.lastSeen}</Card.Text>
