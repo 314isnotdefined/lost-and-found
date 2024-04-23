@@ -6,6 +6,7 @@ import { Meteor } from 'meteor/meteor';
 import SimpleSchema2Bridge from 'uniforms-bridge-simple-schema-2';
 import SimpleSchema from 'simpl-schema';
 import { LostItems } from '../../api/item/LostItems';
+import { Button } from 'react-bootstrap';
 
 // Create a schema to specify the structure of the data to appear in the form.
 const formSchema = new SimpleSchema({
@@ -25,7 +26,7 @@ const bridge = new SimpleSchema2Bridge(formSchema);
 
 /* Renders the AddLostItem page for adding a document. */
 const AddLostItem = () => {
-  const [photoRefs, usePhotoRefs] = useState([]);
+  const [encodedPhotoRefs, setEncodedPhotoRefs] = useState([]);
   // On submit, insert the data.
   const submit = (data, formRef) => {
     const { itemName, image, category, description, lastSeen, contactEmail } = data;
@@ -44,13 +45,39 @@ const AddLostItem = () => {
   };
 
   function changeImage(e) {
-    console.log(e);
+    const file = e.target.files[0];
+    const src = URL.createObjectURL(file);
+    console.log('uploading');
+    const size = file.size;
+    const fr = new FileReader();
+    fr.addEventListener('load', (event) => {
+      const text = event.target.result;
+      if (size >= 8388608) {
+        // If more than 8mb, reject and display err message.
+        swal('Please upload a smaller image!', `Max image size is 8mb; you've uploaded ${(size / 1048576).toFixed(2)}mb`, 'error');
+      } else {
+        // If under 4mb, allow.
+        const tempArray = [...encodedPhotoRefs];
+        tempArray.push({ data: text.toString(), shown: false, src: src });
+        setEncodedPhotoRefs(tempArray);
+      }
+    });
+    fr.readAsDataURL(file);
+  }
+
+  function removeImage(e) {
+    const tempArr = [...encodedPhotoRefs];
+    const toDelete = e.target.name;
+    const index = tempArr.map(item => item.src).indexOf(toDelete);
+    tempArr.splice(index, 1);
+    setEncodedPhotoRefs(tempArr);
   }
 
   // Render the form. Use Uniforms: https://github.com/vazco/uniforms
   let fRef = null;
   return (
     <Container className="py-3">
+      <p style={{ color: 'white' }}>{encodedPhotoRefs.length}</p>
       <Row className="justify-content-center">
         <Col xs={10}>
           <Col className="text-center"><h2>Add Lost Item</h2></Col>
@@ -63,13 +90,18 @@ const AddLostItem = () => {
                 <LongTextField name="description" />
                 <div className="ImageField">
                   {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
-                  <label htmlFor="file-input">
+                  <div>
                     <div>Upload your photos</div>
-                    {photoRefs.map(e => (
-                      <img src={e} alt="" style={{ height: '10vw', width: '10vw' }} />
-                    ))}
-                  </label>
-                  <br />
+                    <div style={{ width: 'auto', margin: '3% 0 3% 0' }}>
+                      {encodedPhotoRefs.map(e => (
+                        <div style={{ display: 'inline-block', margin: '0% 2% 3% 2%' }} key={e.src}>
+                          <img src={e.data} key={e} alt="" style={{ height: '10vw', width: '10vw' }} />
+                          <br />
+                          <Button variant="danger" key={e.src} name={e.src} style={{ textAlign: 'center', width: '80%', margin: '5% 10% 5% 10%' }} onClick={(evt) => removeImage(evt)}>Remove</Button>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
                   <input
                     accept="image/*"
                     id="file-input"
