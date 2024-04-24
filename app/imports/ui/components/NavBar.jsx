@@ -75,7 +75,7 @@ const NavBar = () => {
                 <NavDropdown
                   id="navbar-current-user"
                   title={(
-                    rdy ? (
+                    (rdy && userFullProfile) ? (
                       <>
                         <img src={/* userFullProfile.image */ 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png'} alt="user profile" style={{ width: '3vw', height: '3vw', borderRadius: '50%' }} />
                         <span style={{ marginLeft: '10%', display: 'inline-block', fontSize: '115%' }}>{`${userFullProfile.firstName} ${userFullProfile.lastName}`}</span>
