@@ -43,9 +43,13 @@ test('Test that add found item page works', async (testController) => {
   await addFoundItemPage.addFoundItem(testController);
 });
 
-test.only('Test that admins can remove found items via found items admin page', async (testController) => {
+test('Test that admins can edit found items via found items admin page', async (testController) => {
   await navBar.gotoSignInPage(testController);
   await signinPage.signin(testController, admin.email, admin.password, admin.username);
   await navBar.gotoListFoundItemAdminPage(testController);
   await listFoundItemAdminPage.editAndRemoveItem(testController);
+});
+
+test('Test that resolved items archive shows up', async (testController) => {
+  await landingPage.isDisplayed(testController);
 });
