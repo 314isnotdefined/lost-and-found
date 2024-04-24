@@ -62,6 +62,16 @@ class NavBar {
     await testController.click('#basic-nav-dropdown2');
     await testController.click('#list-lost-nav');
   }
+
+  async gotoAddFoundItemPage(testController) {
+    await testController.click('#basic-nav-dropdown1');
+    await testController.click('#add-found-nav');
+  }
+
+  async gotoListFoundItemPage(testController) {
+    await testController.click('#basic-nav-dropdown2');
+    await testController.click('#list-found-nav');
+  }
 }
 
 export const navBar = new NavBar();

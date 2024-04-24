@@ -3,6 +3,7 @@ import { signinPage } from './signin.page';
 import { signoutPage } from './signout.page';
 import { navBar } from './navbar.component';
 import { addLostItemPage } from './addlostitem.page';
+import { addFoundItemPage } from './addfounditem.page';
 
 /* global fixture:false, test:false */
 
@@ -24,10 +25,18 @@ test('Test that signin and signout work', async (testController) => {
   await signoutPage.isDisplayed(testController);
 });
 
-test.only('Test that add lost item page works', async (testController) => {
+test('Test that add lost item page works', async (testController) => {
   await navBar.gotoSignInPage(testController);
   await signinPage.signin(testController, credentials.email, credentials.password, credentials.username);
   await navBar.gotoAddLostItemPage(testController);
   await addLostItemPage.isDisplayed(testController);
   await addLostItemPage.addLostItem(testController);
+});
+
+test('Test that add found item page works', async (testController) => {
+  await navBar.gotoSignInPage(testController);
+  await signinPage.signin(testController, credentials.email, credentials.password, credentials.username);
+  await navBar.gotoAddFoundItemPage(testController);
+  await addFoundItemPage.isDisplayed(testController);
+  await addFoundItemPage.addFoundItem(testController);
 });
