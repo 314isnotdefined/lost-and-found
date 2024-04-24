@@ -35,10 +35,10 @@ const NavBar = () => {
             {currentUser ? ([
               <NavDropdown title="Submit An Item" id="basic-nav-dropdown1">
                 <NavDropdown.Item id="addlost" as={NavLink} to="/add" key="add">Submit Lost Item</NavDropdown.Item>
-                <NavDropdown.Item as={NavLink} to="/addfound" key="addfound">Submit Found Item</NavDropdown.Item>
+                <NavDropdown.Item id="add-found-nav" as={NavLink} to="/addfound" key="addfound">Submit Found Item</NavDropdown.Item>
               </NavDropdown>,
               <NavDropdown title="Item Listings" id="basic-nav-dropdown2">
-                <NavDropdown.Item as={NavLink} to="/listfound" key="listfound">Found Items</NavDropdown.Item>
+                <NavDropdown.Item as={NavLink} id="list-found-nav" to="/listfound" key="listfound">Found Items</NavDropdown.Item>
                 <NavDropdown.Item id="list-lost-nav" as={NavLink} to="/listlost" key="listlost">Lost Items</NavDropdown.Item>
                 <NavDropdown.Item as={NavLink} to="/archive" key="listfound">Item Archive</NavDropdown.Item>
               </NavDropdown>,
