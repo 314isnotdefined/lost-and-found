@@ -3,6 +3,7 @@ import { Roles } from 'meteor/alanning:roles';
 import { Stuffs } from '../../api/stuff/Stuff';
 import { Profiles } from '../../api/profile/Profile';
 import { LostItems } from '../../api/item/LostItems';
+import { Images } from '../../api/item/Images';
 import { FoundItems } from '../../api/item/FoundItems';
 import { ResolvedItemsArchive } from '../../api/item/ResolvedItemsArchive';
 
@@ -44,6 +45,13 @@ Meteor.publish(ResolvedItemsArchive.userPublicationName, function () {
   return this.ready();
 });
 
+Meteor.publish(Images.userPublicationName, function () {
+  if (this.userId) {
+    return Images.collection.find({});
+  }
+  return this.ready();
+});
+
 // Admin-level publication.
 // If logged in and with admin role, then publish all documents from all users. Otherwise, publish nothing.
 Meteor.publish(Stuffs.adminPublicationName, function () {
@@ -77,6 +85,13 @@ Meteor.publish(FoundItems.adminPublicationName, function () {
 Meteor.publish(ResolvedItemsArchive.adminPublicationName, function () {
   if (this.userId) {
     return ResolvedItemsArchive.collection.find({});
+  }
+  return this.ready();
+});
+
+Meteor.publish(Images.adminPublicationName, function () {
+  if (this.userId) {
+    return Images.collection.find({});
   }
   return this.ready();
 });
