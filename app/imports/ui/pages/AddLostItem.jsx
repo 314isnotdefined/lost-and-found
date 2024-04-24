@@ -92,7 +92,7 @@ const AddLostItem = () => {
   // Render the form. Use Uniforms: https://github.com/vazco/uniforms
   let fRef = null;
   return (
-    <Container className="py-3">
+    <Container id="add-lost-page" className="py-3">
       <Row className="justify-content-center">
         <Col xs={10}>
           <Col className="text-center"><h2>Add Lost Item</h2></Col>
@@ -100,9 +100,9 @@ const AddLostItem = () => {
             <Card>
               <Card.Body>
                 <Row>
-                  <Col><TextField name="itemName" /></Col>
+                  <Col><TextField id="item-name-field" name="itemName" /></Col>
                 </Row>
-                <LongTextField name="description" />
+                <Col><LongTextField id="description-field" name="description" /></Col>
                 <div className="ImageField">
                   {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
                   <div>
@@ -124,10 +124,12 @@ const AddLostItem = () => {
                     onChange={(e) => changeImage(e)}
                   />
                 </div>
-                <SelectField name="category" />
-                <TextField name="lastSeen" />
-                <TextField name="contactEmail" />
-                <SubmitField value="Submit" />
+                <Row>
+                  <Col><SelectField id="category-field" name="category" /></Col>
+                  <Col><TextField id="last-seen-field" name="lastSeen" /></Col>
+                </Row>
+                <Col><TextField id="email-field" name="contactEmail" /></Col>
+                <SubmitField id="submit-btn" value="Submit" />
                 <ErrorsField />
               </Card.Body>
             </Card>
