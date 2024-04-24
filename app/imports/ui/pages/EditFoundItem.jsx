@@ -55,10 +55,10 @@ const EditFoundItem = () => {
                   <Col><TextField name="locationFound" /></Col>
                 </Row>
                 <Row>
-                  <Col><TextField name="contactEmail" /></Col>
+                  <Col><TextField id="edit-found-email" name="contactEmail" /></Col>
                   <Col><LongTextField name="description" /></Col>
                 </Row>
-                <SubmitField value="Submit" />
+                <SubmitField id="submit-btn" value="Submit" />
                 <ErrorsField />
                 <HiddenField name="owner" />
               </Card.Body>

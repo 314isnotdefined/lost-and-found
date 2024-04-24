@@ -54,13 +54,55 @@ class NavBar {
   }
 
   async gotoAddLostItemPage(testController) {
+    const visible = await Selector('#basic-navbar-nav').visible;
+    if (!visible) {
+      await testController.click('button.navbar-toggler');
+    }
     await testController.click('#basic-nav-dropdown1');
     await testController.click('#addlost');
   }
 
   async gotoListLostItemPage(testController) {
+    const visible = await Selector('#basic-navbar-nav').visible;
+    if (!visible) {
+      await testController.click('button.navbar-toggler');
+    }
     await testController.click('#basic-nav-dropdown2');
     await testController.click('#list-lost-nav');
+  }
+
+  async gotoAddFoundItemPage(testController) {
+    const visible = await Selector('#basic-navbar-nav').visible;
+    if (!visible) {
+      await testController.click('button.navbar-toggler');
+    }
+    await testController.click('#basic-nav-dropdown1');
+    await testController.click('#add-found-nav');
+  }
+
+  async gotoListFoundItemPage(testController) {
+    const visible = await Selector('#basic-navbar-nav').visible;
+    if (!visible) {
+      await testController.click('button.navbar-toggler');
+    }
+    await testController.click('#basic-nav-dropdown2');
+    await testController.click('#list-found-nav');
+  }
+
+  async gotoListFoundItemAdminPage(testController) {
+    const visible = await Selector('#basic-navbar-nav').visible;
+    if (!visible) {
+      await testController.click('button.navbar-toggler');
+    }
+    await testController.click('#list-found-admin-nav');
+  }
+
+  async gotoListLostItemAdminPage(testController) {
+    const visible = await Selector('#basic-navbar-nav').visible;
+    if (!visible) {
+      await testController.click('button.navbar-toggler');
+    }
+    await testController.click('#list-lost-admin-nav');
   }
 }
 
