@@ -15,7 +15,7 @@ class AddLostItemPage {
   async addLostItem(testController) {
     const lostItemTest = { itemName: 'Cinnamoroll', image: 'https://static.wikia.nocookie.net/sanrio/images/2/23/Cinnamoroll.png/', lastSeen: 'Hamilton Library', email: 'cashbake@hawaii.edu', description: 'a silly lil guy' };
     await testController.typeText('#item-name-field', lostItemTest.itemName);
-    await testController.typeText('#image-field', lostItemTest.image);
+    await testController.setFilesToUpload('#file-input', '../public/images/meteor-logo.png');
     const categorySelect = Selector('#category-field');
     const categoryOption = categorySelect.find('option');
     await testController.click(categorySelect);
