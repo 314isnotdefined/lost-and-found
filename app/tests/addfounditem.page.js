@@ -26,7 +26,7 @@ class AddFoundItemPage {
     await testController.click('#submit-btn input.btn.btn-primary');
     await testController.click('.swal-button--confirm');
     // Check if newly created item is added to lost items page
-    await navBar.gotoListLostItemPage(testController);
+    await navBar.gotoListFoundItemPage(testController);
     await testController.click(Selector('.card-title').withText((foundItemTest.itemName)));
   }
 }
