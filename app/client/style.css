@@ -64,3 +64,11 @@ footer, footer a {
 #signin-page .alert-light a {
   color: white; /* Sets the text color to white */
 }
+
+#signup-page .already-login-button {
+  color: white;
+}
+
+#signup-page .alert-light a {
+  color: white;
+}
