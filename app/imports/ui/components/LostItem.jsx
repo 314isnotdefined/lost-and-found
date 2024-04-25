@@ -87,9 +87,12 @@ const LostItem = ({ item }) => {
         {/* eslint-disable-next-line react/jsx-no-bind */}
         <Modal show={messageFormDisplay} onHide={handleClose}>
           <Modal.Header closeButton>
-            <Modal.Title>{`Thank you for finding ${item.itemName}!`}</Modal.Title>
+            <Modal.Title>
+              <h3 style={{ textAlign: 'center', color: 'black' }}>{`Thank you for finding ${item.itemName}!`}</h3>
+            </Modal.Title>
           </Modal.Header>
           <Modal.Body>
+            <p>Please fill out the necessary info below.</p>
             <AutoForm schema={bridge} onSubmit={data => submit(data)}>
               <TextField name="contactInfo" placeholder="email, phone #, instagram, etc... (optional)" label="Your Contact Info" required={false} />
               <LongTextField name="message" placeholder="Indicate details of where you found the item, etc..." required />
