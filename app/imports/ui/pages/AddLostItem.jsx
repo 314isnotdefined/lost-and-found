@@ -126,7 +126,7 @@ const AddLostItem = () => {
                 </div>
                 <Row>
                   <Col><SelectField id="category-field" name="category" /></Col>
-                  <Col><TextField id="last-seen-field" name="lastSeen" /></Col>
+                  <Col><LongTextField id="last-seen-field" name="lastSeen" placeholder="Date and location last seen; e.g. '9:30am at Campus Center, on April 20, 2024'"/></Col>
                 </Row>
                 <Col><TextField id="email-field" name="contactEmail" /></Col>
                 <SubmitField id="submit-btn" value="Submit" />
