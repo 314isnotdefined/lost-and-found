@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { Card, Image, Carousel, Button } from 'react-bootstrap';
+import { Card, Image, Carousel, Button, Modal } from 'react-bootstrap';
 import { AutoForm, ErrorsField, SubmitField, LongTextField, TextField } from 'uniforms-bootstrap5';
 import { Meteor } from 'meteor/meteor';
 import SimpleSchema2Bridge from 'uniforms-bridge-simple-schema-2';
@@ -12,7 +12,7 @@ import { Images } from '../../api/item/Images';
 const messageSchema = new SimpleSchema({
   contactInfo: String,
   message: String,
-})
+});
 
 const bridge = new SimpleSchema2Bridge(messageSchema);
 
@@ -44,8 +44,19 @@ const LostItem = ({ item }) => {
     };
   });
 
+  const [messageFormDisplay, setMessageFormDisplay] = useState(false);
+
+  function toggleContactForm() {
+    setMessageFormDisplay(true);
+  }
+
+  function handleClose() {
+    setMessageFormDisplay(false);
+  }
+
   const submit = ({ data }) => {
     console.log(JSON.stringify(data));
+    handleClose();
   };
 
   return (
@@ -71,15 +82,22 @@ const LostItem = ({ item }) => {
         <Card.Text>Category: {item.category}</Card.Text>
         <Card.Text>Description: {item.description}</Card.Text>
         <Card.Text>Last Seen At: {item.lastSeen}</Card.Text>
-        <Button>I found this item</Button>
-        <div>
-          <AutoForm schema={bridge} onSubmit={data => submit(data)}>
-            <TextField name="contactInfo" placeholder="email, phone #, instagram, etc... (optional)" label="Your Contact Info" />
-            <LongTextField name="message" placeholder="Indicate details of where you found the item, etc..." required />
-            <ErrorsField />
-            <SubmitField />
-          </AutoForm>
-        </div>
+        <Button variant="success" style={{ width: '100%' }} onClick={() => toggleContactForm()}>I found this item</Button>
+
+        {/* eslint-disable-next-line react/jsx-no-bind */}
+        <Modal show={messageFormDisplay} onHide={handleClose}>
+          <Modal.Header closeButton>
+            <Modal.Title>{`Thank you for finding ${item.itemName}!`}</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <AutoForm schema={bridge} onSubmit={data => submit(data)}>
+              <TextField name="contactInfo" placeholder="email, phone #, instagram, etc... (optional)" label="Your Contact Info" required={false} />
+              <LongTextField name="message" placeholder="Indicate details of where you found the item, etc..." required />
+              <ErrorsField />
+              <SubmitField />
+            </AutoForm>
+          </Modal.Body>
+        </Modal>
         <Card.Text>Email: {item.contactEmail}</Card.Text>
       </Card.Body>
     </Card>
