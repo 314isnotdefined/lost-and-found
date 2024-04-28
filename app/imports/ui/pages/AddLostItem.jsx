@@ -8,6 +8,10 @@ import SimpleSchema from 'simpl-schema';
 import { LostItems } from '../../api/item/LostItems';
 import { Images } from '../../api/item/Images';
 
+const isValidEmail = (value) => {
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  return emailRegex.test(value);
+};
 // Create a schema to specify the structure of the data to appear in the form.
 const formSchema = new SimpleSchema({
   itemName: String,
@@ -18,7 +22,15 @@ const formSchema = new SimpleSchema({
   },
   description: String,
   lastSeen: String,
-  contactEmail: String,
+  contactEmail: {
+    type: String,
+    // eslint-disable-next-line consistent-return
+    custom() {
+      if (!isValidEmail(this.value)) {
+        return 'Invalid';
+      }
+    },
+  },
 });
 
 const bridge = new SimpleSchema2Bridge(formSchema);
@@ -126,7 +138,7 @@ const AddLostItem = () => {
                 </div>
                 <Row>
                   <Col><SelectField id="category-field" name="category" /></Col>
-                  <Col><LongTextField id="last-seen-field" name="lastSeen" placeholder="Date and location last seen; e.g. '9:30am at Campus Center, on April 20, 2024'"/>
+                  <Col><LongTextField id="last-seen-field" name="lastSeen" placeholder="Date and location last seen; e.g. '9:30am at Campus Center, on April 20, 2024'" />
                   </Col>
                 </Row>
                 <Col><TextField id="email-field" name="contactEmail" /></Col>

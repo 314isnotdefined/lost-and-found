@@ -8,6 +8,11 @@ import SimpleSchema from 'simpl-schema';
 import { FoundItems } from '../../api/item/FoundItems';
 import { Images } from '../../api/item/Images';
 
+const isValidEmail = (value) => {
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  return emailRegex.test(value);
+};
+
 // Create a schema to specify the structure of the data to appear in the form.
 const formSchema = new SimpleSchema({
   itemName: String,
@@ -18,7 +23,15 @@ const formSchema = new SimpleSchema({
   },
   description: String,
   locationFound: String,
-  contactEmail: String,
+  contactEmail: {
+    type: String,
+    // eslint-disable-next-line consistent-return
+    custom() {
+      if (!isValidEmail(this.value)) {
+        return 'Invalid';
+      }
+    },
+  },
 });
 
 const bridge = new SimpleSchema2Bridge(formSchema);
@@ -26,6 +39,7 @@ const bridge = new SimpleSchema2Bridge(formSchema);
 /* Renders the AddFoundItem page for adding a document. */
 const AddFoundItem = () => {
   const [encodedPhotoRefs, setEncodedPhotoRefs] = useState([]);
+
   // On submit, insert the data.
   const submit = (data, formRef) => {
     const { itemName, category, description, locationFound, contactEmail } = data;
