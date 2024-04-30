@@ -107,7 +107,7 @@ const AddLostItem = () => {
     <Container id="add-lost-page" className="py-3">
       <Row className="justify-content-center">
         <Col xs={10}>
-          <Col className="text-center"><h2>Add Lost Item</h2></Col>
+          <Col className="text-center"><h2 className="add-lost-item-heading">Add Lost Item</h2></Col>
           <AutoForm ref={ref => { fRef = ref; }} schema={bridge} onSubmit={data => submit(data, fRef)}>
             <Card>
               <Card.Body>
