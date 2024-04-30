@@ -48,7 +48,7 @@ const ListLostItem = () => {
             </Col>
             <Form className="g-4">
               <Form.Group controlId="category">
-                <Form.Label>Category</Form.Label>
+                <Form.Label className="white-heading">Category</Form.Label>
                 <Form.Control
                   as="select"
                   name="category"
