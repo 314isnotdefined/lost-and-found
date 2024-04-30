@@ -21,6 +21,7 @@ const ListFoundItem = () => {
     }
     return query;
   };
+
   const { ready, founditems } = useTracker(() => {
     const subscription = Meteor.subscribe(FoundItems.userPublicationName);
     const rdy = subscription.ready();
@@ -43,7 +44,7 @@ const ListFoundItem = () => {
         <Row className="justify-content-center">
           <Col>
             <Col className="text-center">
-              <h2>Found Items</h2>
+              <h2 className="white-heading">Found Items</h2>
             </Col>
             <Form className="g-4">
               <Form.Group controlId="category">

@@ -95,7 +95,7 @@ const AddFoundItem = () => {
     <Container className="py-3">
       <Row className="justify-content-center">
         <Col xs={10}>
-          <Col className="text-center"><h2>Add a found item</h2></Col>
+          <Col className="text-center"><h2 className="add-found-item-heading">Add a found item</h2></Col>
           <AutoForm ref={ref => { fRef = ref; }} schema={bridge} onSubmit={data => submit(data, fRef)}>
             <Card>
               <Card.Body>
