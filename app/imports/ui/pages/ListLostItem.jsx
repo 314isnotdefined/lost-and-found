@@ -40,7 +40,7 @@ const ListLostItem = () => {
 
   return (
     ready ? (
-      <Container className="py-3">
+      <Container id="list-lost-page" className="py-3">
         <Row className="justify-content-center">
           <Col>
             <Col className="text-center">

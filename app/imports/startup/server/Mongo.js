@@ -5,6 +5,7 @@ import { FoundItems } from '../../api/item/FoundItems';
 import { LostItems } from '../../api/item/LostItems';
 import { ResolvedItemsArchive } from '../../api/item/ResolvedItemsArchive';
 import { Images } from '../../api/item/Images';
+import { Messages } from '../../api/item/Messages';
 
 /* eslint-disable no-console */
 
@@ -37,6 +38,12 @@ const addResolvedItemData = (data) => {
 
 const addImageData = (data) => {
   Images.collection.insert(data);
+};
+
+const addMsgData = (data) => {
+  const curr = { ...data };
+  curr.date = new Date();
+  Messages.collection.insert(curr);
 };
 
 // Initialize the StuffsCollection if empty.
@@ -79,5 +86,12 @@ if (Images.collection.find().count() === 0) {
   if (Meteor.settings.defaultImages) {
     console.log('Creating default images');
     Meteor.settings.defaultImages.forEach(data => addImageData(data));
+  }
+}
+
+if (Messages.collection.find().count() === 0) {
+  if (Meteor.settings.defaultMessages) {
+    console.log('Creating default messages');
+    Meteor.settings.defaultMessages.forEach(data => addMsgData(data));
   }
 }

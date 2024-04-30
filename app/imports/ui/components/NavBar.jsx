@@ -11,7 +11,6 @@ const NavBar = () => {
   const { currentUser } = useTracker(() => ({
     currentUser: Meteor.user() ? Meteor.user().username : '',
   }), []);
-
   const { userFullProfile, rdy } = useTracker(() => {
     const sub = Meteor.subscribe(Profiles.userPublicationName);
     const ready = sub.ready();
@@ -39,12 +38,12 @@ const NavBar = () => {
           <Nav className="me-auto justify-content-start">
             {currentUser ? ([
               <NavDropdown title="Submit An Item" id="basic-nav-dropdown1">
-                <NavDropdown.Item as={NavLink} to="/add" key="add">Submit Lost Item</NavDropdown.Item>
-                <NavDropdown.Item as={NavLink} to="/addfound" key="addfound">Submit Found Item</NavDropdown.Item>
+                <NavDropdown.Item id="addlost" as={NavLink} to="/add" key="add">Submit Lost Item</NavDropdown.Item>
+                <NavDropdown.Item id="add-found-nav" as={NavLink} to="/addfound" key="addfound">Submit Found Item</NavDropdown.Item>
               </NavDropdown>,
               <NavDropdown title="Item Listings" id="basic-nav-dropdown2">
-                <NavDropdown.Item as={NavLink} to="/listfound" key="listfound">Found Items</NavDropdown.Item>
-                <NavDropdown.Item as={NavLink} to="/listlost" key="listlost">Lost Items</NavDropdown.Item>
+                <NavDropdown.Item as={NavLink} id="list-found-nav" to="/listfound" key="listfound">Found Items</NavDropdown.Item>
+                <NavDropdown.Item id="list-lost-nav" as={NavLink} to="/listlost" key="listlost">Lost Items</NavDropdown.Item>
                 <NavDropdown.Item as={NavLink} to="/archive" key="listfound">Item Archive</NavDropdown.Item>
               </NavDropdown>,
             ]) : ''}
@@ -82,7 +81,7 @@ const NavBar = () => {
                   title={(
                     rdy ? (
                       <>
-                        <img src={userFullProfile.image} alt="user profile" style={{ width: '3vw', height: '3vw', borderRadius: '50%' }} />
+                        <img src={/* userFullProfile.image */ 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png'} alt="user profile" style={{ width: '3vw', height: '3vw', borderRadius: '50%' }} />
                         <span style={{ marginLeft: '10%', display: 'inline-block', fontSize: '115%' }}>{`${userFullProfile.firstName} ${userFullProfile.lastName}`}</span>
                       </>
                     ) : (
@@ -103,5 +102,4 @@ const NavBar = () => {
     </Navbar>
   );
 };
-
 export default NavBar;

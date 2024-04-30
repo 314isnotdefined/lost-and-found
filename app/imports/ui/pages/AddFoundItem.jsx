@@ -8,6 +8,11 @@ import SimpleSchema from 'simpl-schema';
 import { FoundItems } from '../../api/item/FoundItems';
 import { Images } from '../../api/item/Images';
 
+const isValidEmail = (value) => {
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  return emailRegex.test(value);
+};
+
 // Create a schema to specify the structure of the data to appear in the form.
 const formSchema = new SimpleSchema({
   itemName: String,
@@ -18,7 +23,15 @@ const formSchema = new SimpleSchema({
   },
   description: String,
   locationFound: String,
-  contactEmail: String,
+  contactEmail: {
+    type: String,
+    // eslint-disable-next-line consistent-return
+    custom() {
+      if (!isValidEmail(this.value)) {
+        return 'Invalid';
+      }
+    },
+  },
 });
 
 const bridge = new SimpleSchema2Bridge(formSchema);
@@ -26,6 +39,7 @@ const bridge = new SimpleSchema2Bridge(formSchema);
 /* Renders the AddFoundItem page for adding a document. */
 const AddFoundItem = () => {
   const [encodedPhotoRefs, setEncodedPhotoRefs] = useState([]);
+
   // On submit, insert the data.
   const submit = (data, formRef) => {
     const { itemName, category, description, locationFound, contactEmail } = data;
@@ -92,7 +106,7 @@ const AddFoundItem = () => {
   // Render the form. Use Uniforms: https://github.com/vazco/uniforms
   let fRef = null;
   return (
-    <Container className="py-3">
+    <Container id="add-found-page" className="py-3">
       <Row className="justify-content-center">
         <Col xs={10}>
           <Col className="text-center"><h2 className="add-found-item-heading">Add a found item</h2></Col>
@@ -100,9 +114,9 @@ const AddFoundItem = () => {
             <Card>
               <Card.Body>
                 <Row>
-                  <Col><TextField name="itemName" /></Col>
+                  <Col><TextField id="found-name" name="itemName" /></Col>
                 </Row>
-                <LongTextField name="description" />
+                <LongTextField id="found-desc" name="description" />
                 <div className="ImageField">
                   {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
                   <div>
@@ -124,10 +138,10 @@ const AddFoundItem = () => {
                     onChange={(e) => changeImage(e)}
                   />
                 </div>
-                <SelectField name="category" />
-                <TextField name="locationFound" />
-                <TextField name="contactEmail" />
-                <SubmitField value="Submit" />
+                <SelectField id="found-cat" name="category" />
+                <TextField id="found-location" name="locationFound" />
+                <TextField id="found-email" name="contactEmail" />
+                <SubmitField id="submit-btn" value="Submit" />
                 <ErrorsField />
               </Card.Body>
             </Card>

@@ -8,6 +8,10 @@ import SimpleSchema from 'simpl-schema';
 import { LostItems } from '../../api/item/LostItems';
 import { Images } from '../../api/item/Images';
 
+const isValidEmail = (value) => {
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  return emailRegex.test(value);
+};
 // Create a schema to specify the structure of the data to appear in the form.
 const formSchema = new SimpleSchema({
   itemName: String,
@@ -18,7 +22,15 @@ const formSchema = new SimpleSchema({
   },
   description: String,
   lastSeen: String,
-  contactEmail: String,
+  contactEmail: {
+    type: String,
+    // eslint-disable-next-line consistent-return
+    custom() {
+      if (!isValidEmail(this.value)) {
+        return 'Invalid';
+      }
+    },
+  },
 });
 
 const bridge = new SimpleSchema2Bridge(formSchema);
@@ -92,7 +104,7 @@ const AddLostItem = () => {
   // Render the form. Use Uniforms: https://github.com/vazco/uniforms
   let fRef = null;
   return (
-    <Container className="py-3">
+    <Container id="add-lost-page" className="py-3">
       <Row className="justify-content-center">
         <Col xs={10}>
           <Col className="text-center"><h2 className="add-lost-item-heading">Add Lost Item</h2></Col>
@@ -100,9 +112,9 @@ const AddLostItem = () => {
             <Card>
               <Card.Body>
                 <Row>
-                  <Col><TextField name="itemName" /></Col>
+                  <Col><TextField id="item-name-field" name="itemName" /></Col>
                 </Row>
-                <LongTextField name="description" />
+                <Col><LongTextField id="description-field" name="description" /></Col>
                 <div className="ImageField">
                   {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
                   <div>
@@ -124,10 +136,13 @@ const AddLostItem = () => {
                     onChange={(e) => changeImage(e)}
                   />
                 </div>
-                <SelectField name="category" />
-                <TextField name="lastSeen" />
-                <TextField name="contactEmail" />
-                <SubmitField value="Submit" />
+                <Row>
+                  <Col><SelectField id="category-field" name="category" /></Col>
+                  <Col><LongTextField id="last-seen-field" name="lastSeen" placeholder="Date and location last seen; e.g. '9:30am at Campus Center, on April 20, 2024'" />
+                  </Col>
+                </Row>
+                <Col><TextField id="email-field" name="contactEmail" /></Col>
+                <SubmitField id="submit-btn" value="Submit" />
                 <ErrorsField />
               </Card.Body>
             </Card>
