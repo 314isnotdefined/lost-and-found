@@ -6,7 +6,9 @@ import { Meteor } from 'meteor/meteor';
 import SimpleSchema2Bridge from 'uniforms-bridge-simple-schema-2';
 import SimpleSchema from 'simpl-schema';
 import { useTracker } from 'meteor/react-meteor-data';
+import nodemailer from 'nodemailer';
 import { Images } from '../../api/item/Images';
+import { Profiles } from '../../api/profile/Profile';
 /** Renders a single row in the List Stuff table. See pages/ListStuff.jsx. */
 
 const messageSchema = new SimpleSchema({
@@ -18,9 +20,10 @@ const bridge = new SimpleSchema2Bridge(messageSchema);
 
 const LostItem = ({ item }) => {
 
-  const { ready, itemImages } = useTracker(() => {
+  const { ready, itemImages, userInfo } = useTracker(() => {
     const subscription = Meteor.subscribe(Images.userPublicationName);
-    const rdy = subscription.ready();
+    const userSubscription = Meteor.subscribe(Profiles.userPublicationName);
+    const rdy = subscription.ready() && userSubscription.ready();
     let imageArr = [];
     if (item.image[0].includes('http')) {
       // accounting for default data
@@ -37,9 +40,10 @@ const LostItem = ({ item }) => {
       const fetchedImageData = Images.collection.find({ $or: logicalImages }).fetch();
       imageArr = fetchedImageData.map(e => e.data);
     }
-
+    const prof = Profiles.collection.find({ email: item.owner }).fetch();
     return {
       itemImages: [...imageArr],
+      userInfo: prof[0],
       ready: rdy,
     };
   });
@@ -55,7 +59,20 @@ const LostItem = ({ item }) => {
   }
 
   const submit = ({ data }) => {
-    console.log(JSON.stringify(data));
+    const transporter = nodemailer.createTransport({
+      service: 'gmail',
+      auth: {
+        user: 'youremail@gmail.com',
+        pass: 'yourpassword',
+      },
+    });
+
+    const mailOptions = {
+      from: 'youremail@gmail.com',
+      to: 'mchlcape808@gmail.com',
+      subject: 'Sending Email using Node.js',
+      text: 'That was easy!',
+    };
     handleClose();
   };
 
@@ -78,10 +95,11 @@ const LostItem = ({ item }) => {
         ) : <h5 style={{ color: 'black', textAlign: 'center' }}>Fetching images...</h5>}
       </Card.Header>
       <Card.Body>
-        <Card.Title>Item name: {item.itemName}</Card.Title>
-        <Card.Text>Category: {item.category}</Card.Text>
-        <Card.Text>Description: {item.description}</Card.Text>
-        <Card.Text>Last Seen At: {item.lastSeen}</Card.Text>
+        <Card.Title><b>Item name:</b> {item.itemName}</Card.Title>
+        <Card.Text><b>Category:</b> {item.category}</Card.Text>
+        <Card.Text><b>Description:</b> {item.description}</Card.Text>
+        <Card.Text><b>Last Seen At:</b> {item.lastSeen}</Card.Text>
+        <Card.Text><img src={userInfo.image} alt="" style={{ height: '2.5vw', width: '2.5vw', borderRadius: '50%' }} /><span>&nbsp;&nbsp;&nbsp;Owner: {`${userInfo.firstName} ${userInfo.lastName}`}</span></Card.Text>
         <Button variant="success" style={{ width: '100%' }} onClick={() => toggleContactForm()}>I found this item</Button>
 
         {/* eslint-disable-next-line react/jsx-no-bind */}
@@ -92,7 +110,7 @@ const LostItem = ({ item }) => {
             </Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            <p>Please enter a message. This information will be emailed to [Insert name here].</p>
+            <p>Please enter a message. This information will be emailed to <b>{`${userInfo.firstName} ${userInfo.lastName}.`}</b></p>
             <AutoForm schema={bridge} onSubmit={data => submit(data)}>
               <TextField name="contactInfo" placeholder="email, phone #, instagram, etc... (optional)" label="Your Contact Info" required={false} />
               <LongTextField name="message" placeholder="Indicate details of where you found the item, etc..." required />
@@ -117,6 +135,7 @@ LostItem.propTypes = {
     // eslint-disable-next-line react/forbid-prop-types
     image: PropTypes.array,
     description: PropTypes.string,
+    owner: PropTypes.string,
     _id: PropTypes.string,
   }).isRequired,
 };
