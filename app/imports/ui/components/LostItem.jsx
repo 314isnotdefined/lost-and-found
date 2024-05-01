@@ -92,7 +92,7 @@ const LostItem = ({ item }) => {
             </Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            <p>Please fill out the necessary info below.</p>
+            <p>Please enter a message. This information will be emailed to [Insert name here].</p>
             <AutoForm schema={bridge} onSubmit={data => submit(data)}>
               <TextField name="contactInfo" placeholder="email, phone #, instagram, etc... (optional)" label="Your Contact Info" required={false} />
               <LongTextField name="message" placeholder="Indicate details of where you found the item, etc..." required />
