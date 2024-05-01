@@ -23,10 +23,15 @@ const NavBar = () => {
   });
   const notificationCount = 5; // Placeholder for the actual count of notifications
   return (
-    <Navbar bg="dark" expand="lg">
+    <Navbar expand="lg">
       <Container>
-        <Navbar.Brand as={NavLink} to="/">
-          <h2>Item Depot</h2>
+        <Navbar.Brand>
+          <div style={{ display: 'flex', alignItems: 'center' }}>
+            <img src="/images/Logo.png" alt="Logo" style={{ height: '70px', marginRight: '10px' }} />
+            <NavLink to="/" style={{ color: 'inherit', textDecoration: 'inherit' }}>
+              <h2>Item Depot</h2>
+            </NavLink>
+          </div>
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">

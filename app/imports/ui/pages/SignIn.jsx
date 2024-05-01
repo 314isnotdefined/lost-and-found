@@ -63,7 +63,7 @@ const SignIn = () => {
     <Container id="signin-page" className="py-3">
       <Row className="justify-content-center">
         <Col xs={5}>
-          <Col className="text-center">
+          <Col className="text-center white-heading">
             <h2>Login to your account</h2>
           </Col>
           <AutoForm schema={bridge} onSubmit={data => submit(data)}>
