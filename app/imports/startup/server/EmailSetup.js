@@ -14,10 +14,10 @@ Meteor.methods({
     // waiting for the email sending to complete.
     this.unblock();
 
-    Email.sendAsync({ to, from, subject, html }).catch((err) => console.log(err));
+    Email.send({ to, from, subject, html });
   },
 });
 
 // set the mail environment variable
-process.env.MAIL_URL = Meteor.settings.emailCredentials;
+process.env.MAIL_URL = 'smtp://itemdepotmsg@outlook.com:1t3md3p0t@smtp-mail.outlook.com:587';
 console.log(`set process.env.MAIL_URL to ${process.env.MAIL_URL}`);

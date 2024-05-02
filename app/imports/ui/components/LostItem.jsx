@@ -10,7 +10,7 @@ import { Images } from '../../api/item/Images';
 import { Profiles } from '../../api/profile/Profile';
 
 /** Renders a single row in the List Stuff table. See pages/ListStuff.jsx. */
-  // eslint-disable-next-line max-len
+// eslint-disable-next-line max-len
 const messageSchema = new SimpleSchema({
   contactInfo: String,
   message: String,
@@ -61,20 +61,21 @@ const LostItem = ({ item }) => {
     setMessageFormDisplay(false);
   }
 
-  const submit = ({ data }) => {
+  const submit = (data) => {
+    const { message, contactInfo } = data;
+    console.log(message);
+    console.log(contactInfo);
     // eslint-disable-next-line max-len
-    /* const htmlText = `<div style='background-color: whitesmoke; font-size: 150%; line-height: 1.3;'><br><div style='justify-content: center; display: flex;'><img src='https://manoa.hawaii.edu/speakers/wp-content/uploads/logo-1-1030x1030.png' alt='item depot logo' width="10%"/><span style='font-size: 200%; margin-top: auto; margin-bottom: auto; padding-left: 2%'>Item Depot</span></div><hr width="60%"><p><b style="color: red">⚠️ Warning: </b> If you did not lose this item, please ignore this email!</p><p>Hi ${ownerInfo.firstName} ${ownerInfo.lastName}, <br><br>${userInfo.firstName} ${userInfo.lastName} has found your item: "${item.itemName}". Here is a message from them indicating the status of the item:</p><div style="padding: 1% 2% 1% 2%; background-color: lightgrey; border-left: 6px solid green"><code>${data.message} </code></div><p>${userInfo.firstName} ${userInfo.lastName} has also provided their contact information should you need to get into contact with them after this.</p><div style="padding: 1% 2% 1% 2%; background-color: lightgrey; border-left: 6px solid green"><code>${data.contactInfo}</code></div><p>If this item has been successfully found, please resolve it and take it off the Item Depot site to prevent confusion. Thank you!</p><p>All the best,</p><p>The Item Depot team (Micaiah, Shayde, Sam, Cash, & Darrius)</p></div>`; */
+    const htmlText = `<div style='font-size: 110%; line-height: 1.3;'><br><div style='justify-content: center; display: flex;'><img src='https://manoa.hawaii.edu/speakers/wp-content/uploads/logo-1-1030x1030.png' alt='item depot logo' width="5%"/><span style='font-size: 200%; margin-top: auto; margin-bottom: auto; padding-left: 2%'>Item Depot</span></div><hr width="60%"><p><b style="color: red">⚠️ Warning: </b> If you did not lose this item, please ignore this email!</p><p>Hi ${ownerInfo.firstName} ${ownerInfo.lastName}, <br><br>${userInfo.firstName} ${userInfo.lastName} has found your item: "${item.itemName}". Here is a message from them indicating the status of the item:</p><div style="padding: 1% 2% 1% 2%; background-color: lightgrey; border-left: 6px solid green; margin: 0 5% 0 1%"><code>${message} </code></div><p>${userInfo.firstName} ${userInfo.lastName} has also provided their contact information should you need to get into contact with them after this.</p><div style="padding: 1% 2% 1% 2%; background-color: lightgrey; border-left: 6px solid green; margin: 0 5% 0 1%"><code>${contactInfo}</code></div><p>If this item has been successfully found, please resolve it and take it off the Item Depot site to prevent confusion. Thank you!</p><p>All the best,</p><p>The Item Depot team (Micaiah, Shayde, Sam, Cash, & Darrius)</p></div>`;
 
     // ^^^ AHHH WHAT IS THIS HORROR 😭😭😭
-    // eslint-disable-next-line max-len
-    const htmlTextWithoutCSS = `<p>Hi ${ownerInfo.firstName} ${ownerInfo.lastName}, <br><br>${userInfo.firstName} ${userInfo.lastName} has found your item: "${item.itemName}. The message they sent it ${data.message}".`;
-    console.log(htmlTextWithoutCSS);
+
     Meteor.call(
       'sendEmail',
       'mchlcape808@gmail.com',
       'itemdepotmsg@outlook.com',
       `${ownerInfo.firstName}, there has been an update on your lost item.`,
-      htmlTextWithoutCSS,
+      htmlText,
     );
   };
 
