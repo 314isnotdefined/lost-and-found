@@ -1,7 +1,8 @@
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Nunito&display=swap");
 
-/* Set up some CSS variables to theme the application. */
 :root {
+  --button-text-color: white;
+  --button-hover-text-color: lightblue;
   --matr-navbar-bg: green;
   --matr-navbar-bg-rgb: 0, 100, 0;
   --matr-navbar-text-color: white;
@@ -26,11 +27,11 @@ body .navbar {
   --bs-navbar-color: var(--matr-navbar-text-color);
   --bs-navbar-hover-color: var(--matr-navbar-highlight-text);
 }
-/* Set the alert background on the signin and signup pages. */
+
 #signin-page .alert-light, #signup-page .alert-light {
   --bs-alert-bg: var(--matr-navbar-bg);
 }
-/* Define custom styles */
+
 .gray-background {
   background-color: var(--matr-navbar-bg);
   color: var(--bs-dark);
@@ -47,7 +48,6 @@ footer, footer a {
   font-size: 60px;
 }
 
-/* Applying theme variables for p within #landing-page */
 #landing-page p {
   color: var(--matr-navbar-text-color);
   font-size: 20px;
@@ -57,9 +57,9 @@ footer, footer a {
   margin-top: 150px;
 }
 
-/* changes color of "click here to register" to white */
+
 #signin-page .alert-light a {
-  color: white; /* Sets the text color to white */
+  color: white;
 }
 
 #signup-page .already-login-button {
@@ -85,3 +85,21 @@ footer, footer a {
 .white-heading {
   color: white;
 }
+
+
+#landing-page a .button-custom {
+  width: 150px;
+  height: 50px;
+  border-radius: 0;
+  font-size: 16px;
+  background-color: rgba(144, 238, 144, 0.5);
+  border: none;
+  color: var(--button-text-color, white);
+}
+
+#landing-page a .button-custom:hover {
+  color: var(--button-hover-text-color, lightblue);
+}
+
+
+
