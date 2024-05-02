@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Card, Image, Carousel, Button, Modal } from 'react-bootstrap';
-import { AutoForm, ErrorsField, SubmitField, LongTextField, TextField } from 'uniforms-bootstrap5';
+import { AutoForm, ErrorsField, SubmitField, LongTextField } from 'uniforms-bootstrap5';
 import { Meteor } from 'meteor/meteor';
+import swal from 'sweetalert';
 import SimpleSchema2Bridge from 'uniforms-bridge-simple-schema-2';
 import SimpleSchema from 'simpl-schema';
 import { useTracker } from 'meteor/react-meteor-data';
@@ -76,7 +77,14 @@ const LostItem = ({ item }) => {
       'itemdepotmsg@outlook.com',
       `${ownerInfo.firstName}, there has been an update on your lost item.`,
       htmlText,
-    );
+    ).then((err) => {
+      if (err) {
+        swal(err, 'error');
+      } else {
+        swal('Email successfully sent', `${ownerInfo.firstName} ${ownerInfo.lastName} has been notified.`, 'success');
+        handleClose();
+      }
+    });
   };
 
   return (
@@ -113,10 +121,10 @@ const LostItem = ({ item }) => {
             </Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            <p>Please enter a message. This information will be emailed to <b>{`${ownerInfo.firstName} ${ownerInfo.lastName}.`}</b></p>
+            <p>Please enter a message. This information will be automatically emailed to <b>{`${ownerInfo.firstName} ${ownerInfo.lastName}.`}</b></p>
             <AutoForm schema={bridge} onSubmit={data => submit(data)}>
-              <TextField name="contactInfo" placeholder="email, phone #, instagram, etc... (optional)" label="Your Contact Info" required={false} />
               <LongTextField name="message" placeholder="Indicate details of where you found the item, etc..." required />
+              <LongTextField name="contactInfo" placeholder="email, phone #, instagram, etc... (optional)" label={`Where should ${ownerInfo.firstName} ${ownerInfo.lastName} contact you at? (optional)`} required={false} />
               <ErrorsField />
               <SubmitField />
             </AutoForm>
