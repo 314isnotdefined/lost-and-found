@@ -101,5 +101,5 @@
   "defaultMessages": [{"initiator": "init", "recipient": "rcpt", "initiatorContactInfo": "x@hawaii.edu", "content": "String", "readByRecipient": false
   }],
 
-  "emailCredentials": "smtp://itemdepotmsg@outlook.com:1t3md3p0t@smtp-mail.outlook.com:587"
+  "emailCredentials": "smtp://itemdepotmsg@outlook.com:<password>@smtp-mail.outlook.com:587"
 }
