@@ -19,5 +19,5 @@ Meteor.methods({
 });
 
 // set the mail environment variable
-process.env.MAIL_URL = 'smtp://itemdepotmsg@outlook.com:1t3md3p0t@smtp-mail.outlook.com:587';
+process.env.MAIL_URL = Meteor.settings.emailCredentials;
 console.log(`set process.env.MAIL_URL to ${process.env.MAIL_URL}`);
