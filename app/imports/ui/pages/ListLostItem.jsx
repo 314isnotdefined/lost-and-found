@@ -67,7 +67,7 @@ const ListLostItem = () => {
               </Form.Group>
             </Form>
             <Row xs={1} md={2} lg={3} className="g-4">
-              {lostitems.map((item, index) => (<Col key={index}><LostItem item={item} canTakeAction={true} /></Col>))}
+              {lostitems.map((item, index) => (<Col key={index}><LostItem item={item} canTakeAction /></Col>))}
             </Row>
           </Col>
         </Row>
