@@ -9,6 +9,8 @@
     { "email": "jane@foo.com", "password": "changeme" }
   ],
 
+  "emailCredentials": "smtp://itemdepotmsg@outlook.com:1t3md3p0t@smtp-mail.outlook.com:587",
+
   "defaultData": [
     { "name": "Basket", "quantity": 3, "owner": "john@foo.com", "condition": "excellent" },
     { "name": "Bicycle", "quantity": 2, "owner": "john@foo.com", "condition": "poor" },
@@ -96,5 +98,13 @@
     }
   ],
 
-  "defaultImages": [{"data":  "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png", "owner": "john@foo.com"}]
+  "defaultImages": [{"data":  "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png", "owner": "john@foo.com"}],
+
+  "packages": {
+    "email": {
+      "service": "Hotmail",
+      "user": "itemdepotmsg@outlook.com",
+      "password": "1t3md3p0t"
+    }
+  }
 }

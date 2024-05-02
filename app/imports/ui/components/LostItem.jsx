@@ -5,10 +5,11 @@ import { AutoForm, ErrorsField, SubmitField, LongTextField, TextField } from 'un
 import { Meteor } from 'meteor/meteor';
 import SimpleSchema2Bridge from 'uniforms-bridge-simple-schema-2';
 import SimpleSchema from 'simpl-schema';
-import { useTracker } from 'meteor/react-meteor-data';
 import nodemailer from 'nodemailer';
+import { useTracker } from 'meteor/react-meteor-data';
 import { Images } from '../../api/item/Images';
 import { Profiles } from '../../api/profile/Profile';
+
 /** Renders a single row in the List Stuff table. See pages/ListStuff.jsx. */
 
 const messageSchema = new SimpleSchema({
@@ -59,21 +60,41 @@ const LostItem = ({ item }) => {
   }
 
   const submit = ({ data }) => {
-    const transporter = nodemailer.createTransport({
-      service: 'gmail',
+    console.log(JSON.stringify(data));
+    Meteor.call(
+      'sendEmail',
+      'mchlcape808@gmail.com',
+      'itemdepotmsg@outlook.com',
+      'Hello from Meteor!',
+      'This is a test of Email.send.',
+    );
+
+    /* const transporter = nodemailer.createTransport({
+
+      host: 'smtp-mail.outlook.com', // hostname
+      secureConnection: false, // TLS requires secureConnection to be false
+      port: 587, // port for secure SMTP
       auth: {
-        user: 'youremail@gmail.com',
-        pass: 'yourpassword',
+        user: 'itemdepotmsg@outlook.com',
+        pass: '1t3md3p0t',
       },
     });
 
     const mailOptions = {
-      from: 'youremail@gmail.com',
-      to: 'mchlcape808@gmail.com',
-      subject: 'Sending Email using Node.js',
-      text: 'That was easy!',
+      from: 'itemdepotmsg@outlook.com', // sender address
+      to: 'mchlcape808@gmail.com', // list of receivers
+      subject: 'Test Email', // Subject line
+      text: 'Hello world ?', // plain text body
     };
-    handleClose();
+
+    transporter.sendMail(mailOptions, function (error, info) {
+
+      if (error) {
+        console.log(`error sending email: ${error}`);
+      } else {
+        console.log(`email sent: ${info.response}`);
+      }
+    }); */
   };
 
   return (
