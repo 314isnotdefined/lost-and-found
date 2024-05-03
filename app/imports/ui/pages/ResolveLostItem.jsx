@@ -80,5 +80,6 @@ export const ResolveLostItem = () => {
         <h4 style={{ color: 'white' }}>Appreciate you checking, though!</h4>
       </>
     ))
+
   ) : <h1>Please wait...</h1>);
 };
