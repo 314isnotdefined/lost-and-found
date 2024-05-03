@@ -27,7 +27,7 @@ const NavBar = () => {
       <Container>
         <Navbar.Brand>
           <div style={{ display: 'flex', alignItems: 'center' }}>
-            <img src="/images/Logo.png" alt="Logo" style={{ height: '70px', marginRight: '10px' }} />
+            <img src="/images/Logo.png" alt="Logo" style={{ height: '80px', marginRight: '20px', marginLeft: '-50px' }} />
             <NavLink to="/" style={{ color: 'inherit', textDecoration: 'inherit' }}>
               <h2>Item Depot</h2>
             </NavLink>
