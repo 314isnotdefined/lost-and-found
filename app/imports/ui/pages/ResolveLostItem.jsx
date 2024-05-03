@@ -61,7 +61,7 @@ export const ResolveLostItem = () => {
           <Col md={1} />
           <Col md={6}>
             <br />
-            <div style={{ width: '80%', height: '2vh', backgroundColor: 'seagreen' }}/>
+            <div style={{ width: '80%', height: '2vh', backgroundColor: 'seagreen' }} />
             <br />
             <h3 style={{ color: 'white' }}>Please confirm if the following item has been found.</h3>
             <p style={{ color: 'white' }}>This will help us clear the site of found/claimed/resolved items.</p>
