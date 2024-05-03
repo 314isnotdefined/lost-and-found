@@ -58,7 +58,7 @@ const AddFoundItem = () => {
           if (imageRefArray.length === encodedPhotoRefs.length) {
             // all the IDs of the images are obtained, now add these IDs to the FoundItem.
             FoundItems.collection.insert(
-              { itemName, category, description, locationFound, contactEmail, owner, image: imageRefArray },
+              { itemName, category, description, locationFound, contactEmail, owner, image: imageRefArray, dateReported: new Date() },
               (error) => {
                 if (error) {
                   swal('Error', error.message, 'error');

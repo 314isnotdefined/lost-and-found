@@ -8,7 +8,7 @@ import { Profiles } from '../../api/profile/Profile';
 /* import { FoundItems } from '../../api/item/FoundItems';
 import { LostItems } from '../../api/item/LostItems'; */
 
-const ArchiveCard = ({ data }) => {
+const ArchiveRow = ({ data }) => {
   const { ready, nameData } = useTracker(() => {
     const nameSub = Meteor.subscribe(Profiles.userPublicationName);
     const isReady = nameSub.ready();
@@ -31,27 +31,24 @@ const ArchiveCard = ({ data }) => {
 
   return (
     ((ready && nameData) ? (
-      <Card className="h-100">
-        <Card.Header>
-          <img src={data.image} alt="" width="100%" />
-        </Card.Header>
-        <Card.Body>
-          <Card.Title>
-            <h3 style={{ textAlign: 'center', color: 'black' }}>{data.itemName}</h3>
-          </Card.Title>
-          <Card.Subtitle>
-            <p style={{ textAlign: 'center', color: 'black' }}>Found by <Link to={nameData._id}> {nameData.firstName} {nameData.lastName}</Link> on {convertDate(data.dateResolved)}</p>
-          </Card.Subtitle>
-        </Card.Body>
-      </Card>
+      <tr>
+        <td><p style={{color: 'seagreen', fontSize: '120%', fontWeight: 'bold'}}>{data.itemName}</p></td>
+        <td>
+          <img src={nameData.image} alt="" style={{ width: '3vw', height: '3vw', borderRadius: '50%', border: '2px solid seagreen' }} />
+          &nbsp;&nbsp;&nbsp;{nameData.firstName} {nameData.lastName}
+        </td>
+        <td>grr</td>
+        <td>{convertDate(data.dateResolved)}</td>
+        <td>hi</td>
+      </tr>
     ) : (<h1>Please wait</h1>)
     )
   );
 };
 
-export default ArchiveCard;
+export default ArchiveRow;
 
-ArchiveCard.propTypes = {
+ArchiveRow.propTypes = {
   // eslint-disable-next-line react/require-default-props
   data: PropTypes.shape({
     image: PropTypes.string,

@@ -24,6 +24,7 @@ class FoundItemsCollection {
       description: String,
       locationFound: String,
       contactEmail: String,
+      dateReported: Date,
     });
     // Attach the schema to the collection, so all attempts to insert a document are checked against schema.
     this.collection.attachSchema(this.schema);

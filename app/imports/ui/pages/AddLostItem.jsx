@@ -56,7 +56,7 @@ const AddLostItem = () => {
           if (imageRefArray.length === encodedPhotoRefs.length) {
             // all the IDs of the images are obtained, now add these IDs to the LostItem.
             LostItems.collection.insert(
-              { itemName, category, description, lastSeen, contactEmail, owner, image: imageRefArray },
+              { itemName, category, description, lastSeen, contactEmail, owner, image: imageRefArray, dateReported: new Date() },
               (error) => {
                 if (error) {
                   swal('Error', error.message, 'error');

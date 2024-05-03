@@ -22,6 +22,7 @@ class LostItemsCollection {
         defaultValue: 'Miscellaneous',
       },
       description: String,
+      dateReported: Date,
       lastSeen: String,
       contactEmail: String,
     });
