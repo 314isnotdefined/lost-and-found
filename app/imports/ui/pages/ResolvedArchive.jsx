@@ -1,10 +1,9 @@
 import React from 'react';
 import { Meteor } from 'meteor/meteor';
 import { useTracker } from 'meteor/react-meteor-data';
-import { Container, Row, Col, Table } from 'react-bootstrap';
+import { Container, Table } from 'react-bootstrap';
 import { ResolvedItemsArchive } from '../../api/item/ResolvedItemsArchive';
 import ArchiveRow from '../components/ArchiveRow';
-import StuffItem from '../components/StuffItem';
 
 const ResolvedArchive = () => {
   const { ready, archiveList } = useTracker(() => {

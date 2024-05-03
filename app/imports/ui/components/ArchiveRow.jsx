@@ -32,8 +32,11 @@ const ArchiveRow = ({ data }) => {
   return (
     ((ready && nameData) ? (
       <tr>
-        <td>{data.itemName}</td>
-        <td>{nameData.firstName} {nameData.lastName}</td>
+        <td><p style={{color: 'seagreen', fontSize: '120%', fontWeight: 'bold'}}>{data.itemName}</p></td>
+        <td>
+          <img src={nameData.image} alt="" style={{ width: '3vw', height: '3vw', borderRadius: '50%', border: '2px solid seagreen' }} />
+          &nbsp;&nbsp;&nbsp;{nameData.firstName} {nameData.lastName}
+        </td>
         <td>grr</td>
         <td>{convertDate(data.dateResolved)}</td>
         <td>hi</td>

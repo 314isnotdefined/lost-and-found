@@ -13,6 +13,7 @@ class ResolvedItemsArchiveCollection {
     // Define the structure of each document in the collection.
     this.schema = new SimpleSchema({
       image: String,
+      dateReported: Date,
       itemName: String,
       resolvedBy: String, // a unique email identified by the user.
       dateResolved: Date,

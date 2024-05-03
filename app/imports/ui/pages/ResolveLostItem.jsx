@@ -2,6 +2,7 @@ import { Meteor } from 'meteor/meteor';
 import { useTracker } from 'meteor/react-meteor-data';
 import { useParams } from 'react-router';
 import React from 'react';
+import swal from 'sweetalert';
 import { Container, Row, Col, Button } from 'react-bootstrap';
 import LostItem from '../components/LostItem';
 import { LostItems } from '../../api/item/LostItems';
@@ -28,7 +29,13 @@ export const ResolveLostItem = () => {
   function handleFound() {
     console.log('this item has been found');
     // eslint-disable-next-line max-len
-    ResolvedItemsArchive.collection.insert({ image: 'https://i.fbcd.co/products/resized/resized-750-500/88cf1f6276057b29a27a5b93ebce4c82781839a7d3a6c577e30730ffed9cd2eb.jpg', resolvedBy: userInfo.email, dateResolved: new Date(), itemName: lostItemInfo.itemName });
+    ResolvedItemsArchive.collection.insert({ image: 'https://i.fbcd.co/products/resized/resized-750-500/88cf1f6276057b29a27a5b93ebce4c82781839a7d3a6c577e30730ffed9cd2eb.jpg', resolvedBy: userInfo.email, dateResolved: new Date(), itemName: lostItemInfo.itemName, dateReported: lostItemInfo.dateReported }, (err) => {
+      if (err) {
+        swal(err, 'error');
+      } else {
+        swal('Thank you!', 'Item successfully moved to archive.', 'success');
+      }
+    });
   }
 
   return (ready ? (
