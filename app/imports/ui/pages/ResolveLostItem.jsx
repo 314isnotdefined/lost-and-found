@@ -49,7 +49,7 @@ export const ResolveLostItem = () => {
           <h3 style={{ color: 'white' }}>Please confirm if the following item has been found.</h3>
           <p style={{ color: 'white' }}>This will help us clear the site of found/claimed/resolved items.</p>
           <Button variant="success" onClick={() => handleFound()}>Yes, this item has been found</Button>
-          <Button variant="danger">No, this item was not found / incorrect item recieved.</Button>
+          <Button variant="danger">No, this item was not found / incorrect item received.</Button>
         </Col>
         <Col md={4}>
           <LostItem item={lostItemInfo} canTakeAction={false} />
