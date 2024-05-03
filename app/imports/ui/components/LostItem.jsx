@@ -101,7 +101,7 @@ const LostItem = ({ item, canTakeAction }) => {
       'sendEmail',
       ownerInfo.email,
       'itemdepotmsg@outlook.com',
-      `${ownerInfo.firstName}, there has been an update on your lost item.`,
+      `${ownerInfo.firstName}, ${userInfo.firstName} found your lost item!`,
       htmlText,
     );
     swal('Email successfully sent', `${ownerInfo.firstName} ${ownerInfo.lastName} has been notified.`, 'success');

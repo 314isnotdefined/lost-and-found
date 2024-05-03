@@ -16,19 +16,20 @@ export const ResolveLostItem = () => {
   const { _id, _userId } = useParams();
   console.log(_id);
   console.log(_userId);
-
+  // console.log(LostItems.collection.find({ _id: _id }, { owner: 1 });
   const { lostItemInfo, userInfo, ready } = useTracker(() => {
     const sub = Meteor.subscribe(LostItems.userPublicationName);
     const rdy = sub.ready();
     const item = LostItems.collection.find({ _id: _id }).fetch();
     const user = Profiles.collection.find({ _id: _userId }).fetch();
+    // const owner = Profiles.collection.find({ owner: item.owner }).fetch();
     return {
       lostItemInfo: item[0],
       userInfo: user[0],
       ready: rdy,
     };
   });
-
+  // console.log(lostItemInfo.owner);
   function handleFound() {
     console.log('this item has been found');
     // eslint-disable-next-line max-len
@@ -36,6 +37,7 @@ export const ResolveLostItem = () => {
       if (err) {
         swal(err, 'error');
       } else {
+        Profiles.collection.update({ _id: _userId }, { $inc: { points: 1 } });
         // eslint-disable-next-line consistent-return
         LostItems.collection.remove({ _id: _id }, (e) => {
           if (e) {
