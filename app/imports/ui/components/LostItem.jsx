@@ -43,8 +43,8 @@ const LostItem = ({ item, canTakeAction }) => {
       imageArr = fetchedImageData.map(e => e.data);
     }
     const prof = Profiles.collection.find({ email: item.owner }).fetch();
-    const usremail = Meteor.user().username;
-    const usr = Profiles.collection.find({ email: usremail }).fetch();
+    const useremail = Meteor.user().username;
+    const usr = Profiles.collection.find({ email: useremail }).fetch();
     return {
       itemImages: [...imageArr],
       ownerInfo: prof[0],
@@ -99,9 +99,9 @@ const LostItem = ({ item, canTakeAction }) => {
 
     Meteor.call(
       'sendEmail',
-      'mchlcape808@gmail.com',
+      ownerInfo.email,
       'itemdepotmsg@outlook.com',
-      `${ownerInfo.firstName}, there has been an update on your lost item. ${item._id}`,
+      `${ownerInfo.firstName}, there has been an update on your lost item.`,
       htmlText,
     );
     swal('Email successfully sent', `${ownerInfo.firstName} ${ownerInfo.lastName} has been notified.`, 'success');
