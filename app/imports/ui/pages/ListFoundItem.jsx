@@ -67,7 +67,7 @@ const ListFoundItem = () => {
               </Form.Group>
             </Form>
             <Row xs={1} md={2} lg={3} className="g-4">
-              {founditems.map((item, index) => (<Col key={index}><FoundItem item={item} /></Col>))}
+              {founditems.map((item, index) => (<Col key={index}><FoundItem item={item} canTakeAction /></Col>))}
             </Row>
           </Col>
         </Row>
