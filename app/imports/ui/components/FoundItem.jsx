@@ -99,7 +99,7 @@ const FoundItem = ({ item, canTakeAction }) => {
 
     Meteor.call(
       'sendEmail',
-      'mchlcape808@gmail.com',
+      ownerInfo.email,
       'itemdepotmsg@outlook.com',
       `${ownerInfo.firstName}, someone wants to claim the item you found.`,
       htmlText,
