@@ -1,9 +1,10 @@
 import React from 'react';
 import { Meteor } from 'meteor/meteor';
 import { useTracker } from 'meteor/react-meteor-data';
-import { Container, Row, Col } from 'react-bootstrap';
+import { Container, Row, Col, Table } from 'react-bootstrap';
 import { ResolvedItemsArchive } from '../../api/item/ResolvedItemsArchive';
-import ArchiveCard from '../components/ArchiveCard';
+import ArchiveRow from '../components/ArchiveRow';
+import StuffItem from '../components/StuffItem';
 
 const ResolvedArchive = () => {
   const { ready, archiveList } = useTracker(() => {
@@ -19,13 +20,20 @@ const ResolvedArchive = () => {
     <Container id="resolved-page">
       <h1 className="white-heading" style={{ textAlign: 'center', margin: '3% 0 3% 0' }}>Resolved Items Archive</h1>
       <h5 style={{ textAlign: 'center', margin: '3% 0 3% 0', color: 'lightgray' }}>Showing all items that have been lost and found in the past. No action can be taken with them.</h5>
-      <Row>
-        {archiveList.map(a => (
-          <Col md={4}>
-            <ArchiveCard data={a} />
-          </Col>
-        ))}
-      </Row>
+      <Table striped bordered>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Found/Claimed By</th>
+            <th>Date reported</th>
+            <th>Date resolved</th>
+            <th>Resolving time</th>
+          </tr>
+        </thead>
+        <tbody>
+          {archiveList.map(a => <ArchiveRow data={a} />)}
+        </tbody>
+      </Table>
       <br /><br />
     </Container>
   ) : <h1>Please wait...</h1>);
