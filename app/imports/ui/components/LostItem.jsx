@@ -93,15 +93,17 @@ const LostItem = ({ item, canTakeAction }) => {
      <div style="padding: 1% 2% 1% 2%; background-color: lightgrey; border-left: 6px solid green; margin: 0 5% 0 1%"><code>${contactInfo}</code></div>
      <p>If this item has been successfully found, please resolve it and take it off the Item Depot site to prevent confusion. Thank you!</p>
      <a href='${basename}/resolvelost/${item._id}/${userInfo._id}' style='color: white; font-size: 125%; display: block; text-align: center; padding: 1% 2.5% 1% 2.5%; background-color: orange; width: 20%'>Resolve this item</a>
+     <p>If the above link does not work / gets blocked, please copy and paste the following URL into the browser:</p>
+     <p style='color: seagreen'><b>${basename}/resolvelost/${item._id}/${ownerInfo._id}</b></p>
      <p>All the best,</p><p>The Item Depot team <br>(Micaiah, Shayde, Sam, Cash, & Darrius)</p></div>`;
 
     // ^^^ AHHH WHAT IS THIS HORROR 😭😭😭
 
     Meteor.call(
       'sendEmail',
-      'mchlcape808@gmail.com',
+      ownerInfo.email,
       'itemdepotmsg@outlook.com',
-      `${ownerInfo.firstName}, there has been an update on your lost item. ${item._id}`,
+      `${ownerInfo.firstName}, there has been an update on your lost item.`,
       htmlText,
     );
     swal('Email successfully sent', `${ownerInfo.firstName} ${ownerInfo.lastName} has been notified.`, 'success');

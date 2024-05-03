@@ -24,6 +24,7 @@ import EditLostItem from '../pages/EditLostItem';
 import ListFoundItemAdmin from '../pages/ListFoundItemAdmin';
 import ListLostItemAdmin from '../pages/ListLostItemAdmin';
 import { ResolveLostItem } from '../pages/ResolveLostItem';
+import { ResolveFoundItem } from '../pages/ResolveFoundItem';
 
 /** Top-level layout component for this application. Called in imports/startup/client/startup.jsx. */
 const App = () => {
@@ -52,6 +53,7 @@ const App = () => {
           <Route path="/editfound/:_id" element={<ProtectedRoute><EditFoundItem /></ProtectedRoute>} />
           <Route path="/editlost/:_id" element={<ProtectedRoute><EditLostItem /></ProtectedRoute>} />
           <Route path="/resolvelost/:_id/:_userId" element={<ProtectedRoute><ResolveLostItem /></ProtectedRoute>} />
+          <Route path="/resolvefound/:_id/:_userId" element={<ProtectedRoute><ResolveFoundItem /></ProtectedRoute>} />
           <Route path="/foundadmin" element={<AdminProtectedRoute ready={ready}><ListFoundItemAdmin /></AdminProtectedRoute>} />
           <Route path="/lostadmin" element={<AdminProtectedRoute ready={ready}><ListLostItemAdmin /></AdminProtectedRoute>} />
           <Route path="/notauthorized" element={<NotAuthorized />} />
