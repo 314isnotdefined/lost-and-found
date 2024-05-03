@@ -45,7 +45,6 @@ const LostItem = ({ item, canTakeAction }) => {
     const prof = Profiles.collection.find({ email: item.owner }).fetch();
     const usremail = Meteor.user().username;
     const usr = Profiles.collection.find({ email: usremail }).fetch();
-    let personWhoFound = null;
     return {
       itemImages: [...imageArr],
       ownerInfo: prof[0],
@@ -104,7 +103,7 @@ const LostItem = ({ item, canTakeAction }) => {
       'itemdepotmsg@outlook.com',
       `${ownerInfo.firstName}, there has been an update on your lost item. ${item._id}`,
       htmlText,
-    )
+    );
     swal('Email successfully sent', `${ownerInfo.firstName} ${ownerInfo.lastName} has been notified.`, 'success');
     handleClose();
   };
@@ -173,6 +172,7 @@ LostItem.propTypes = {
     owner: PropTypes.string,
     _id: PropTypes.string,
   }).isRequired,
+  // eslint-disable-next-line react/require-default-props
   canTakeAction: PropTypes.bool,
 };
 

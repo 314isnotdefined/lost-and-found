@@ -1,7 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Card } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
 import { Meteor } from 'meteor/meteor';
 import { useTracker } from 'meteor/react-meteor-data';
 import { Profiles } from '../../api/profile/Profile';
@@ -28,18 +26,34 @@ const ArchiveRow = ({ data }) => {
     const year = curr.getFullYear();
     return `${month} ${day}, ${year}`;
   }
+  function convertToDays(seconds) {
+    let resultantString = '';
+    if (seconds >= 86400) {
+      resultantString += `${Math.floor(seconds / 86400)}d `;
+      resultantString += convertToDays(seconds % 86400);
+    } else if (seconds >= 3600) {
+      resultantString += `${Math.floor(seconds / 3600)}hr `;
+      resultantString += convertToDays(seconds % 3600);
+    } else if (seconds >= 60) {
+      resultantString += `${Math.floor(seconds / 60)}min `;
+      resultantString += convertToDays(seconds % 60);
+    } else {
+      resultantString += `${seconds}s`;
+    }
+    return resultantString;
+  }
 
   return (
     ((ready && nameData) ? (
       <tr>
-        <td><p style={{color: 'seagreen', fontSize: '120%', fontWeight: 'bold'}}>{data.itemName}</p></td>
+        <td><p style={{ color: 'seagreen', fontSize: '120%', fontWeight: 'bold' }}>{data.itemName}</p></td>
         <td>
           <img src={nameData.image} alt="" style={{ width: '3vw', height: '3vw', borderRadius: '50%', border: '2px solid seagreen' }} />
           &nbsp;&nbsp;&nbsp;{nameData.firstName} {nameData.lastName}
         </td>
-        <td>grr</td>
+        <td>{convertDate(data.dateReported)}</td>
         <td>{convertDate(data.dateResolved)}</td>
-        <td>hi</td>
+        <td>{convertToDays((Date.parse(data.dateResolved) - Date.parse(data.dateReported)) / 1000)}</td>
       </tr>
     ) : (<h1>Please wait</h1>)
     )
@@ -56,5 +70,6 @@ ArchiveRow.propTypes = {
     linkToProfile: PropTypes.string,
     resolvedBy: PropTypes.string,
     dateResolved: PropTypes.instanceOf(Date),
+    dateReported: PropTypes.instanceOf(Date),
   }),
 };
