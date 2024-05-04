@@ -38,9 +38,9 @@ export const ResolveLostItem = () => {
         swal(err, 'error');
       } else {
         // Award 2 points to user who found the item
-        Profiles.collection.update({ _id: _userId }, { $inc: { points: 2 } });
+        Profiles.collection.update({ _id: _userId }, { $inc: { points: 200 } });
         // Award 1 point to the owner of the item
-        Profiles.collection.update({ _id: owner._id }, { $inc: { points: 1 } });
+        Profiles.collection.update({ _id: owner._id }, { $inc: { points: 100 } });
         // eslint-disable-next-line consistent-return
         LostItems.collection.remove({ _id: _id }, (e) => {
           if (e) {
