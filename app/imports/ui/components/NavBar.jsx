@@ -3,8 +3,8 @@ import { Meteor } from 'meteor/meteor';
 import { useTracker } from 'meteor/react-meteor-data';
 import { NavLink } from 'react-router-dom';
 import { Roles } from 'meteor/alanning:roles';
-import { Container, Nav, Navbar, NavDropdown, Badge } from 'react-bootstrap';
-import { BoxArrowRight, PersonFill, PersonPlusFill, Bell } from 'react-bootstrap-icons';
+import { Container, Nav, Navbar, NavDropdown } from 'react-bootstrap';
+import { BoxArrowRight, PersonFill, PersonPlusFill } from 'react-bootstrap-icons';
 import { Profiles } from '../../api/profile/Profile';
 
 const NavBar = () => {
@@ -21,7 +21,6 @@ const NavBar = () => {
       userFullProfile: user[0],
     };
   });
-  const notificationCount = 5; // Placeholder for the actual count of notifications
   return (
     <Navbar expand="lg">
       <Container>
@@ -67,34 +66,24 @@ const NavBar = () => {
                 </NavDropdown.Item>
               </NavDropdown>
             ) : (
-              <>
-                <Nav.Link as={NavLink} to="/notifications" className="nav-notification-link">
-                  <Bell size={20} className="bell-icon" />
-                  {notificationCount > 0 && (
-                    <Badge pill bg="danger" className="notification-badge">
-                      {notificationCount}
-                    </Badge>
-                  )}
-                </Nav.Link>
-                <NavDropdown
-                  id="navbar-current-user"
-                  title={(
-                    rdy ? (
-                      <>
-                        <img src={userFullProfile.image} alt="user profile" style={{ width: '3vw', height: '3vw', borderRadius: '50%', border: '3px solid seagreen' }} />
-                        <span style={{ marginLeft: '10%', display: 'inline-block', fontSize: '115%' }}>{`${userFullProfile.firstName} ${userFullProfile.lastName}`}</span>
-                      </>
-                    ) : (
-                      <h6>Fetching</h6>
-                    )
-                  )}
-                >
-                  <NavDropdown.Item id="navbar-sign-out" as={NavLink} to="/signout">
-                    <BoxArrowRight />
-                    Sign out
-                  </NavDropdown.Item>
-                </NavDropdown>
-              </>
+              <NavDropdown
+                id="navbar-current-user"
+                title={(
+                  rdy ? (
+                    <>
+                      <img src={userFullProfile.image} alt="user profile" style={{ width: '3vw', height: '3vw', borderRadius: '50%', border: '3px solid seagreen' }} />
+                      <span style={{ marginLeft: '10%', display: 'inline-block', fontSize: '115%' }}>{`${userFullProfile.firstName} ${userFullProfile.lastName}`}</span>
+                    </>
+                  ) : (
+                    <h6>Fetching</h6>
+                  )
+                )}
+              >
+                <NavDropdown.Item id="navbar-sign-out" as={NavLink} to="/signout">
+                  <BoxArrowRight />
+                  Sign out
+                </NavDropdown.Item>
+              </NavDropdown>
             )}
           </Nav>
         </Navbar.Collapse>
