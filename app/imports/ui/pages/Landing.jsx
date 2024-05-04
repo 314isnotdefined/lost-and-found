@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 const Landing = () => (
   <Container id="landing-page" fluid className="py-5 d-flex h-100">
-    <Row id="center-text" className="justify-content-center align-items-start w-100" style={{ marginTop: '9.5%' }}>
+    <Row id="center-text" className="justify-content-center align-items-start w-100" style={{ marginTop: '5.5%' }}>
       <Col xs={12} md={8} className="d-flex flex-column justify-content-center align-items-center text-center">
         <h1 style={{ marginBottom: '20px' }}>Welcome!</h1>
         <p style={{ marginBottom: '0px' }}>Item Depot offers a centralized system for listing and reclaiming lost and found items at UH Manoa.</p>
