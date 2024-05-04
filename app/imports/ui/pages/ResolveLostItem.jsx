@@ -16,13 +16,12 @@ export const ResolveLostItem = () => {
   const { _id, _userId } = useParams();
   console.log(_id);
   console.log(_userId);
-  // console.log(LostItems.collection.find({ _id: _id }, { owner: 1 });
   const { lostItemInfo, userInfo, ready } = useTracker(() => {
     const sub = Meteor.subscribe(LostItems.userPublicationName);
-    const rdy = sub.ready();
+    const sub2 = Meteor.subscribe(Profiles.userPublicationName);
+    const rdy = sub.ready() && sub2.ready();
     const item = LostItems.collection.find({ _id: _id }).fetch();
     const user = Profiles.collection.find({ _id: _userId }).fetch();
-    // const owner = Profiles.collection.find({ owner: item.owner }).fetch();
     return {
       lostItemInfo: item[0],
       userInfo: user[0],
@@ -32,12 +31,16 @@ export const ResolveLostItem = () => {
   // console.log(lostItemInfo.owner);
   function handleFound() {
     console.log('this item has been found');
+    const owner = Profiles.collection.find({ email: lostItemInfo.owner }).fetch()[0];
     // eslint-disable-next-line max-len
     ResolvedItemsArchive.collection.insert({ image: 'https://i.fbcd.co/products/resized/resized-750-500/88cf1f6276057b29a27a5b93ebce4c82781839a7d3a6c577e30730ffed9cd2eb.jpg', resolvedBy: userInfo.email, dateResolved: new Date(), itemName: lostItemInfo.itemName, dateReported: lostItemInfo.dateReported }, (err) => {
       if (err) {
         swal(err, 'error');
       } else {
-        Profiles.collection.update({ _id: _userId }, { $inc: { points: 1 } });
+        // Award 2 points to user who found the item
+        Profiles.collection.update({ _id: _userId }, { $inc: { points: 2 } });
+        // Award 1 point to the owner of the item
+        Profiles.collection.update({ _id: owner._id }, { $inc: { points: 1 } });
         // eslint-disable-next-line consistent-return
         LostItems.collection.remove({ _id: _id }, (e) => {
           if (e) {
