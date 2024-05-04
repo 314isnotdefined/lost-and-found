@@ -26,8 +26,8 @@ const Landing = () => (
             </Button>
           </Link>
         </div>
-        <div style={{ display: 'flex', marginTop: '300px', marginLeft: '-40%', width: '100%' }}>
-          <div style={{ textAlign: 'left', border: '0px solid #ccc', padding: '30px', borderRadius: '0px', flex: '1' }}>
+        <div style={{ marginTop: '200px', width: '100%', display: 'flex', justifyContent: 'space-between' }}>
+          <div style={{ flex: '1', textAlign: 'left', border: '5px solid #ccc', padding: '30px', borderRadius: '0px', marginRight: '200px' }}>
             <h2 className="white-heading">Why Choose Item Depot?</h2>
             <div style={{ overflow: 'auto' }}>
               <p style={{ overflowWrap: 'break-word' }}>Item Depot provides a seamless platform for the UH Manoa community to reunite with
@@ -37,8 +37,8 @@ const Landing = () => (
               </p>
             </div>
           </div>
-          <div style={{ flex: '1', display: 'flex', justifyContent: 'flex-end', alignItems: 'center', paddingRight: '10px' }}>
-            <img src="/images/2.jpg" alt="SecondPhoto" style={{ height: '300px' }} />
+          <div style={{ flex: '1', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+            <img src="/images/2.jpg" alt="SecondPhoto" style={{ maxHeight: '300px', maxWidth: '100%' }} />
           </div>
         </div>
 
@@ -48,3 +48,4 @@ const Landing = () => (
 );
 
 export default Landing;
+
