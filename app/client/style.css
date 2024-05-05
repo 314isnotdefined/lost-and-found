@@ -102,5 +102,77 @@ footer, footer a {
   color: var(--button-hover-text-color, lightblue);
 }
 
+.large-image {
+  margin-top: 80px;
+  height: 500px;
+  width: 700px;
+}
 
+.text-box {
+  padding: 30px;
+  border: 5px solid #ccc;
+  border-radius: 0px;
+  width: 920px;
+  background-color: rgba(52, 58, 64, 0.9);
+}
 
+#landing-page {
+  margin-top: 90px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+}
+
+.welcome-heading {
+  margin-bottom: 20px;
+}
+
+.description-text, .feature-section p {
+  margin-bottom: 10px;
+}
+
+.button-container a {
+  text-decoration: none;
+}
+
+.button-custom {
+  margin-right: 10px; /* Right margin for spacing between buttons */
+}
+
+.feature-section {
+  color: #fff; /* Adjust according to your theme */
+}
+
+.hyperlink {
+  color: #0294A5;
+  text-decoration: underline;
+}
+
+.image-container {
+  width: 100%;
+  text-align: center;
+}
+
+.responsive-image {
+  margin-top: 10px;
+  max-width: 100%;
+  height: auto;
+  margin-bottom: 100px;
+}
+
+.strong-highlight {
+  color: rgba(144, 238, 144, 1);
+  padding: 4px;
+  border-radius: 0px;
+}
+
+.hyperlink {
+  color: #0294A5; /* Initial color for hyperlinks */
+  text-decoration: underline;
+  transition: color 0.3s ease; /* Smooth transition for color change */
+}
+
+.hyperlink:hover {
+  color: var(--button-hover-text-color); /* Color change on hover */
+}
