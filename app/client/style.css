@@ -159,6 +159,13 @@ footer, footer a {
   max-width: 100%;
   height: auto;
   margin-bottom: 100px;
+  transition: transform 0.3s ease-in-out, border 0.3s ease-in-out;
+  border: 5px solid transparent;
+}
+
+.responsive-image:hover {
+  transform: scale(1.05);
+  border: 5px solid var(--button-hover-text-color);
 }
 
 .strong-highlight {

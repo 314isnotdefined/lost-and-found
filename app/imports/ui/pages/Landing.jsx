@@ -25,7 +25,7 @@ const Landing = () => (
           <div className="text-box white-heading">
             <h2>Item Depot</h2>
             <p>
-              Item Depot isn't just for reclaiming lost and found items; it's a comprehensive resource that facilitates community interaction and support.
+              Item Depot isn&apos;t just for reclaiming lost and found items; it&apos;s a comprehensive resource that facilitates community interaction and support.
             </p>
             <p>
               <span className="strong-highlight">Submit a Lost Item:</span> Lost something? Fill out our
