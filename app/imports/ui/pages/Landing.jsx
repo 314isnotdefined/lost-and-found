@@ -23,7 +23,7 @@ const Landing = () => (
         </div>
         <div style={{ marginTop: '300px', width: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
           <div className="text-box white-heading">
-            <h2>Item Depot</h2>
+            <h2 className="large-heading">Why Use Item Depot?</h2>
             <p>
               Item Depot isn&apos;t just for reclaiming lost and found items; it&apos;s a comprehensive resource that facilitates community interaction and support.
             </p>
