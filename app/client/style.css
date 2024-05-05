@@ -93,7 +93,7 @@ footer, footer a {
   height: 50px;
   border-radius: 0;
   font-size: 16px;
-  background-color: rgba(144, 238, 144, 0.5);
+  background-color: rgba(144, 238, 144, 0.6);
   border: none;
   color: var(--button-text-color, white);
 }
@@ -185,6 +185,6 @@ footer, footer a {
 }
 
 .large-heading {
-  font-size: 36px; 
+  font-size: 36px;
   color: lightgreen;
 }
