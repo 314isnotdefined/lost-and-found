@@ -137,11 +137,11 @@ footer, footer a {
 }
 
 .button-custom {
-  margin-right: 10px; /* Right margin for spacing between buttons */
+  margin-right: 10px;
 }
 
 .feature-section {
-  color: #fff; /* Adjust according to your theme */
+  color: #fff;
 }
 
 .hyperlink {
@@ -175,11 +175,16 @@ footer, footer a {
 }
 
 .hyperlink {
-  color: #0294A5; /* Initial color for hyperlinks */
+  color: #0294A5;
   text-decoration: underline;
-  transition: color 0.3s ease; /* Smooth transition for color change */
+  transition: color 0.3s ease;
 }
 
 .hyperlink:hover {
-  color: var(--button-hover-text-color); /* Color change on hover */
+  color: var(--button-hover-text-color);
+}
+
+.large-heading {
+  font-size: 36px; 
+  color: lightgreen;
 }
