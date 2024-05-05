@@ -106,10 +106,10 @@ const AddFoundItem = () => {
   // Render the form. Use Uniforms: https://github.com/vazco/uniforms
   let fRef = null;
   return (
-    <Container id="add-found-page" className="py-3">
+    <Container id="add-found-page" className="py-3" style={{ marginBottom: '100px' }}>
       <Row className="justify-content-center">
         <Col xs={10}>
-          <Col className="text-center"><h2 className="add-found-item-heading">Add a found item</h2></Col>
+          <Col className="text-center" style={{ marginBottom: '40px' }}><h2 className="add-found-item-heading">Add a Found Item</h2></Col>
           <AutoForm ref={ref => { fRef = ref; }} schema={bridge} onSubmit={data => submit(data, fRef)}>
             <Card>
               <Card.Body>
