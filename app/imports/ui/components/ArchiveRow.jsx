@@ -49,7 +49,7 @@ const ArchiveRow = ({ data }) => {
         <td><p style={{ color: 'seagreen', fontSize: '120%', fontWeight: 'bold' }}>{data.itemName}</p></td>
         <td>
           <img src={nameData.image} alt="" style={{ width: '3vw', height: '3vw', borderRadius: '50%', border: '2px solid seagreen' }} />
-          &nbsp;&nbsp;&nbsp;{nameData.firstName} {nameData.lastName}
+          &nbsp;&nbsp;&nbsp; {nameData.firstName} {nameData.lastName}
         </td>
         <td>{convertDate(data.dateReported)}</td>
         <td>{convertDate(data.dateResolved)}</td>
