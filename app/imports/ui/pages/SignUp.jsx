@@ -12,6 +12,10 @@ import { Profiles } from '../../api/profile/Profile';
 /**
  * SignUp component is similar to signin component, but we create a new user instead.
  */
+const isValidEmail = (value) => {
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  return emailRegex.test(value);
+};
 const SignUp = ({ location }) => {
   const [error, setError] = useState('');
   const [redirectToReferer, setRedirectToRef] = useState(false);
@@ -22,7 +26,16 @@ const SignUp = ({ location }) => {
   const schema = new SimpleSchema({
     firstName: String,
     lastName: String,
-    email: String,
+    email: {
+      type: String,
+      // eslint-disable-next-line consistent-return
+      custom() {
+        // eslint-disable-next-line react/no-this-in-sfc
+        if (!isValidEmail(this.value)) {
+          return 'Invalid';
+        }
+      },
+    },
     password: String,
     // images is not included due to it getting extremely messy. It has its own form, which changes the state upon uploading files.
     position: {
