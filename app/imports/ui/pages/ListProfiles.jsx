@@ -27,7 +27,7 @@ const ListProfiles = () => {
     <Container className="py-3">
       <Row className="justify-content-center">
         <Col md={7}>
-          <Col className="text-center">
+          <Col className="text-center white-heading" style={{ marginBottom: '30px' }}>
             <h2>Leaderboards</h2>
           </Col>
           <Table striped bordered hover>
