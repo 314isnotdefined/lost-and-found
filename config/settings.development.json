@@ -31,22 +31,22 @@
     {
       "itemName": "Student ID Card", "category": "Identification and Access Cards", "locationFound": "UHM Bookstore",
       "image": "https://bloximages.newyork1.vip.townnews.com/manoanow.org/content/tncms/assets/v3/editorial/7/9d/79d02ea6-be32-11e9-a1ae-03c492fd97f2/5d5363de273ca.image.jpg?crop=1662%2C873%2C0%2C187&resize=1200%2C630&order=crop%2Cresize",
-      "description": "Student's first name is Ramos", "contactEmail": "abc@hawaii.edu", "owner": "john@foo.com", "dateReported": "8-15-2023"
+      "description": "Student's first name is Ramos", "contactEmail": "abc@hawaii.edu", "owner": "admin@foo.com", "dateReported": "8-15-2023"
     },
     {
       "itemName": "White Hoodie", "category": "Clothing and Accessories", "locationFound": "Hamilton Library",
       "image": "https://img.freepik.com/premium-photo/blank-white-hoodie-lying-table-photographed-from_786887-172.jpg",
-      "description": "Found on the first floor by the computers", "contactEmail": "abc@hawaii.edu", "owner": "john@foo.com", "dateReported": "8-15-2023"
+      "description": "Found on the first floor by the computers", "contactEmail": "abc@hawaii.edu", "owner": "jane@foo.com", "dateReported": "8-15-2023"
     },
     {
       "itemName": "Black Hydro flask", "category": "Food and Drink Containers", "locationFound": "Paradise Palms",
       "image": "https://www.thespruce.com/thmb/GxBSKKRN1NgkJySfF6Ug435uacU=/4000x0/filters:no_upscale():max_bytes(150000):strip_icc()/SPR-how-to-clean-a-hydro-flask-7486890-Hero-483c09c7e2e64c0f858cd4569a0907ae.jpg",
-      "description": "Brand New Hydro flask found at the tables inside Paradise Palms", "contactEmail": "abc@hawaii.edu", "owner": "john@foo.com", "dateReported": "8-15-2023"
+      "description": "Brand New Hydro flask found at the tables inside Paradise Palms", "contactEmail": "abc@hawaii.edu", "owner": "jane@foo.com", "dateReported": "8-15-2023"
     },
     {
       "itemName": "Algorithm Book", "category": "Textbooks and School Supplies", "locationFound": "Edmonson Third Floor",
       "image": "https://m.media-amazon.com/images/I/81JCp+3S5tL._AC_UF1000,1000_QL80_.jpg",
-      "description": "found on the tables", "contactEmail": "abc@hawaii.edu", "owner": "john@foo.com", "dateReported": "8-15-2023"
+      "description": "found on the tables", "contactEmail": "abc@hawaii.edu", "owner": "jane@foo.com", "dateReported": "8-15-2023"
     },
     {
       "itemName": "Bracelet", "category": "Miscellaneous", "locationFound": "Gateway Cafe",
