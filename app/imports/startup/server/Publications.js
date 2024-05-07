@@ -6,6 +6,7 @@ import { LostItems } from '../../api/item/LostItems';
 import { Images } from '../../api/item/Images';
 import { FoundItems } from '../../api/item/FoundItems';
 import { ResolvedItemsArchive } from '../../api/item/ResolvedItemsArchive';
+import { MyItems } from '../../api/item/MyItems';
 
 // User-level publication.
 // If logged in, then publish documents owned by this user. Otherwise, publish nothing.
@@ -13,6 +14,14 @@ Meteor.publish(Stuffs.userPublicationName, function () {
   if (this.userId) {
     const username = Meteor.users.findOne(this.userId).username;
     return Stuffs.collection.find({ owner: username });
+  }
+  return this.ready();
+});
+
+Meteor.publish(MyItems.userPublicationName, function () {
+  if (this.userId) {
+    const username = Meteor.users.findOne(this.userId).username;
+    return LostItems.collection.find({ owner: username }) + FoundItems.collection.find({ owner: username });
   }
   return this.ready();
 });
