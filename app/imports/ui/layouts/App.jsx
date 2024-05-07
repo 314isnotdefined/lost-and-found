@@ -45,7 +45,6 @@ const App = () => {
           <Route path="/home" element={<ProtectedRoute><Landing /></ProtectedRoute>} />
           <Route path="/listfound" element={<ProtectedRoute><ListFoundItem /></ProtectedRoute>} />
           <Route path="/listlost" element={<ProtectedRoute><ListLostItem /></ProtectedRoute>} />
-          <Route path="/listmy" element={<ProtectedRoute><ListMyItem /></ProtectedRoute>} />
           <Route path="/archive" element={<ProtectedRoute><ResolvedArchive /></ProtectedRoute>} />
           <Route path="/add" element={<ProtectedRoute><AddLostItem /></ProtectedRoute>} />
           <Route path="/addfound" element={<ProtectedRoute><AddFoundItem /></ProtectedRoute>} />

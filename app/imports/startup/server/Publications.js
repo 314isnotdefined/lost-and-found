@@ -6,7 +6,7 @@ import { LostItems } from '../../api/item/LostItems';
 import { Images } from '../../api/item/Images';
 import { FoundItems } from '../../api/item/FoundItems';
 import { ResolvedItemsArchive } from '../../api/item/ResolvedItemsArchive';
-import { MyItems } from "../../api/item/MyItems";
+import { MyItems } from '../../api/item/MyItems';
 
 // User-level publication.
 // If logged in, then publish documents owned by this user. Otherwise, publish nothing.

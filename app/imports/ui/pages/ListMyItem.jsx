@@ -46,7 +46,6 @@ const ListMyItem = () => {
         <Row className="justify-content-center">
           <Col>
             <Col className="text-center">
-              <h2>Lost Items</h2>
             </Col>
             <Form className="g-4">
               <Form.Group controlId="category">

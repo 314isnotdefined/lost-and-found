@@ -2,7 +2,6 @@ import { Mongo } from 'meteor/mongo';
 import SimpleSchema from 'simpl-schema';
 
 /**
- * The FoundItemsCollection. It encapsulates state and variable values for stuff.
  */
 class MyItemsCollection {
   constructor() {
@@ -22,8 +21,8 @@ class MyItemsCollection {
         defaultValue: 'Miscellaneous',
       },
       description: String,
+      lastSeen: String,
       foundAt: String,
-      locationFound: String,
       contactEmail: String,
     });
     // Attach the schema to the collection, so all attempts to insert a document are checked against schema.
@@ -34,7 +33,7 @@ class MyItemsCollection {
 }
 
 /**
- * The singleton instance of the FoundItemsCollection.
+ * The singleton instance of the LostItemsCollection.
  * @type {MyItemsCollection}
  */
 export const MyItems = new MyItemsCollection();

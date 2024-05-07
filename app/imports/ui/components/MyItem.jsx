@@ -57,7 +57,6 @@ const MyItem = ({ item }) => {
         <Card.Text>Category: {item.category}</Card.Text>
         <Card.Text>Description: {item.description}</Card.Text>
         <Card.Text>Last Seen At: {item.lastSeen}</Card.Text>
-        <Card.Text>Found At: {item.foundAt}</Card.Text>
         <Card.Text>Email: {item.contactEmail}</Card.Text>
       </Card.Body>
     </Card>
