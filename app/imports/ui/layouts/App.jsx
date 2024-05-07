@@ -21,6 +21,7 @@ import EditFoundItem from '../pages/EditFoundItem';
 import ResolvedArchive from '../pages/ResolvedArchive';
 import ListLostItem from '../pages/ListLostItem';
 import EditLostItem from '../pages/EditLostItem';
+import ListMyItem from "../pages/ListMyItem";
 import ListFoundItemAdmin from '../pages/ListFoundItemAdmin';
 import ListLostItemAdmin from '../pages/ListLostItemAdmin';
 
@@ -44,6 +45,7 @@ const App = () => {
           <Route path="/home" element={<ProtectedRoute><Landing /></ProtectedRoute>} />
           <Route path="/listfound" element={<ProtectedRoute><ListFoundItem /></ProtectedRoute>} />
           <Route path="/listlost" element={<ProtectedRoute><ListLostItem /></ProtectedRoute>} />
+          <Route path="/listmy" element={<ProtectedRoute><ListMyItem /></ProtectedRoute>} />
           <Route path="/archive" element={<ProtectedRoute><ResolvedArchive /></ProtectedRoute>} />
           <Route path="/add" element={<ProtectedRoute><AddLostItem /></ProtectedRoute>} />
           <Route path="/addfound" element={<ProtectedRoute><AddFoundItem /></ProtectedRoute>} />
