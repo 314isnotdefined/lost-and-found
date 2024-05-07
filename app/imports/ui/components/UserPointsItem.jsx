@@ -5,7 +5,10 @@ import { Link } from 'react-router-dom';
 const UserPointsItem = ({ user, rank }) => (
   <tr>
     <td>{rank}</td>
-    <td><Link to={`/profile/${user._id}`}>{user.firstName} {user.lastName}</Link></td>
+    <td>
+      <img src={user.image} alt="Profile" id="lb-profile-pics" />
+      <Link to={`/profile/${user._id}`}>{user.firstName} {user.lastName}</Link>
+    </td>
     <td>{user.points}</td>
   </tr>
 );
@@ -16,6 +19,7 @@ UserPointsItem.propTypes = {
     firstName: PropTypes.string,
     lastName: PropTypes.string,
     points: PropTypes.number,
+    image: PropTypes.string,
     _id: PropTypes.string,
   }).isRequired,
   // eslint-disable-next-line react/require-default-props

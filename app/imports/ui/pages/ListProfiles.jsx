@@ -24,9 +24,9 @@ const ListProfiles = () => {
     };
   }, []);
   return (ready ? (
-    <Container className="py-3 leaderboard-container">
-      <Row className="justify-content-center">
-        <Col md={7}>
+    <Container className="py-3">
+      <Row className="justify-content-center leaderboard-container">
+        <Col>
           <Col className="text-center leaderboard-heading">
             <h2>Leaderboards</h2>
           </Col>
