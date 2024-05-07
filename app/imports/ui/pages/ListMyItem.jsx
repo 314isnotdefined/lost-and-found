@@ -1,36 +1,60 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { Tracker } from 'meteor/tracker';
 import { Meteor } from 'meteor/meteor';
 import { Col, Container, Row, Form } from 'react-bootstrap';
 import { useTracker } from 'meteor/react-meteor-data';
 import LoadingSpinner from '../components/LoadingSpinner';
-import MyItem from '../components/MyItem';
 import { LostItems } from '../../api/item/LostItems';
-import { FoundItems} from "../../api/item/FoundItems";
-import { MyItems} from "../../api/item/MyItems";
+import { FoundItems } from '../../api/item/FoundItems';
+import FoundItem from '../components/FoundItem';
+import LostItem from '../components/LostItem';
 
 const ListMyItem = () => {
   const [filters, setFilters] = useState({
     category: '',
+    owner: '',
   });
+
+  useEffect(() => {
+    const handle = Tracker.autorun(() => {
+      const user = Meteor.user();
+      if (user && user.emails && user.emails.length > 0) {
+        // Set the filter to the logged-in user's primary email address
+        setFilters(f => ({ ...f, owner: user.emails[0].address }));
+      } else {
+        // Optional: Clear the owner or handle users without an email
+        setFilters(f => ({ ...f, owner: '' }));
+      }
+    });
+
+    // Clean up the tracker when the component unmounts
+    return () => handle.stop();
+  }, []);
 
   const constructQuery = () => {
     const query = {};
     if (filters.name) {
       query.name = { $regex: `^${filters.name}`, $options: 'i' };
     }
+    if (filters.owner) {
+      query.owner = filters.owner;
+    }
     if (filters.category) {
       query.category = filters.category;
     }
     return query;
   };
-  const { ready, myitems } = useTracker(() => {
-    const subscription = Meteor.subscribe(MyItems.userPublicationName);
-    const rdy = subscription.ready();
+
+  const { ready, lostitems, founditems } = useTracker(() => {
+    const subscription1 = Meteor.subscribe(LostItems.userPublicationName);
+    const subscription2 = Meteor.subscribe(FoundItems.userPublicationName);
+    const rdy = subscription1.ready() && subscription2.ready();
     const query = constructQuery(filters);
     const myItems1 = LostItems.collection.find(query).fetch();
     const myItems2 = FoundItems.collection.find(query).fetch();
     return {
-      myitems: myItems1, myItems2,
+      lostitems: myItems1,
+      founditems: myItems2,
       ready: rdy,
     };
   }, [filters]);
@@ -46,6 +70,7 @@ const ListMyItem = () => {
         <Row className="justify-content-center">
           <Col>
             <Col className="text-center">
+              <h2>My Items</h2>
             </Col>
             <Form className="g-4">
               <Form.Group controlId="category">
@@ -68,7 +93,8 @@ const ListMyItem = () => {
               </Form.Group>
             </Form>
             <Row xs={1} md={2} lg={3} className="g-4">
-              {myitems.map((item, index) => (<Col key={index}><MyItem item={item} /></Col>))}
+              {lostitems.map((item, index) => (<Col key={index}><LostItem item={item} /></Col>))}
+              {founditems.map((item, index) => (<Col key={index}><FoundItem item={item} /></Col>))}
             </Row>
           </Col>
         </Row>
