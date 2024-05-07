@@ -2,7 +2,6 @@ import React from 'react';
 import { Meteor } from 'meteor/meteor';
 import { Col, Container, Row, Table } from 'react-bootstrap';
 import { useTracker } from 'meteor/react-meteor-data';
-// import { Link } from 'react-router-dom';
 import LoadingSpinner from '../components/LoadingSpinner';
 import { Profiles } from '../../api/profile/Profile';
 import UserPointsItem from '../components/UserPointsItem';
@@ -25,21 +24,22 @@ const ListProfiles = () => {
     };
   }, []);
   return (ready ? (
-    <Container className="py-3">
+    <Container className="py-3 leaderboard-container">
       <Row className="justify-content-center">
         <Col md={7}>
-          <Col className="text-center white-heading" style={{ marginBottom: '30px' }}>
+          <Col className="text-center leaderboard-heading">
             <h2>Leaderboards</h2>
           </Col>
-          <Table striped bordered hover>
+          <Table striped bordered hover className="leaderboard-table">
             <thead>
               <tr>
+                <th>Rank</th>
                 <th>Name</th>
                 <th>Total Points</th>
               </tr>
             </thead>
             <tbody>
-              {profiles.map((user) => <UserPointsItem key={user._id} user={user} />)}
+              {profiles.map((user, index) => <UserPointsItem key={user._id} user={user} rank={index + 1} />)}
             </tbody>
           </Table>
         </Col>
