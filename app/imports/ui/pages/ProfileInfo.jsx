@@ -22,11 +22,14 @@ const ProfileInfo = () => {
     <Container id="resolved-page">
       <Card>
         <Card.Header>
-          <h1 className="white-heading" style={{ textAlign: 'left', margin: '3% 0 3% 0' }}>User Profiles</h1>
+          <h1 className="black-heading" style={{ textAlign: 'left', margin: '3% 0 3% 0' }}>User Profiles</h1>
           <h1 style={{ textAlign: 'left', margin: '3% 0 3% 0', color: 'lightgray' }}>{user.firstName} {user.lastName}</h1>
         </Card.Header>
         <Card.Body>
           <img src={user.image} alt="user profile" style={{ width: '300px', borderRadius: '50%', border: '3px solid seagreen' }} />
+          <Card.Title style={{ padding: '50px' }}>
+            Points Earned: {user.points}
+          </Card.Title>
         </Card.Body>
       </Card>
     </Container>
