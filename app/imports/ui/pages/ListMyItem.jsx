@@ -73,7 +73,7 @@ const ListMyItem = () => {
               <h2 className="white-heading">My Items</h2>
             </Col>
             <Form className="g-4">
-              <Form.Group controlId="category">
+              <Form.Group className="white-heading" controlId="category">
                 <Form.Label>Category</Form.Label>
                 <Form.Control
                   as="select"
