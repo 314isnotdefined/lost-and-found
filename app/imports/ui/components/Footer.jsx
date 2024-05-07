@@ -6,7 +6,7 @@ const Footer = () => (
     <Container>
       <Row>
         {/* Logo Section */}
-        <Col md={4} className="text-center mb-3 mb-md-0">
+        <Col md={4} className="text-center mb-3 mb-md-0" style={{ marginTop: '20px' }}>
           <img src="/images/uhm-white-seal-nameplate@2x.png" alt="ItemDepot Logo" style={{ width: '200px', height: 'auto' }} />
         </Col>
         <Col md={4} className="text-center mb-3 mb-md-0">
@@ -17,7 +17,7 @@ const Footer = () => (
             <a href="https://github.com/item-depot/item-depot">GitHub Repository</a>
           </div>
         </Col>
-        <Col md={4} className="text-center">
+        <Col md={4} className="text-center" style={{ marginTop: '20px' }}>
           <address>
             <strong>University of Hawaii at Manoa</strong><br />
             2500 Campus Road,<br />
