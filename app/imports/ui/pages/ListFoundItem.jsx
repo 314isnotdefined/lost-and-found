@@ -45,6 +45,7 @@ const ListFoundItem = () => {
           <Col>
             <Col className="text-center">
               <h2 className="white-heading">Found Items</h2>
+              <p className="white-heading">All potentially lost items that people found on campus. Claim the item if it&apos;s yours.</p>
             </Col>
             <Form className="g-4">
               <Form.Group controlId="category">

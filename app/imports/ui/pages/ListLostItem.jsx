@@ -45,6 +45,7 @@ const ListLostItem = () => {
           <Col>
             <Col className="text-center">
               <h2 className="white-heading">Lost Items</h2>
+              <p className="white-heading">All the lost items that need looking for on campus.</p>
             </Col>
             <Form className="g-4">
               <Form.Group controlId="category">

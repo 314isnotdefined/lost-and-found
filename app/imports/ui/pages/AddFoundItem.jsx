@@ -10,7 +10,7 @@ import { Images } from '../../api/item/Images';
 
 const isValidEmail = (value) => {
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  return emailRegex.test(value);
+  return emailRegex.test(value) || value.length === 0;
 };
 
 // Create a schema to specify the structure of the data to appear in the form.
@@ -24,6 +24,7 @@ const formSchema = new SimpleSchema({
   description: String,
   locationFound: String,
   contactEmail: {
+    defaultValue: Meteor.user() ? Meteor.user().username : '',
     type: String,
     // eslint-disable-next-line consistent-return
     custom() {
@@ -31,6 +32,7 @@ const formSchema = new SimpleSchema({
         return 'Invalid';
       }
     },
+    required: false,
   },
 });
 
@@ -43,33 +45,65 @@ const AddFoundItem = () => {
   // On submit, insert the data.
   const submit = (data, formRef) => {
     const { itemName, category, description, locationFound, contactEmail } = data;
+    let processedEmail;
+    if (!contactEmail) {
+      processedEmail = Meteor.user().username;
+    } else {
+      processedEmail = contactEmail;
+    }
     const owner = Meteor.user().username;
     // upload images.
     const imageRefArray = [];
-    for (let i = 0; i < encodedPhotoRefs.length; i++) {
+    // default back to stock image if no image uploaded.
+    if (encodedPhotoRefs.length > 0) {
+      for (let i = 0; i < encodedPhotoRefs.length; i++) {
+        Images.collection.insert({
+          owner: owner,
+          data: encodedPhotoRefs[i].data,
+        }, (err, doc) => {
+          if (err) {
+            swal(err);
+          } else {
+            imageRefArray.push(doc);
+            if (imageRefArray.length === encodedPhotoRefs.length) {
+              // all the IDs of the images are obtained, now add these IDs to the FoundItem.
+              FoundItems.collection.insert(
+                { itemName, category, description, locationFound, contactEmail: processedEmail, owner, image: imageRefArray, dateReported: new Date() },
+                (error) => {
+                  if (error) {
+                    swal('Error', error.message, 'error');
+                  } else {
+                    swal('Success', 'Item added successfully', 'success');
+                    formRef.reset();
+                  }
+                  // CALLBACK HELL!!! WOOHOO!!!! #plzdon'tdeductgrade
+                },
+              );
+            }
+          }
+        });
+      }
+    } else {
       Images.collection.insert({
         owner: owner,
-        data: encodedPhotoRefs[i].data,
+        data: 'https://www.generationsforpeace.org/wp-content/uploads/2018/03/empty.jpg',
       }, (err, doc) => {
         if (err) {
           swal(err);
         } else {
           imageRefArray.push(doc);
-          if (imageRefArray.length === encodedPhotoRefs.length) {
-            // all the IDs of the images are obtained, now add these IDs to the FoundItem.
-            FoundItems.collection.insert(
-              { itemName, category, description, locationFound, contactEmail, owner, image: imageRefArray, dateReported: new Date() },
-              (error) => {
-                if (error) {
-                  swal('Error', error.message, 'error');
-                } else {
-                  swal('Success', 'Item added successfully', 'success');
-                  formRef.reset();
-                }
-                // CALLBACK HELL!!! WOOHOO!!!! #plzdon'tdeductgrade
-              },
-            );
-          }
+          FoundItems.collection.insert(
+            { itemName, category, description, locationFound, contactEmail: processedEmail, owner, image: imageRefArray, dateReported: new Date() },
+            (error) => {
+              if (error) {
+                swal('Error', error.message, 'error');
+              } else {
+                swal('Success', 'Item added successfully', 'success');
+                formRef.reset();
+              }
+              // CALLBACK HELL!!! WOOHOO!!!! #plzdon'tdeductgrade
+            },
+          );
         }
       });
     }
@@ -109,7 +143,10 @@ const AddFoundItem = () => {
     <Container id="add-found-page" className="py-3" style={{ marginBottom: '100px' }}>
       <Row className="justify-content-center">
         <Col xs={10}>
-          <Col className="text-center" style={{ marginBottom: '40px' }}><h2 className="add-found-item-heading">Add a Found Item</h2></Col>
+          <Col className="text-center" style={{ marginBottom: '40px' }}>
+            <h2 className="add-found-item-heading">Add a Found Item</h2>
+            <p className="text-center" style={{ color: 'white' }}>Came across an item you think may be lost on campus? Post it here.</p>
+          </Col>
           <AutoForm ref={ref => { fRef = ref; }} schema={bridge} onSubmit={data => submit(data, fRef)}>
             <Card>
               <Card.Body>
@@ -138,9 +175,18 @@ const AddFoundItem = () => {
                     onChange={(e) => changeImage(e)}
                   />
                 </div>
-                <SelectField id="found-cat" name="category" />
-                <TextField id="found-location" name="locationFound" />
-                <TextField id="found-email" name="contactEmail" />
+                <Row>
+                  <Col>
+                    <SelectField id="found-cat" name="category" />
+                  </Col>
+                  <Col>
+                    <LongTextField id="found-location" name="locationFound" placeholder="e.g. Found at 9:30am at Campus Center Food Court on May 1, 2024" />
+                  </Col>
+                </Row>
+
+                <Col>
+                  <TextField id="found-email" name="contactEmail" label="If you'd like to recieve notifications on another email, please enter it here: " />
+                </Col>
                 <SubmitField id="submit-btn" value="Submit" />
                 <ErrorsField />
               </Card.Body>
