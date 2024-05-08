@@ -19,17 +19,17 @@ const ProfileInfo = () => {
     };
   });
   return (ready ? (
-    <Container id="resolved-page">
+    <Container id="profile-page">
       <Card>
         <Card.Header>
-          <h1 className="black-heading" style={{ textAlign: 'left', margin: '3% 0 3% 0' }}>User Profiles</h1>
-          <h1 style={{ textAlign: 'left', margin: '3% 0 3% 0', color: 'lightgray' }}>{user.firstName} {user.lastName}</h1>
+          <h1 className="black-heading" style={{ textAlign: 'center', margin: '3% 0 3% 0' }}>{user.firstName} {user.lastName}</h1>
         </Card.Header>
-        <Card.Body>
-          <img src={user.image} alt="user profile" style={{ width: '300px', borderRadius: '50%', border: '3px solid seagreen' }} />
-          <Card.Title style={{ padding: '50px' }}>
+        <Card.Body className="justify-content-center">
+          <img src={user.image} alt="user profile" style={{ width: '200px', borderRadius: '50%', border: '3px solid seagreen', textAlign: 'center' }} />
+          <Card.Text style={{ padding: '25px' }}>
             Points Earned: {user.points}
-          </Card.Title>
+          </Card.Text>
+          <Card.Text> </Card.Text>
         </Card.Body>
       </Card>
     </Container>
