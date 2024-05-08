@@ -138,8 +138,11 @@ const AddFoundItem = () => {
                     onChange={(e) => changeImage(e)}
                   />
                 </div>
-                <SelectField id="found-cat" name="category" />
-                <TextField id="found-location" name="locationFound" />
+                <Row>
+                  <Col><SelectField id="found-cat" name="category" /></Col>
+                  <Col><LongTextField id="found-location" name="locationFound" placeholder="Date and location last seen; e.g. '9:30am at Campus Center, on April 20, 2024'" />
+                  </Col>
+                </Row>
                 <TextField id="found-email" name="contactEmail" />
                 <SubmitField id="submit-btn" value="Submit" />
                 <ErrorsField />
