@@ -216,3 +216,7 @@ footer, footer a {
   margin-right: 15px;
   border-radius: 50%;
 }
+
+#profile-page {
+  justify-content: center;
+}

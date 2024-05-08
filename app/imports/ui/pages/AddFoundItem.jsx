@@ -183,7 +183,6 @@ const AddFoundItem = () => {
                     <LongTextField id="found-location" name="locationFound" placeholder="e.g. Found at 9:30am at Campus Center Food Court on May 1, 2024" />
                   </Col>
                 </Row>
-
                 <Col>
                   <TextField id="found-email" name="contactEmail" label="If you'd like to recieve notifications on another email, please enter it here: " />
                 </Col>

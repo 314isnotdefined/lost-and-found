@@ -82,12 +82,12 @@
     {
       "itemName": "Gray Hydro Flask", "category": "Food and Drink Containers", "lastSeen": "Paradise Palms",
       "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRoAh-RzwJK7eu8ZZwaIFfszkaHpgbN2xGSqE1izgj2EQ&s",
-      "description": "Gray hydro flask with a sticker that says, Am I Lost?", "contactEmail": "abc@hawaii.edu", "owner": "john@foo.com", "dateReported": "8-15-2023"
+      "description": "Gray hydro flask with a sticker that says, Am I Lost?", "contactEmail": "abc@hawaii.edu", "owner": "jane@foo.com", "dateReported": "8-15-2023"
     },
     {
       "itemName": "Pencil Pouch", "category": "Textbooks and School Supplies", "lastSeen": "Edmonson Third Floor",
       "image": "https://cdn.shopify.com/s/files/1/0575/7177/products/the-student-leather-pencil-case-purple_2000x.jpg?v=1536591794",
-      "description": "found on the tables", "contactEmail": "abc@hawaii.edu", "owner": "john@foo.com", "dateReported": "8-15-2023"
+      "description": "found on the tables", "contactEmail": "abc@hawaii.edu", "owner": "jane@foo.com", "dateReported": "8-15-2023"
     },
     {
       "itemName": "Bracelet", "category": "Miscellaneous", "lastSeen": "Gateway Cafe",
