@@ -9,10 +9,11 @@ import SimpleSchema from 'simpl-schema';
 import SimpleSchema2Bridge from 'uniforms-bridge-simple-schema-2';
 import { Images } from '../../api/item/Images';
 import { Profiles } from '../../api/profile/Profile';
+import { FoundItems } from '../../api/item/FoundItems';
 /** Renders a single row in the List Stuff table. See pages/ListStuff.jsx. */
 
 const messageSchema = new SimpleSchema({
-  contactInfo: String,
+  contactInfo: { type: String, required: false },
   message: String,
 });
 
@@ -22,7 +23,8 @@ const FoundItem = ({ item, canTakeAction }) => {
   const { ready, itemImages, ownerInfo, userInfo } = useTracker(() => {
     const subscription = Meteor.subscribe(Images.userPublicationName);
     const userSubscription = Meteor.subscribe(Profiles.userPublicationName);
-    const rdy = subscription.ready() && userSubscription.ready();
+    const foundItemSubscription = Meteor.subscribe(FoundItems.userPublicationName);
+    const rdy = subscription.ready() && userSubscription.ready() && foundItemSubscription.ready();
     let imageArr = [];
     if (item.image[0].includes('http')) {
       // accounting for default data
@@ -54,6 +56,16 @@ const FoundItem = ({ item, canTakeAction }) => {
 
   function toggleContactForm() {
     setMessageFormDisplay(true);
+  }
+
+  function removePosting() {
+    FoundItems.collection.remove({ _id: item._id }, (e) => {
+      if (e) {
+        swal(e, 'error');
+      } else {
+        swal('Item successfully deleted.', '', 'success');
+      }
+    });
   }
 
   function handleClose() {
@@ -99,7 +111,7 @@ const FoundItem = ({ item, canTakeAction }) => {
 
     Meteor.call(
       'sendEmail',
-      ownerInfo.email,
+      item.contactEmail,
       'itemdepotmsg@outlook.com',
       `${ownerInfo.firstName}, someone wants to claim the item you found.`,
       htmlText,
@@ -128,9 +140,10 @@ const FoundItem = ({ item, canTakeAction }) => {
         <Card.Text>Description: {item.description}</Card.Text>
         <Card.Text>Last Seen At: {item.locationFound}</Card.Text>
         <Card.Text><img src={ownerInfo.image} alt="" style={{ height: '2.5vw', width: '2.5vw', borderRadius: '50%' }} /><span>&nbsp;&nbsp;&nbsp;Posted by: {`${ownerInfo.firstName} ${ownerInfo.lastName}`}</span></Card.Text>
-        {canTakeAction && (
+        {(canTakeAction && Meteor.user().username !== item.owner) && (
           <Button variant="success" style={{ width: '100%' }} onClick={() => toggleContactForm()}>I claim this item</Button>
         )}
+        {Meteor.user().username === item.owner && <Button variant="danger" style={{ width: '100%' }} onClick={() => removePosting()}>Remove Item</Button>}
         {/* eslint-disable-next-line react/jsx-no-bind */}
         <Modal show={messageFormDisplay} onHide={handleClose}>
           <Modal.Header closeButton>
@@ -139,16 +152,15 @@ const FoundItem = ({ item, canTakeAction }) => {
             </Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            <p>Please fill out the necessary info below to obtain this item.</p>
+            <p>Please enter a message. This information will be automatically emailed to <b>{`${ownerInfo.firstName} ${ownerInfo.lastName}`},</b> who will be notified that you want to claim this item.</p>
             <AutoForm schema={bridge} onSubmit={data => submit(data)}>
               <LongTextField name="message" placeholder="Indicate details of where and when you want to pick up the item, etc..." required />
-              <LongTextField name="contactInfo" placeholder="email, phone #, instagram, etc... (optional)" label="Your Contact Info" required={false} />
+              <LongTextField name="contactInfo" placeholder="email, phone #, instagram, etc... (optional)" label={`Where should ${ownerInfo.firstName} ${ownerInfo.lastName} contact you at? (optional)`} required={false} />
               <ErrorsField />
               <SubmitField />
             </AutoForm>
           </Modal.Body>
         </Modal>
-        <Card.Text>Email: {item.contactEmail}</Card.Text>
       </Card.Body>
     </Card>
   );

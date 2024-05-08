@@ -66,14 +66,14 @@ const ListMyItem = () => {
 
   return (
     ready ? (
-      <Container id="list-my-page" className="py-3">
+      <Container id="list-my-page" className="py-3" style={{ marginBottom: '100px' }}>
         <Row className="justify-content-center">
           <Col>
             <Col className="text-center">
               <h2 className="white-heading">My Items</h2>
             </Col>
             <Form className="g-4">
-              <Form.Group controlId="category">
+              <Form.Group className="white-heading" controlId="category">
                 <Form.Label>Category</Form.Label>
                 <Form.Control
                   as="select"

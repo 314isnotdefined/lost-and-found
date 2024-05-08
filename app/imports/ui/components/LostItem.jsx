@@ -9,11 +9,12 @@ import SimpleSchema from 'simpl-schema';
 import { useTracker } from 'meteor/react-meteor-data';
 import { Images } from '../../api/item/Images';
 import { Profiles } from '../../api/profile/Profile';
+import { LostItems } from '../../api/item/LostItems';
 
 /** Renders a single row in the List Stuff table. See pages/ListStuff.jsx. */
 // eslint-disable-next-line max-len
 const messageSchema = new SimpleSchema({
-  contactInfo: String,
+  contactInfo: { type: String, required: false },
   message: String,
 });
 
@@ -25,7 +26,8 @@ const LostItem = ({ item, canTakeAction }) => {
   const { ready, itemImages, ownerInfo, userInfo } = useTracker(() => {
     const subscription = Meteor.subscribe(Images.userPublicationName);
     const userSubscription = Meteor.subscribe(Profiles.userPublicationName);
-    const rdy = subscription.ready() && userSubscription.ready();
+    const lostItemSubscription = Meteor.subscribe(LostItems.userPublicationName);
+    const rdy = subscription.ready() && userSubscription.ready() && lostItemSubscription.ready();
     let imageArr = [];
     if (item.image[0].includes('http')) {
       // accounting for default data
@@ -57,6 +59,16 @@ const LostItem = ({ item, canTakeAction }) => {
 
   function toggleContactForm() {
     setMessageFormDisplay(true);
+  }
+
+  function removePosting() {
+    LostItems.collection.remove({ _id: item._id }, (e) => {
+      if (e) {
+        swal(e, 'error');
+      } else {
+        swal('Item successfully deleted', '', 'success');
+      }
+    });
   }
 
   function handleClose() {
@@ -101,7 +113,7 @@ const LostItem = ({ item, canTakeAction }) => {
 
     Meteor.call(
       'sendEmail',
-      ownerInfo.email,
+      item.contactEmail,
       'itemdepotmsg@outlook.com',
       `${ownerInfo.firstName}, ${userInfo.firstName} found your lost item!`,
       htmlText,
@@ -134,9 +146,10 @@ const LostItem = ({ item, canTakeAction }) => {
         <Card.Text><b>Description:</b> {item.description}</Card.Text>
         <Card.Text><b>Last Seen At:</b> {item.lastSeen}</Card.Text>
         <Card.Text><img src={ownerInfo.image} alt="" style={{ height: '2.5vw', width: '2.5vw', borderRadius: '50%' }} /><span>&nbsp;&nbsp;&nbsp;Owner: {`${ownerInfo.firstName} ${ownerInfo.lastName}`}</span></Card.Text>
-        {canTakeAction && (
+        {(canTakeAction && Meteor.user().username !== item.owner) && (
           <Button variant="success" style={{ width: '100%' }} onClick={() => toggleContactForm()}>I found this item</Button>
         )}
+        {Meteor.user().username === item.owner && <Button variant="danger" style={{ width: '100%' }} onClick={() => removePosting()}>Remove Item</Button>}
 
         {/* eslint-disable-next-line react/jsx-no-bind */}
         <Modal show={messageFormDisplay} onHide={handleClose}>
@@ -155,7 +168,6 @@ const LostItem = ({ item, canTakeAction }) => {
             </AutoForm>
           </Modal.Body>
         </Modal>
-        <Card.Text>Email: {item.contactEmail}</Card.Text>
       </Card.Body>
     </Card>
   );
