@@ -9,13 +9,6 @@
     { "email": "jane@foo.com", "password": "changeme" }
   ],
 
-  "defaultData": [
-    { "name": "Basket", "quantity": 3, "owner": "john@foo.com", "condition": "excellent" },
-    { "name": "Bicycle", "quantity": 2, "owner": "john@foo.com", "condition": "poor" },
-    { "name": "Banana", "quantity": 2, "owner": "admin@foo.com", "condition": "good" },
-    { "name": "Boogie Board", "quantity": 2, "owner": "admin@foo.com", "condition": "excellent" }
-  ],
-
   "profileData": [
     { "firstName":  "John", "lastName":  "Smith", "email": "john@foo.com", "image":  "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png", "points":  100, "totalItemsLost":  0, "totalItemsFound":  0, "recentItemsFound":  [], "position": "Freshman"},
     { "firstName":  "Jane", "lastName":  "Doe", "email": "jane@foo.com", "image":  "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png", "points":  300, "totalItemsLost":  0, "totalItemsFound":  0, "recentItemsFound":  [], "position": "Junior"},
