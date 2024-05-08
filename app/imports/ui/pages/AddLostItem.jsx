@@ -10,7 +10,7 @@ import { Images } from '../../api/item/Images';
 
 const isValidEmail = (value) => {
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  return emailRegex.test(value);
+  return emailRegex.test(value) || value.length === 0;
 };
 // Create a schema to specify the structure of the data to appear in the form.
 const formSchema = new SimpleSchema({
@@ -24,12 +24,14 @@ const formSchema = new SimpleSchema({
   lastSeen: String,
   contactEmail: {
     type: String,
+    defaultValue: Meteor.user() ? Meteor.user().username : '',
     // eslint-disable-next-line consistent-return
     custom() {
       if (!isValidEmail(this.value)) {
         return 'Invalid';
       }
     },
+    required: false,
   },
 });
 
@@ -41,33 +43,64 @@ const AddLostItem = () => {
   // On submit, insert the data.
   const submit = (data, formRef) => {
     const { itemName, category, description, lastSeen, contactEmail } = data;
+    let processedEmail;
+    if (!contactEmail) {
+      processedEmail = Meteor.user().username;
+    } else {
+      processedEmail = contactEmail;
+    }
     const owner = Meteor.user().username;
     // upload images.
     const imageRefArray = [];
-    for (let i = 0; i < encodedPhotoRefs.length; i++) {
+    if (encodedPhotoRefs.length > 0) {
+      for (let i = 0; i < encodedPhotoRefs.length; i++) {
+        Images.collection.insert({
+          owner: owner,
+          data: encodedPhotoRefs[i].data,
+        }, (err, doc) => {
+          if (err) {
+            swal(err);
+          } else {
+            imageRefArray.push(doc);
+            if (imageRefArray.length === encodedPhotoRefs.length) {
+              // all the IDs of the images are obtained, now add these IDs to the LostItem.
+              LostItems.collection.insert(
+                { itemName, category, description, lastSeen, contactEmail: processedEmail, owner, image: imageRefArray, dateReported: new Date() },
+                (error) => {
+                  if (error) {
+                    swal('Error', error.message, 'error');
+                  } else {
+                    swal('Success', 'Item added successfully', 'success');
+                    formRef.reset();
+                  }
+                  // CALLBACK HELL!!! WOOHOO!!!! #plzdon'tdeductgrade
+                },
+              );
+            }
+          }
+        });
+      }
+    } else {
       Images.collection.insert({
         owner: owner,
-        data: encodedPhotoRefs[i].data,
+        data: 'https://www.generationsforpeace.org/wp-content/uploads/2018/03/empty.jpg',
       }, (err, doc) => {
         if (err) {
           swal(err);
         } else {
           imageRefArray.push(doc);
-          if (imageRefArray.length === encodedPhotoRefs.length) {
-            // all the IDs of the images are obtained, now add these IDs to the LostItem.
-            LostItems.collection.insert(
-              { itemName, category, description, lastSeen, contactEmail, owner, image: imageRefArray, dateReported: new Date() },
-              (error) => {
-                if (error) {
-                  swal('Error', error.message, 'error');
-                } else {
-                  swal('Success', 'Item added successfully', 'success');
-                  formRef.reset();
-                }
-                // CALLBACK HELL!!! WOOHOO!!!! #plzdon'tdeductgrade
-              },
-            );
-          }
+          LostItems.collection.insert(
+            { itemName, category, description, lastSeen, contactEmail: processedEmail, owner, image: imageRefArray, dateReported: new Date() },
+            (error) => {
+              if (error) {
+                swal('Error', error.message, 'error');
+              } else {
+                swal('Success', 'Item added successfully', 'success');
+                formRef.reset();
+              }
+              // CALLBACK HELL!!! WOOHOO!!!! #plzdon'tdeductgrade
+            },
+          );
         }
       });
     }
@@ -107,7 +140,10 @@ const AddLostItem = () => {
     <Container id="add-lost-page" className="py-3" style={{ marginBottom: '100px' }}>
       <Row className="justify-content-center">
         <Col xs={10}>
-          <Col className="text-center" style={{ marginBottom: '40px' }}><h2 className="add-lost-item-heading">Add Lost Item</h2></Col>
+          <Col className="text-center" style={{ marginBottom: '40px' }}>
+            <h2 className="add-lost-item-heading">Add Lost Item</h2>
+            <p className="text-center" style={{ color: 'white' }}>Did you lose an item on campus? Please enter details here.</p>
+          </Col>
           <AutoForm ref={ref => { fRef = ref; }} schema={bridge} onSubmit={data => submit(data, fRef)}>
             <Card>
               <Card.Body>
@@ -118,7 +154,7 @@ const AddLostItem = () => {
                 <div className="ImageField">
                   {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
                   <div>
-                    <div>Upload your photos</div>
+                    <div>Upload your photos (optional)</div>
                     <div style={{ width: 'auto', margin: '3% 0 3% 0' }}>
                       {encodedPhotoRefs.map(e => (
                         <div style={{ display: 'inline-block', margin: '0% 2% 3% 2%' }} key={e.src}>
@@ -141,7 +177,9 @@ const AddLostItem = () => {
                   <Col><LongTextField id="last-seen-field" name="lastSeen" placeholder="Date and location last seen; e.g. '9:30am at Campus Center, on April 20, 2024'" />
                   </Col>
                 </Row>
-                <Col><TextField id="email-field" name="contactEmail" /></Col>
+                <Col>
+                  <TextField id="email-field" name="contactEmail" label="If you'd like to recieve notifications on another email, please enter it here: " />
+                </Col>
                 <SubmitField id="submit-btn" value="Submit" />
                 <ErrorsField />
               </Card.Body>

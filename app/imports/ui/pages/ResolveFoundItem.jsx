@@ -72,7 +72,7 @@ export const ResolveFoundItem = () => {
             <p style={{ color: 'white' }}>This will help us clear the site of found/claimed/resolved items.</p>
             <Button variant="success" onClick={() => handleFound()}>Yes, this item has been claimed</Button>
             <br /><br />
-            <Button variant="danger">No, this item was not claimed.</Button>
+            <Button variant="danger" onClick={() => swal('Thank you for letting us know', 'Your posting will still be up; you may exit this page.', 'error')}>No, this item was not claimed.</Button>
           </Col>
           <Col md={4}>
             <FoundItem item={lostItemInfo} canTakeAction={false} />

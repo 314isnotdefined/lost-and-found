@@ -40,7 +40,7 @@ export const ResolveLostItem = () => {
         // Award 200 points to user who found the item
         Profiles.collection.update({ _id: _userId }, { $inc: { points: 200 } });
         // Award 100 point to the owner of the item
-        Profiles.collection.update({ _id: owner._id }, { $inc: { points: 100 } });
+        Profiles.collection.update({ _id: owner._id }, { $inc: { points: 30 } });
         // eslint-disable-next-line consistent-return
         LostItems.collection.remove({ _id: _id }, (e) => {
           if (e) {
@@ -72,7 +72,7 @@ export const ResolveLostItem = () => {
             <p style={{ color: 'white' }}>This will help us clear the site of found/claimed/resolved items.</p>
             <Button variant="success" onClick={() => handleFound()}>Yes, this item has been found</Button>
             <br /><br />
-            <Button variant="danger">No, this item was not found / incorrect item received.</Button>
+            <Button variant="danger" onClick={() => swal('Thank you for letting us know', 'Your posting will still be up; you may exit this page.', 'error')}>No, this item was not found / incorrect item received.</Button>
           </Col>
           <Col md={4}>
             <LostItem item={lostItemInfo} canTakeAction={false} />
