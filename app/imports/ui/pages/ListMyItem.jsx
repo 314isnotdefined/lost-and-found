@@ -66,7 +66,7 @@ const ListMyItem = () => {
 
   return (
     ready ? (
-      <Container id="list-my-page" className="py-3">
+      <Container id="list-my-page" className="py-3" style={{ marginBottom: '100px' }}>
         <Row className="justify-content-center">
           <Col>
             <Col className="text-center">
