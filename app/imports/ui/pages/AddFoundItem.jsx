@@ -185,7 +185,7 @@ const AddFoundItem = () => {
                 </Row>
 
                 <Col>
-                  <TextField id="email-field" name="contactEmail" label="If you'd like to recieve notifications on another email, please enter it here: " />
+                  <TextField id="found-email" name="contactEmail" label="If you'd like to recieve notifications on another email, please enter it here: " />
                 </Col>
                 <SubmitField id="submit-btn" value="Submit" />
                 <ErrorsField />
