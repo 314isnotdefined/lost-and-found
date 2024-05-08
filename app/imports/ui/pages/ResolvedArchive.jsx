@@ -16,7 +16,7 @@ const ResolvedArchive = () => {
     };
   });
   return (ready ? (
-    <Container id="resolved-page">
+    <Container id="resolved-page" style={{ marginBottom: '100px' }}>
       <h1 className="white-heading" style={{ textAlign: 'center', margin: '3% 0 3% 0' }}>Resolved Items Archive</h1>
       <h5 style={{ textAlign: 'center', margin: '3% 0 3% 0', color: 'lightgray' }}>All items that have been lost and found in the past.</h5>
       <Table striped bordered>
