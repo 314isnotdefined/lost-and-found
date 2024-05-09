@@ -13,7 +13,7 @@ class AddLostItemPage {
   }
 
   async addLostItem(testController) {
-    const lostItemTest = { itemName: 'Cinnamoroll', lastSeen: 'Hamilton Library', email: 'cashbake@hawaii.edu', description: 'a silly lil guy' };
+    const lostItemTest = { itemName: 'Cinnamoroll', lastSeen: 'Hamilton Library', description: 'a silly lil guy' };
     await testController.typeText('#item-name-field', lostItemTest.itemName);
     await testController.setFilesToUpload('#file-input', '../public/images/meteor-logo.png');
     const categorySelect = Selector('#category-field');
@@ -22,7 +22,6 @@ class AddLostItemPage {
     await testController.click(categoryOption.withText('Miscellaneous'));
     await testController.typeText('#last-seen-field', lostItemTest.lastSeen);
     await testController.typeText('#description-field', lostItemTest.description);
-    await testController.typeText('#email-field', lostItemTest.email);
     await testController.click('#submit-btn input.btn.btn-primary');
     await testController.click('.swal-button--confirm');
     // Check if newly created item is added to lost items page
