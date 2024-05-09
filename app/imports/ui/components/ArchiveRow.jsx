@@ -3,8 +3,6 @@ import PropTypes from 'prop-types';
 import { Meteor } from 'meteor/meteor';
 import { useTracker } from 'meteor/react-meteor-data';
 import { Profiles } from '../../api/profile/Profile';
-/* import { FoundItems } from '../../api/item/FoundItems';
-import { LostItems } from '../../api/item/LostItems'; */
 
 const ArchiveRow = ({ data }) => {
   const { ready, nameData } = useTracker(() => {
